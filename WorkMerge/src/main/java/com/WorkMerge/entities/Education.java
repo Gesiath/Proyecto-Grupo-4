@@ -33,7 +33,6 @@ public class Education {
 	@ManyToOne
 	private Curriculum curriculum;
 
-	
 	public Education() {	
 	}
 

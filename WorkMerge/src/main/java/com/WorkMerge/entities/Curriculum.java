@@ -17,6 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.WorkMerge.enums.City;
 import com.WorkMerge.enums.Gender;
 import com.WorkMerge.enums.Nationality;
+
 @Entity
 public class Curriculum {
 	@Id
@@ -36,7 +37,7 @@ public class Curriculum {
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	private Integer phone;
-	@OneToMany
+	@OneToMany(mappedBy = "curriculum")
 	private List<Education> education;
 	@OneToMany
 	private List<WorkExperience> workexperience;
