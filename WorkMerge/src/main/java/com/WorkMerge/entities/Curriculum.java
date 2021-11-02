@@ -17,6 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 import com.WorkMerge.enums.City;
 import com.WorkMerge.enums.Gender;
 import com.WorkMerge.enums.Nationality;
+
 @Entity
 public class Curriculum {
 	@Id
