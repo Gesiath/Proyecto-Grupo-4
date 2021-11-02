@@ -36,7 +36,7 @@ public class Curriculum {
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	private Integer phone;
-	@OneToMany
+	@OneToMany(mappedBy = "curriculum")
 	private List<Education> education;
 	@OneToMany
 	private List<WorkExperience> workexperience;
