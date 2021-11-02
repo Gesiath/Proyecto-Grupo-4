@@ -15,7 +15,7 @@ public class Photo {
 @Id
 @GeneratedValue(generator = "uuid")
 @GenericGenerator(name="uuid",strategy = "uuid2")
-private Integer id;
+private String id;
 private String name;
 private String mime; //El atributo mime asigna el formato del archivo de una foto
 // Lob :identifica que el tipo de dato es pesado al motor de persistencia
@@ -25,12 +25,12 @@ private String mime; //El atributo mime asigna el formato del archivo de una fot
 private byte[] content;
 
 
-public Integer getId() {
+public String getId() {
     return id;
 }
 
 
-public void setId(Integer id) {
+public void setId(String id) {
     this.id = id;
 }
 

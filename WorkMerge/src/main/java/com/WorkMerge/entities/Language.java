@@ -5,6 +5,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -18,6 +19,8 @@ public class Language {
 	private String id;
 	@Enumerated(EnumType.STRING)
 	private EnumLanguage language ;
+	@ManyToOne
+	private Curriculum curriculum;
 	
 	
 	public String getId() {
