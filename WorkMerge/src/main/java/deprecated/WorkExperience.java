@@ -1,4 +1,4 @@
-package com.WorkMerge.entities;
+package deprecated;
 
 import java.util.Date;
 
@@ -11,6 +11,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.WorkMerge.entities.Curriculum;
 @Entity
 public class WorkExperience {
 	@Id
