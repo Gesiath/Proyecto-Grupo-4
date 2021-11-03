@@ -1,6 +1,7 @@
 package com.WorkMerge.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,6 +13,7 @@ import com.WorkMerge.entities.Company;
 import com.WorkMerge.entities.Job;
 import com.WorkMerge.entities.Photo;
 import com.WorkMerge.enums.Rol;
+import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.repositories.CompanyRepository;
 
 @Service
@@ -21,7 +23,7 @@ public class CompanyService {
 	private CompanyRepository companyRepository;
 	//CREATE
 	@Transactional
-	public void newCompany(String email, String password, List<Job> job,Photo photo,MultipartFile archive)throws ErrorCompany {
+	public void newCompany(String email, String password, List<Job> job,Photo photo,MultipartFile archive)throws ServiceException {
 		Company company = new Company();
 		company.setRol(Rol.COMPANY);
 		company.setActive(true);
@@ -35,7 +37,7 @@ public class CompanyService {
 	}
 	// UPDATE
 	@Transactional
-	public void updateCompany(String id,String password, List<Job> job,Photo photo,MultipartFile archive,String email) {
+	public void updateCompany(String id,String password, List<Job> job,Photo photo,MultipartFile archive,String email) throws ServiceException{
 		validate(email,password);
 		Optional<Company> compy = companyRepository.findById(id);
 		Company company = compy.get();
@@ -48,7 +50,7 @@ public class CompanyService {
 	}
 	//DELETE
 	@Transactional
-	public void deleteCompany (String id,String password, List<Job> job,Photo photo,MultipartFile archive) throws ErrorCompany{
+	public void deleteCompany (String id,String password, List<Job> job,Photo photo,MultipartFile archive) throws ServiceException{
 		Optional<Company> compy = companyRepository.findById(id);
 		if (compy.isPresent()) {
 	            Company company = compy.get();
@@ -60,7 +62,7 @@ public class CompanyService {
 	}
 	//DOWNGRADE
 	@Transactional
-	public void downgradeCompany (String id,String password, List<Job> job,Photo photo,MultipartFile archive)throws ErrorCompany{
+	public void downgradeCompany (String id,String password, List<Job> job,Photo photo,MultipartFile archive)throws ServiceException{
 		Optional<Company> compy = companyRepository.findById(id);
 		if (compy.isPresent()) {
 	            Company company = compy.get();
@@ -70,12 +72,12 @@ public class CompanyService {
 	        }
 		
 	}
-	public void validate(String email,String password) throws ErrorCompany {
+	public void validate(String email,String password) throws ServiceException {
 		if(email==null || email.isEmpty() || email.equals("")) {
-			throw new ErrorCompany ("El email no puede ser nulo/vacío.");
+			throw new ServiceException ("El email no puede ser nulo/vacío.");
 		}
 		if(password==null || password.isEmpty()||password.equals("")) {
-			throw new ErrorCompany ("La contraseña no puede ser nula/vacía o 0.");
+			throw new ServiceException ("La contraseña no puede ser nula/vacía o 0.");
 		}
 
 	}
