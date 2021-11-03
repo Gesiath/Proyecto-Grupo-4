@@ -26,14 +26,14 @@ public class ClientService {
 	private ClientRepository clientRepository;
 	
 	//Registrar cliente
-	public void Save(String id, Rol rol,String email, String password,Curriculum curriculum, Photo photo, boolean active) throws Exception{ //BUSCAMOS UNA CLIENTE Y DEVOLVEMOS UN OPTIONAL
-		validar(email,password);
+	public void registerClient(String id, Rol rol,String email, String password,String password2, boolean active) throws Exception{ //BUSCAMOS UNA CLIENTE Y DEVOLVEMOS UN OPTIONAL
+		validar(email,password,password2);
+		
 		Client cliente = new Client();
 			cliente.setEmail(email);
-			cliente.setPassword(password);
+			String encript = new BCryptPasswordEncoder().encode(password); //ENCRIPTANDO PASSWORD
+			cliente.setPassword(encript);
 			cliente.setRol(Rol.CLIENT);
-			cliente.setCurriculum(curriculum);
-			cliente.setPhoto(photo);
 			cliente.setActive(true);
 			clientRepository.save(cliente);
 		}
@@ -41,8 +41,8 @@ public class ClientService {
 	
 	//MODIFICAR CLIENTE
 	@Transactional //Transactional (se pone porque cambia algo en la base de datos)
-	public Client ModifyClient(String id,Rol rol,String email, String password,Curriculum curriculum, Photo photo, boolean active) throws Exception {
-		validar(email,password);
+	public Client modifyClient(String id,Rol rol,String email, String password,String password2,Curriculum curriculum, Photo photo, boolean active) throws Exception {
+		validar(email,password,password2);
 		Optional<Client> respuesta = clientRepository.findById(id);
 		if(respuesta.isPresent()) {
 		Client p = respuesta.get();
@@ -62,13 +62,13 @@ public class ClientService {
 	
 	@Transactional
 	//Eliminar cliente
-	public void delete(Client p) {
-		clientRepository.delete(p);
+	public void delete(String id) {
+		clientRepository.deleteById(id);
 	}
 	
 	@Transactional
 	//Dar de baja cliente
-	public void LowCustomer(String id) {
+	public void lowCustomer(String id) {
 		Optional<Client> respuesta = clientRepository.findById(id);
 		if(respuesta.isPresent()) {
 			Client cliente = respuesta.get();
@@ -79,7 +79,7 @@ public class ClientService {
 	
 	@Transactional
 	//Dar de alta cliente
-	public void HightCustomer(String id) {
+	public void hightCustomer(String id) {
 		Optional<Client> respuesta = clientRepository.findById(id);
 		if(respuesta.isPresent()) {
 			Client cliente = respuesta.get();
@@ -90,12 +90,16 @@ public class ClientService {
 	
 	
 	//Metodo validación
-	public void validar (String email,String password)throws Exception{
+	public void validar(String email,String password,String password2)throws Exception{
 		if(email==null || email.isEmpty()) {
 			throw new Exception("El email no puede estar vacío");
 		}
 		if(password==null || password.isEmpty()) {
-			throw new Exception("La contraseña no puede estar vacío");
+			throw new Exception("La contraseña no puede estar vacía");
+		}
+		
+		if(!password.equals(password2)){
+			throw new Exception("La contraseñas tienen que coincidir");
 		}
 	}
 	}

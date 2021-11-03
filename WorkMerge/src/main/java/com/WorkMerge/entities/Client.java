@@ -21,6 +21,9 @@ public class Client {
 	private Rol rol;
 	private String email;
 	private String password;
+
+	
+	
 	@OneToOne
 	private Curriculum curriculum;
 	@OneToOne
@@ -43,6 +46,16 @@ public class Client {
 		this.photo = photo;
 		this.active = active;
 	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	
 	public Rol getRol() {
 		return rol;
 	}
