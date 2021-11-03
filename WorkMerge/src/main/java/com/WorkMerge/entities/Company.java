@@ -20,6 +20,7 @@ public class Company {
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name="uuid",strategy = "uuid2")
 	private String id;
+	private String name;
 	@Enumerated(EnumType.STRING)
 	private Rol rol;
 	private String email;
@@ -33,17 +34,6 @@ public class Company {
 	public Company() {
 		
 	}
-	
-	public Company(String id, Rol rol, String email, String password, List<Job> job, boolean active, Photo photo) {
-		super();
-		this.id = id;
-		this.rol = rol;
-		this.email = email;
-		this.password = password;
-		this.job = job;
-		this.active = active;
-		this.photo = photo;
-	}
 
 	public String getId() {
 		return id;
@@ -51,6 +41,14 @@ public class Company {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Rol getRol() {

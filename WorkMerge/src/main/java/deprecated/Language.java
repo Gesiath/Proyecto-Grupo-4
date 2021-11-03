@@ -1,4 +1,4 @@
-package com.WorkMerge.entities;
+package deprecated;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.WorkMerge.entities.Curriculum;
 import com.WorkMerge.enums.EnumLanguage;
 
 @Entity

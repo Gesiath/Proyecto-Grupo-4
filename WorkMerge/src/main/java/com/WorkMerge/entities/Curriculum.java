@@ -1,14 +1,12 @@
 package com.WorkMerge.entities;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -37,21 +35,25 @@ public class Curriculum {
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	private Integer phone;
-	@OneToMany(mappedBy = "curriculum")
+	private String education;
+	private String workexperience;
+	private String language;
+	private String skills;
+	/*@OneToMany(mappedBy = "curriculum")
 	private List<Education> education;
 	@OneToMany
 	private List<WorkExperience> workexperience;
 	@OneToMany
-	private List<Language> language;
-	private String skills;
+	private List<Language> language;*/
+	
 	
 	public Curriculum() {
 		
 	}
 
 	public Curriculum(String id, String name, String surname, Long dni, Gender gender, Nationality nationality,
-			String address, City city, Date birthday, Integer phone, List<Education> education,
-			List<WorkExperience> workexperience, List<Language> language, String skills) {
+			String address, City city, Date birthday, Integer phone, String education,
+			String workexperience, String language, String skills) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -149,27 +151,27 @@ public class Curriculum {
 		this.phone = phone;
 	}
 
-	public List<Education> getEducation() {
+	public String getEducation() {
 		return education;
 	}
 
-	public void setEducation(List<Education> education) {
+	public void setEducation(String education) {
 		this.education = education;
 	}
 
-	public List<WorkExperience> getWorkexperience() {
+	public String getWorkexperience() {
 		return workexperience;
 	}
 
-	public void setWorkexperience(List<WorkExperience> workexperience) {
+	public void setWorkexperience(String workexperience) {
 		this.workexperience = workexperience;
 	}
 
-	public List<Language> getLanguage() {
+	public String getLanguage() {
 		return language;
 	}
 
-	public void setLanguage(List<Language> language) {
+	public void setLanguage(String language) {
 		this.language = language;
 	}
 
