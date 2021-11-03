@@ -2,25 +2,28 @@ package com.WorkMerge.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.WorkMerge.entities.Company;
 import com.WorkMerge.entities.Job;
 import com.WorkMerge.entities.Photo;
 import com.WorkMerge.enums.Rol;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.repositories.CompanyRepository;
+import com.WorkMerge.repositories.PhotoRepository;
 
 @Service
 public class CompanyService {
 	
 	@Autowired
 	private CompanyRepository companyRepository;
+	@Autowired
+	private PhotoRepository photoRepository;
+	@Autowired
+	private PhotoService photoService;
 	//CREATE
 	@Transactional
 	public void newCompany(String email, String password, List<Job> job,Photo photo,MultipartFile archive)throws ServiceException {
@@ -31,7 +34,7 @@ public class CompanyService {
 		String encript = new BCryptPasswordEncoder().encode(password);
 		company.setPassword(encript);
 		company.setJob(job.newJob());
-		Photo photo = PhotoService.save(archive);
+		Photo photo2 = photoService.saved(archive);
 	    company.setPhoto(photo);
 		companyRepository.save(company);
 	}
