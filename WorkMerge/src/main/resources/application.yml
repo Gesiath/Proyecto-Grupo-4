@@ -13,7 +13,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect      
   thymeleaf:
     cache: false 
-server:
+server:  port: 1010
   error:
     whitelabel:
       enabled: false

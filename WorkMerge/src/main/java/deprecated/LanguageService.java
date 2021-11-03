@@ -1,16 +1,19 @@
-package com.WorkMerge.services;
+package deprecated;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD:WorkMerge/src/main/java/com/WorkMerge/services/LanguageService.java
 
 import com.WorkMerge.entities.Language;
 import com.WorkMerge.enums.EnumLanguage;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.repositories.LanguageRepository;
 
+=======
+>>>>>>> b87dce88a3e79364a921fa28c6be4b6aa0512b8e:WorkMerge/src/main/java/deprecated/LanguageService.java
 @Service
 public class LanguageService {
 	

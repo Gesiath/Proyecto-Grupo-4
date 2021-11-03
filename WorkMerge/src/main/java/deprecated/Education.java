@@ -1,4 +1,4 @@
-package com.WorkMerge.entities;
+package deprecated;
 
 import java.util.Date;
 
@@ -13,6 +13,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.WorkMerge.entities.Curriculum;
 import com.WorkMerge.enums.TypeEducation;
 
 @Entity
@@ -32,7 +33,7 @@ public class Education {
 	private String description;
 	@ManyToOne
 	private Curriculum curriculum;
-	
+
 	public Education() {	
 	}
 
