@@ -6,13 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD:WorkMerge/src/main/java/com/WorkMerge/services/WorkExperienceService.java
-import com.WorkMerge.entities.WorkExperience;
+import deprecated.WorkExperience;
 import com.WorkMerge.exceptions.ServiceException;
-import com.WorkMerge.repositories.WorkExperienceRepository;
+import deprecated.WorkExperienceRepository;
 
-=======
->>>>>>> b87dce88a3e79364a921fa28c6be4b6aa0512b8e:WorkMerge/src/main/java/deprecated/WorkExperienceService.java
 @Service
 public class WorkExperienceService {
 	

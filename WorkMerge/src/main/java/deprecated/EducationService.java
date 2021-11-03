@@ -6,14 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD:WorkMerge/src/main/java/com/WorkMerge/services/EducationService.java
-import com.WorkMerge.entities.Education;
+
+import deprecated.Education;
 import com.WorkMerge.enums.TypeEducation;
 import com.WorkMerge.exceptions.ServiceException;
-import com.WorkMerge.repositories.EducationRepository;
+import deprecated.EducationRepository;
 
-=======
->>>>>>> b87dce88a3e79364a921fa28c6be4b6aa0512b8e:WorkMerge/src/main/java/deprecated/EducationService.java
 @Service
 public class EducationService {
 	
