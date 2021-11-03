@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
 
 * {
     margin: 0%;
@@ -61,4 +63,36 @@ section {
 
     
 
+}
+
+nav{
+    background-color: #577EB7;
+}
+
+.titulo {
+    font-family: 'Russo One', Arial, Helvetica, sans-serif;
+    font-size: 3rem;
+    color: white;
+}
+
+
+
+footer{
+    background-color: #616160;
+}
+
+footer .titulo-sección{
+    color: black;
+    font-family: 'Russo One', sans-serif;
+}
+footer .copy{
+    color: black; 
+}
+.redes-sociales{
+    display: flex;
+    justify-content: right;
+}
+.redes-sociales i{
+    font-size: 30px;
+    padding:  20px  ;
 }
