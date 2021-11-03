@@ -21,6 +21,8 @@ public class CompanyService {
 	
 	@Autowired
 	private CompanyRepository companyRepository;
+	@Autowired
+	private PhotoService photoService;
 	//CREATE
 	@Transactional
 	public void newCompany(String email, String password, List<Job> job,Photo photo,MultipartFile archive)throws ServiceException {
@@ -30,8 +32,8 @@ public class CompanyService {
 		company.setEmail(email);
 		String encript = new BCryptPasswordEncoder().encode(password);
 		company.setPassword(encript);
-		company.setJob(job.newJob());
-		Photo photo = PhotoService.save(archive);
+		company.setJob(job);
+		photo = photoService.saved(archive);
 	    company.setPhoto(photo);
 		companyRepository.save(company);
 	}
@@ -43,8 +45,8 @@ public class CompanyService {
 		Company company = compy.get();
 		String encript = new BCryptPasswordEncoder().encode(password);
 		company.setPassword(encript);
-		company.setJob(job.newJob());
-		Photo photo = PhotoService.save(archive);
+		company.setJob(job);
+		photo = photoService.saved(archive);
 	    company.setPhoto(photo);
 		companyRepository.save(company);
 	}

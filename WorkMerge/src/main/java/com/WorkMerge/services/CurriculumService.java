@@ -10,4 +10,6 @@ public class CurriculumService {
 	
 	@Autowired
 	private CurriculumRepository curriculumRepository;
+	
+	
 }
