@@ -13,7 +13,7 @@ import com.WorkMerge.entities.Photo;
 import com.WorkMerge.enums.Rol;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.repositories.CompanyRepository;
-import com.WorkMerge.repositories.PhotoRepository;
+
 
 @Service
 public class CompanyService {
@@ -21,8 +21,8 @@ public class CompanyService {
 	@Autowired
 	private CompanyRepository companyRepository;
 	@Autowired
-	private PhotoRepository photoRepository;
-	@Autowired
+
+
 	private PhotoService photoService;
 	//CREATE
 	@Transactional
@@ -33,10 +33,6 @@ public class CompanyService {
 		company.setEmail(email);
 		String encript = new BCryptPasswordEncoder().encode(password);
 		company.setPassword(encript);
-		company.setJob(job.newJob());
-		Photo photo2 = photoService.saved(archive);
-	    company.setPhoto(photo);
-		companyRepository.save(company);
 	}
 	// UPDATE
 	@Transactional
@@ -46,8 +42,8 @@ public class CompanyService {
 		Company company = compy.get();
 		String encript = new BCryptPasswordEncoder().encode(password);
 		company.setPassword(encript);
-		company.setJob(job.newJob());
-		Photo photo = PhotoService.save(archive);
+		company.setJob(job);
+		photo = photoService.saved(archive);
 	    company.setPhoto(photo);
 		companyRepository.save(company);
 	}
