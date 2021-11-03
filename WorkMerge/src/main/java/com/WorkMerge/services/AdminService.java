@@ -11,6 +11,7 @@ import com.WorkMerge.enums.Rol;
 import com.WorkMerge.repositories.AdminRepository;
 import com.WorkMerge.repositories.ClientRepository;
 import com.WorkMerge.repositories.CompanyRepository;
+import com.WorkMerge.repositories.JobRepository;
 
 @Service
 public class AdminService {
@@ -19,12 +20,15 @@ public class AdminService {
 	private AdminRepository adminRepository;
 	
 	@Autowired
+	private JobRepository jobRepository;
+	
+	@Autowired
 	private ClientRepository clientRepository;
 	
 	@Autowired
 	private CompanyRepository companyRepository;
 	
-	/*Crear ADMIN, Eliminar cliente, Eliminar empresa, Aceptar trabajo*/
+	/*Crear ADMIN, Eliminar cliente, Eliminar empresa, Eliminar trabajo*/
 	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Admin newAdmin(String email, String password, String nickname) {
@@ -57,6 +61,14 @@ public class AdminService {
 		/*Elimino empresa*/
 		companyRepository.deleteById(id);
 	}
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public void deleteJob(String id) {
+		
+		/*Elimino trabajo*/
+		jobRepository.deleteById(id);
+	}
+	
 	/*
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Job registerWork(String id) {

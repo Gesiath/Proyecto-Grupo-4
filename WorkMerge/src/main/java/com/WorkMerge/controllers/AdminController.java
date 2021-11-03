@@ -16,7 +16,6 @@ public class AdminController {
 	
 	@GetMapping()
 	public String createAdmin() {
-		adminService.newAdmin("maximongelos@gmail.com", "123456", "maximongelos");
 		return "index";
 	}
 }
