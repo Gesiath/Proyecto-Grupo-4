@@ -32,7 +32,7 @@ public class Education {
 	private String description;
 	@ManyToOne
 	private Curriculum curriculum;
-	
+
 	public Education() {	
 	}
 
