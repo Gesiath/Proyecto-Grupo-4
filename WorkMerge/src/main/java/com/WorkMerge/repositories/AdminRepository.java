@@ -7,5 +7,5 @@ import com.WorkMerge.entities.Admin;
 
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, String>{
-
+	
 }
