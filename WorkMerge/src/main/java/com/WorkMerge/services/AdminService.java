@@ -119,6 +119,9 @@ public class AdminService {
 		if(nickname == null || nickname.isEmpty()) {
 			throw new ServiceException("El nick no puede ser nulo o estar vacio.");
 		}
+		if(adminRepository.existByEmail(email)) {
+			throw new ServiceException("El administrador con ese email ya existe.");
+		}
 	}
 	
 	/*

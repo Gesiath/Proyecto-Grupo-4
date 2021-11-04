@@ -2,12 +2,10 @@ package com.WorkMerge.services;
 
 import java.util.Date;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.WorkMerge.entities.Job;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.repositories.JobRepository;
@@ -18,10 +16,11 @@ public class JobService {
 	@Autowired
 	private JobRepository jobRepository;
 
+		
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public Job newJob(String title, Date datepost, String availability, String category, String description,
-			Integer salary, String experienceRequired) throws ServiceException{
+	public Job newJob(String title, Date datepost, String availability, String category, String description,Integer salary, String experienceRequired) throws ServiceException{
 		validate(title, datepost, availability, category, description, salary, experienceRequired);
+
 		Job newJob = new Job();
 		newJob.setTitle(title);
 		newJob.setDatepost(datepost);
@@ -32,6 +31,9 @@ public class JobService {
 		newJob.setExperienceRequired(experienceRequired);
 		return jobRepository.save(newJob);
 	}
+	
+
+
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Job updateJob(String id, String title, Date datepost, String availability, String category,
@@ -64,6 +66,7 @@ public class JobService {
 		}
 
 	}
+	//dar de alta trabajo
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void upgradeJob(String id) throws ServiceException{
 	Optional<Job> respuesta = jobRepository.findById(id);
@@ -74,6 +77,8 @@ public class JobService {
 		            throw new ServiceException("No se encontro el trabajo a activar.");
 		        }
 	}
+	
+	//dar de baja trabajo
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void downgradeJob(String id)  throws ServiceException{
 		Optional<Job> respuesta = jobRepository.findById(id);
@@ -85,8 +90,9 @@ public class JobService {
 		}
 
 	}
-	public void validate(String title, Date datepost, String availability, String category, String description,
-			Integer salary, String experienceRequired)throws ServiceException {
+	
+	//Validación
+	public void validate(String title, Date datepost, String availability, String category, String description,Integer salary, String experienceRequired)throws ServiceException{
 		if(title==null||title.isEmpty()) {
 			throw new ServiceException("El título no puede estar vacío o nulo.");	
 		}
@@ -110,3 +116,4 @@ public class JobService {
 		}
 }
 }
+
