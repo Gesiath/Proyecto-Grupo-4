@@ -14,7 +14,6 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.WorkMerge.entities.Curriculum;
-import com.WorkMerge.enums.TypeEducation;
 
 @Entity
 public class Education {

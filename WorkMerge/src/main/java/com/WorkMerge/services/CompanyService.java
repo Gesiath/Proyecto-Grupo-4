@@ -16,6 +16,7 @@ import com.WorkMerge.entities.Photo;
 import com.WorkMerge.enums.Rol;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.repositories.CompanyRepository;
+import com.WorkMerge.repositories.JobRepository;
 
 @Service
 public class CompanyService {
@@ -23,21 +24,30 @@ public class CompanyService {
 	@Autowired
 	private CompanyRepository companyRepository;
 	@Autowired
+	private JobRepository jobRepository;
+	@Autowired
 	private PhotoService photoService;
 	//CREATE
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void newCompany(String email, String password, List<Job> job,Photo photo,MultipartFile archive)throws ServiceException {
+	public void newCompany(String email, String password, Photo photo,MultipartFile archive)throws ServiceException {
+		validate(email, password);
 		Company company = new Company();
 		company.setRol(Rol.COMPANY);
 		company.setActive(true);
 		company.setEmail(email);
 		String encript = new BCryptPasswordEncoder().encode(password);
 		company.setPassword(encript);
-		company.setJob(job);
 		photo = photoService.saved(archive);
 	    company.setPhoto(photo);
 		companyRepository.save(company);
 	}
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public void uploadJobs(Company company, Job job) {
+		Optional<Job> job2 = jobRepository.findById(job.getId());
+		company.getJob().add(job2.get());
+	}
+	
 	// UPDATE
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void updateCompany(String id,String password, List<Job> job,Photo photo,MultipartFile archive,String email) throws ServiceException{
@@ -75,6 +85,12 @@ public class CompanyService {
 	        }
 		
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Job> listMyJobs(Company company){
+		return company.getJob();
+	}
+	
 	public void validate(String email,String password) throws ServiceException {
 		if(email==null || email.isEmpty() || email.equals("")) {
 			throw new ServiceException ("El email no puede ser nulo/vacío.");

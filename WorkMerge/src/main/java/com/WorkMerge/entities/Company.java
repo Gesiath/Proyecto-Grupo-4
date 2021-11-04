@@ -34,6 +34,19 @@ public class Company {
 	public Company() {
 		
 	}
+	
+	public Company(String id, String name, Rol rol, String email, String password, List<Job> job, boolean active,
+			Photo photo) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.rol = rol;
+		this.email = email;
+		this.password = password;
+		this.job = job;
+		this.active = active;
+		this.photo = photo;
+	}
 
 	public String getId() {
 		return id;
