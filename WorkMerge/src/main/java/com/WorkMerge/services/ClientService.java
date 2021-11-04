@@ -17,6 +17,7 @@ import com.WorkMerge.entities.Client;
 import com.WorkMerge.entities.Curriculum;
 import com.WorkMerge.entities.Photo;
 import com.WorkMerge.enums.Rol;
+import com.WorkMerge.exceptions.ServiceException;
 
 
 @Service
@@ -26,7 +27,7 @@ public class ClientService {
 	private ClientRepository clientRepository;
 	
 	//Registrar cliente
-	public void registerClient(String id, Rol rol,String email, String password,String password2, boolean active) throws Exception{ //BUSCAMOS UNA CLIENTE Y DEVOLVEMOS UN OPTIONAL
+	public void registerClient(String id, Rol rol,String email, String password,String password2, boolean active) throws ServiceException{ //BUSCAMOS UNA CLIENTE Y DEVOLVEMOS UN OPTIONAL
 		validar(email,password,password2);
 		
 		Client cliente = new Client();
@@ -41,7 +42,7 @@ public class ClientService {
 	
 	//MODIFICAR CLIENTE
 	@Transactional //Transactional (se pone porque cambia algo en la base de datos)
-	public Client modifyClient(String id,Rol rol,String email, String password,String password2,Curriculum curriculum, Photo photo, boolean active) throws Exception {
+	public Client modifyClient(String id,Rol rol,String email, String password,String password2,Curriculum curriculum, Photo photo, boolean active) throws ServiceException {
 		validar(email,password,password2);
 		Optional<Client> respuesta = clientRepository.findById(id);
 		if(respuesta.isPresent()) {
@@ -55,15 +56,20 @@ public class ClientService {
 		p.setActive(true);
 		return clientRepository.save(p);
 	}else {
-		throw new Exception("No se encontro el cliente solicitado");
+		throw new ServiceException("No se encontro el cliente solicitado");
 	}	
 	}
 	
 	
 	@Transactional
 	//Eliminar cliente
-	public void delete(String id) {
+	public void delete(String id) throws ServiceException {
+		Optional<Client> respuesta = clientRepository.findById(id);
+		if(respuesta.isPresent()) {
 		clientRepository.deleteById(id);
+		}else {
+			throw new ServiceException("No se encontro el cliente ");
+		}
 	}
 	
 	@Transactional
@@ -90,16 +96,16 @@ public class ClientService {
 	
 	
 	//Metodo validación
-	public void validar(String email,String password,String password2)throws Exception{
+	public void validar(String email,String password,String password2)throws ServiceException{
 		if(email==null || email.isEmpty()) {
-			throw new Exception("El email no puede estar vacío");
+			throw new ServiceException("El email no puede estar vacío");
 		}
 		if(password==null || password.isEmpty()) {
-			throw new Exception("La contraseña no puede estar vacía");
+			throw new ServiceException("La contraseña no puede estar vacía");
 		}
 		
 		if(!password.equals(password2)){
-			throw new Exception("La contraseñas tienen que coincidir");
+			throw new ServiceException("La contraseñas tienen que coincidir");
 		}
 	}
 	}
