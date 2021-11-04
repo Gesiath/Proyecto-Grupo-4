@@ -2,14 +2,12 @@ package com.WorkMerge.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.WorkMerge.entities.Company;
 import com.WorkMerge.entities.Job;
 import com.WorkMerge.entities.Photo;
@@ -18,16 +16,19 @@ import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.repositories.CompanyRepository;
 import com.WorkMerge.repositories.JobRepository;
 
+
 @Service
 public class CompanyService {
 	
 	@Autowired
 	private CompanyRepository companyRepository;
 	@Autowired
+
 	private JobRepository jobRepository;
 	@Autowired
+
 	private PhotoService photoService;
-	//CREATE
+	//CREATE (crear)
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void newCompany(String email, String password, Photo photo,MultipartFile archive)throws ServiceException {
 		validate(email, password);
@@ -37,9 +38,11 @@ public class CompanyService {
 		company.setEmail(email);
 		String encript = new BCryptPasswordEncoder().encode(password);
 		company.setPassword(encript);
+
 		photo = photoService.saved(archive);
 	    company.setPhoto(photo);
 		companyRepository.save(company);
+
 	}
 	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
@@ -48,7 +51,7 @@ public class CompanyService {
 		company.getJob().add(job2.get());
 	}
 	
-	// UPDATE
+	// UPDATE (actualizar)
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void updateCompany(String id,String password, List<Job> job,Photo photo,MultipartFile archive,String email) throws ServiceException{
 		validate(email,password);
@@ -73,7 +76,7 @@ public class CompanyService {
 	        }
 		
 	}
-	//DOWNGRADE
+	//DOWNGRADE (dar de baja)
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void downgradeCompany (String id,String password, List<Job> job,Photo photo,MultipartFile archive)throws ServiceException{
 		Optional<Company> compy = companyRepository.findById(id);
@@ -98,6 +101,8 @@ public class CompanyService {
 		if(password==null || password.isEmpty()||password.equals("")) {
 			throw new ServiceException ("La contraseña no puede ser nula/vacía o 0.");
 		}
-
+		if(companyRepository.existByEmail(email)) {
+			throw new ServiceException("Ya existe una compañia con ese email.");
+		}
 	}
 }

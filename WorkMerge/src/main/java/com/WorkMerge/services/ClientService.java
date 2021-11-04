@@ -13,7 +13,9 @@ import com.WorkMerge.entities.Curriculum;
 import com.WorkMerge.entities.Photo;
 import com.WorkMerge.enums.Rol;
 import com.WorkMerge.exceptions.ServiceException;
+
 import com.WorkMerge.repositories.ClientRepository;
+
 
 
 @Service
@@ -23,7 +25,7 @@ public class ClientService {
 	private ClientRepository clientRepository;
 	
 	//Registrar cliente
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+
 	public void registerClient(String id, Rol rol,String email, String password,String password2, boolean active) throws ServiceException{ //BUSCAMOS UNA CLIENTE Y DEVOLVEMOS UN OPTIONAL
 		validar(email,password,password2);
 		
@@ -38,7 +40,11 @@ public class ClientService {
 	
 	
 	//MODIFICAR CLIENTE
+
+	 //Transactional (se pone porque cambia algo en la base de datos)
+
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })//Transactional (se pone porque cambia algo en la base de datos)
+
 	public Client modifyClient(String id,Rol rol,String email, String password,String password2,Curriculum curriculum, Photo photo, boolean active) throws ServiceException {
 		validar(email,password,password2);
 		Optional<Client> respuesta = clientRepository.findById(id);
@@ -60,15 +66,14 @@ public class ClientService {
 	
 
 	//Eliminar cliente
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void delete(String id) throws ServiceException{
+
+	public void delete(String id) throws ServiceException {
 		Optional<Client> respuesta = clientRepository.findById(id);
 		if(respuesta.isPresent()) {
-			clientRepository.deleteById(id);
-		} else {
-			throw new ServiceException("No se encotnro el cliente a borrar.");
+		clientRepository.deleteById(id);
+		}else {
+			throw new ServiceException("No se encontro el cliente ");
 		}
-		
 	}
 	
 
@@ -107,6 +112,9 @@ public class ClientService {
 		
 		if(!password.equals(password2)){
 			throw new ServiceException("La contraseñas tienen que coincidir");
+		}
+		if(clientRepository.existByEmail(email)) {
+			throw new ServiceException("Ya existe un usuario registrado con ese email.");
 		}
 	}
 	}
