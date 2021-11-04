@@ -17,10 +17,13 @@ public class Client {
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name="uuid",strategy = "uuid2")
 	private String id;
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING) // permite persistir la enumeración por su nombre, lo que significa que será una columna alfanumérica. 
 	private Rol rol;
 	private String email;
 	private String password;
+
+	
+	
 	@OneToOne
 	private Curriculum curriculum;
 	@OneToOne
@@ -43,6 +46,16 @@ public class Client {
 		this.photo = photo;
 		this.active = active;
 	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	
 	public Rol getRol() {
 		return rol;
 	}

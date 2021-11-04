@@ -27,10 +27,8 @@ public Admin() {
 	
 }
 
-public Admin(String id, Rol rol, String email, String password, String nickname) {
+public Admin(String email, String password, String nickname) {
 	super();
-	this.id = id;
-	this.rol = rol;
 	this.email = email;
 	this.password = password;
 	this.nickname = nickname;
