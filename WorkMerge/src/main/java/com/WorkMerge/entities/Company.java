@@ -112,5 +112,4 @@ public class Company {
 		this.photo = photo;
 	}
 	
-	
-}
+	}
