@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.WorkMerge.entities.Curriculum;
-import com.WorkMerge.enums.EnumLanguage;
 
 @Entity
 public class Language {
