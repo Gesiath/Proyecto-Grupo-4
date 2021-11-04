@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import com.WorkMerge.entities.Company;
@@ -13,6 +14,7 @@ import com.WorkMerge.entities.Photo;
 import com.WorkMerge.enums.Rol;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.repositories.CompanyRepository;
+import com.WorkMerge.repositories.JobRepository;
 
 
 @Service
@@ -22,20 +24,35 @@ public class CompanyService {
 	private CompanyRepository companyRepository;
 	@Autowired
 
+	private JobRepository jobRepository;
+	@Autowired
 
 	private PhotoService photoService;
-	//CREATE
-	@Transactional
-	public void newCompany(String email, String password, List<Job> job,Photo photo,MultipartFile archive)throws ServiceException {
+	//CREATE (crear)
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public void newCompany(String email, String password, Photo photo,MultipartFile archive)throws ServiceException {
+		validate(email, password);
 		Company company = new Company();
 		company.setRol(Rol.COMPANY);
 		company.setActive(true);
 		company.setEmail(email);
 		String encript = new BCryptPasswordEncoder().encode(password);
 		company.setPassword(encript);
+
+		photo = photoService.saved(archive);
+	    company.setPhoto(photo);
+		companyRepository.save(company);
+
 	}
-	// UPDATE
-	@Transactional
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public void uploadJobs(Company company, Job job) {
+		Optional<Job> job2 = jobRepository.findById(job.getId());
+		company.getJob().add(job2.get());
+	}
+	
+	// UPDATE (actualizar)
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void updateCompany(String id,String password, List<Job> job,Photo photo,MultipartFile archive,String email) throws ServiceException{
 		validate(email,password);
 		Optional<Company> compy = companyRepository.findById(id);
@@ -48,29 +65,35 @@ public class CompanyService {
 		companyRepository.save(company);
 	}
 	//DELETE
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void deleteCompany (String id,String password, List<Job> job,Photo photo,MultipartFile archive) throws ServiceException{
 		Optional<Company> compy = companyRepository.findById(id);
 		if (compy.isPresent()) {
 	            Company company = compy.get();
 	            companyRepository.delete(company);
 	        } else {
-	            throw new Error("No se encontro la compañía.");
+	            throw new ServiceException("No se encontro la compañía.");
 	        }
 		
 	}
-	//DOWNGRADE
-	@Transactional
+	//DOWNGRADE (dar de baja)
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void downgradeCompany (String id,String password, List<Job> job,Photo photo,MultipartFile archive)throws ServiceException{
 		Optional<Company> compy = companyRepository.findById(id);
 		if (compy.isPresent()) {
 	            Company company = compy.get();
 	            company.setActive(false);
 	        } else {
-	            throw new Error("No se encontro la compañía.");
+	            throw new ServiceException("No se encontro la compañía.");
 	        }
 		
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Job> listMyJobs(Company company){
+		return company.getJob();
+	}
+	
 	public void validate(String email,String password) throws ServiceException {
 		if(email==null || email.isEmpty() || email.equals("")) {
 			throw new ServiceException ("El email no puede ser nulo/vacío.");
@@ -78,6 +101,8 @@ public class CompanyService {
 		if(password==null || password.isEmpty()||password.equals("")) {
 			throw new ServiceException ("La contraseña no puede ser nula/vacía o 0.");
 		}
-
+		if(companyRepository.existByEmail(email)) {
+			throw new ServiceException("Ya existe una compañia con ese email.");
+		}
 	}
 }

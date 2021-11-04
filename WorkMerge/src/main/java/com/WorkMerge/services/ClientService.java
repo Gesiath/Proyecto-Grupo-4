@@ -1,23 +1,21 @@
 package com.WorkMerge.services;
 
-
-
-
 import java.util.Optional;
 
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.WorkMerge.repositories.ClientRepository;
-
-
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.WorkMerge.entities.Client;
 import com.WorkMerge.entities.Curriculum;
 import com.WorkMerge.entities.Photo;
 import com.WorkMerge.enums.Rol;
 import com.WorkMerge.exceptions.ServiceException;
+
+import com.WorkMerge.repositories.ClientRepository;
+
 
 
 @Service
@@ -27,6 +25,7 @@ public class ClientService {
 	private ClientRepository clientRepository;
 	
 	//Registrar cliente
+
 	public void registerClient(String id, Rol rol,String email, String password,String password2, boolean active) throws ServiceException{ //BUSCAMOS UNA CLIENTE Y DEVOLVEMOS UN OPTIONAL
 		validar(email,password,password2);
 		
@@ -41,7 +40,11 @@ public class ClientService {
 	
 	
 	//MODIFICAR CLIENTE
-	@Transactional //Transactional (se pone porque cambia algo en la base de datos)
+
+	 //Transactional (se pone porque cambia algo en la base de datos)
+
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })//Transactional (se pone porque cambia algo en la base de datos)
+
 	public Client modifyClient(String id,Rol rol,String email, String password,String password2,Curriculum curriculum, Photo photo, boolean active) throws ServiceException {
 		validar(email,password,password2);
 		Optional<Client> respuesta = clientRepository.findById(id);
@@ -61,8 +64,9 @@ public class ClientService {
 	}
 	
 	
-	@Transactional
+
 	//Eliminar cliente
+
 	public void delete(String id) throws ServiceException {
 		Optional<Client> respuesta = clientRepository.findById(id);
 		if(respuesta.isPresent()) {
@@ -72,8 +76,9 @@ public class ClientService {
 		}
 	}
 	
-	@Transactional
+
 	//Dar de baja cliente
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void lowCustomer(String id) {
 		Optional<Client> respuesta = clientRepository.findById(id);
 		if(respuesta.isPresent()) {
@@ -83,8 +88,9 @@ public class ClientService {
 	}
 	
 	
-	@Transactional
+
 	//Dar de alta cliente
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void hightCustomer(String id) {
 		Optional<Client> respuesta = clientRepository.findById(id);
 		if(respuesta.isPresent()) {
@@ -106,6 +112,9 @@ public class ClientService {
 		
 		if(!password.equals(password2)){
 			throw new ServiceException("La contraseñas tienen que coincidir");
+		}
+		if(clientRepository.existByEmail(email)) {
+			throw new ServiceException("Ya existe un usuario registrado con ese email.");
 		}
 	}
 	}
