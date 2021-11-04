@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,7 +25,7 @@ public class CompanyService {
 	@Autowired
 	private PhotoService photoService;
 	//CREATE
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void newCompany(String email, String password, List<Job> job,Photo photo,MultipartFile archive)throws ServiceException {
 		Company company = new Company();
 		company.setRol(Rol.COMPANY);
@@ -38,7 +39,7 @@ public class CompanyService {
 		companyRepository.save(company);
 	}
 	// UPDATE
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void updateCompany(String id,String password, List<Job> job,Photo photo,MultipartFile archive,String email) throws ServiceException{
 		validate(email,password);
 		Optional<Company> compy = companyRepository.findById(id);
@@ -51,26 +52,26 @@ public class CompanyService {
 		companyRepository.save(company);
 	}
 	//DELETE
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void deleteCompany (String id,String password, List<Job> job,Photo photo,MultipartFile archive) throws ServiceException{
 		Optional<Company> compy = companyRepository.findById(id);
 		if (compy.isPresent()) {
 	            Company company = compy.get();
 	            companyRepository.delete(company);
 	        } else {
-	            throw new Error("No se encontro la compañía.");
+	            throw new ServiceException("No se encontro la compañía.");
 	        }
 		
 	}
 	//DOWNGRADE
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void downgradeCompany (String id,String password, List<Job> job,Photo photo,MultipartFile archive)throws ServiceException{
 		Optional<Company> compy = companyRepository.findById(id);
 		if (compy.isPresent()) {
 	            Company company = compy.get();
 	            company.setActive(false);
 	        } else {
-	            throw new Error("No se encontro la compañía.");
+	            throw new ServiceException("No se encontro la compañía.");
 	        }
 		
 	}
