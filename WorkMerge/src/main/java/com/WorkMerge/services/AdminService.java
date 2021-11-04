@@ -71,6 +71,18 @@ public class AdminService {
 	}
 	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public void deleteAdmin(String id) throws ServiceException{
+		
+		Optional<Admin> respuesta = adminRepository.findById(id);
+		if(respuesta.isPresent()) {
+			/*Elimino admin*/
+			adminRepository.deleteById(id);
+		} else {
+			throw new ServiceException("No se encontro el admin a borrar.");
+		}
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void deleteCompany(String id) throws ServiceException{
 		
 		Optional<Company> respuesta = companyRepository.findById(id);
@@ -107,6 +119,11 @@ public class AdminService {
 	@Transactional(readOnly = true)
 	public List<Client> listClients(){
 		return clientRepository.findAll();
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Admin> listAdmins(){
+		return adminRepository.findAll();
 	}
 	
 	private void validate(String email, String password, String nickname) throws ServiceException{
