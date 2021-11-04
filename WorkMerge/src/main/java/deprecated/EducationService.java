@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 import deprecated.Education;
-import com.WorkMerge.enums.TypeEducation;
+
 import com.WorkMerge.exceptions.ServiceException;
 import deprecated.EducationRepository;
 

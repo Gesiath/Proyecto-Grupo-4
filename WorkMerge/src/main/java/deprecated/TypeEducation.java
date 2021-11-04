@@ -1,4 +1,4 @@
-package com.WorkMerge.enums;
+package deprecated;
 
 public enum TypeEducation {
 	

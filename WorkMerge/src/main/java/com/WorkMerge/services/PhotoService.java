@@ -5,6 +5,8 @@ import java.util.Optional;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.WorkMerge.entities.Photo;
@@ -15,7 +17,7 @@ public class PhotoService {
 	
 	@Autowired
 	private PhotoRepository photoRepository;
-	
+	 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	 public Photo saved(MultipartFile archive) throws ServiceException {
 
 	        if (archive != null) {
@@ -33,7 +35,7 @@ public class PhotoService {
 	        }
 	        return null;
 	    }
-
+	 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	    public Photo update(String idPhoto, MultipartFile archive) throws ServiceException {
 
 	        if (archive != null) {
@@ -59,4 +61,10 @@ public class PhotoService {
 	        return null;
 	    }
 	    
+	 	@Transactional(readOnly = true)
+	    public Photo buscar(String Id) throws Error{
+	        
+	        return photoRepository.getById(Id);
+
+	    } 
 }
