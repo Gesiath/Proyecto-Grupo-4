@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -21,24 +21,24 @@
 		<title>Datos Cliente</title>
 	</head>
 
-	<nav class="navbar navbar-light">
-		<div class="container-fluid">
-			<div>
-				<a class="navbar-brand" href="#">
-					<img
-						src="/src/main/resources/static/img/LogoColor.png"
-						alt="WM"
-						width="30"
-						height="24"
-						class="d-inline-block align-text-top"
-					/>
-					<span class="titulo">Work Merge </span>
-				</a>
-			</div>
-		</div>
-	</nav>
-
 	<body>
+		<nav class="navbar navbar-light">
+			<div class="container-fluid">
+				<div>
+					<a class="navbar-brand" href="#">
+						<img
+							src="/src/main/resources/static/img/LogoColor.png"
+							alt="WM"
+							width="30"
+							height="24"
+							class="d-inline-block align-text-top"
+						/>
+						<span class="titulo">WorkMerge </span>
+					</a>
+				</div>
+			</div>
+		</nav>
+
 		<div class="container col-5">
 			<div class="card mt-5">
 				<div class="card-header d-flex">
@@ -54,7 +54,13 @@
 
 						<div class="mb-3">
 							<label for="nombre" class="form-label">Nombre</label>
-							<input type="text" class="form-control" th:field="*{nombre}" placeholder="Nombre" />
+							<input
+								type="text"
+								class="form-control"
+								name="nombre"
+								th:field="*{nombre}"
+								placeholder="Nombre"
+							/>
 						</div>
 						<div class="mb-3">
 							<label for="apellido" class="form-label">Apellido</label>
@@ -62,97 +68,57 @@
 								type="text"
 								class="form-control"
 								th:field="*{apellido}"
+								name="apellido"
 								placeholder="Apellido"
 							/>
 						</div>
+
 						<div class="mb-3">
 							<label for="dni" class="form-label">DNI</label>
-							<input type="number" class="form-control" th:field="*{dni}" placeholder="123456789" />
+							<input
+								type="number"
+								class="form-control"
+								name="dni"
+								th:field="*{dni}"
+								placeholder="123456789"
+							/>
+						</div>
+
+						<div class="dropdown">
+							<label for="genero" class="form-label">Genero</label>
+							<select class="form-select" name="genero">
+								<option value="female">Femenino</option>
+								<option value="male">Masculino</option>
+								<option value="nobinary">No binario</option>
+							</select>
 						</div>
 						<br />
 						<div class="dropdown">
-							<a
-								class="btn btn-secondary dropdown-toggle"
-								href="#"
-								role="button"
-								id="dropdownMenuLink"
-								data-bs-toggle="dropdown"
-								aria-expanded="false"
-							>
-								Género
-							</a>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-								<li><a class="dropdown-item" href="#">Hombre</a></li>
-								<li><a class="dropdown-item" href="#">Mujer</a></li>
-								<li><a class="dropdown-item" href="#">No Binario</a></li>
-							</ul>
+							<label for="nacionalidad" class="form-label">Nacionalidad</label>
+							<select class="form-select" name="nacionalidad">
+								<option value="ARGENTINA">Argentina</option>
+								<option value="CHILE">Chile</option>
+								<option value="PERU">Peru</option>
+								<option value="URUGUAY">Uruguay</option>
+								<option value="BRASIL">Brasil</option>
+								<option value="PARAGUAY">Paraguay</option>
+								<option value="BOLIVIA">Bolivia</option>
+							</select>
 						</div>
 						<br />
 						<div class="dropdown">
-							<a
-								class="btn btn-secondary dropdown-toggle"
-								href="#"
-								role="button"
-								id="dropdownMenuLink"
-								data-bs-toggle="dropdown"
-								aria-expanded="false"
-							>
-								Nacionalidad
-							</a>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-								<li><a class="dropdown-item" href="#">Argentina</a></li>
-								<li><a class="dropdown-item" href="#">Brasil</a></li>
-								<li><a class="dropdown-item" href="#">Chile</a></li>
-								<li><a class="dropdown-item" href="#">Perú</a></li>
-								<li><a class="dropdown-item" href="#">Uruguay</a></li>
-								<li><a class="dropdown-item" href="#">Bolivia</a></li>
-								<li><a class="dropdown-item" href="#">Paraguay</a></li>
-							</ul>
-						</div>
-
-						<br />
-
-						<div class="dropdown">
-							<a
-								class="btn btn-secondary dropdown-toggle"
-								href="#"
-								role="button"
-								id="dropdownMenuLink"
-								data-bs-toggle="dropdown"
-								aria-expanded="false"
-							>
-								Ciudad
-							</a>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-								<li><a class="dropdown-item" href="#">Rosario</a></li>
-								<li><a class="dropdown-item" href="#">Baigorria</a></li>
-								<li><a class="dropdown-item" href="#">Villa Gobernador Galvez</a></li>
-								<li><a class="dropdown-item" href="#">Acebal</a></li>
-								<li><a class="dropdown-item" href="#">Pergamino</a></li>
-								<li><a class="dropdown-item" href="#">Funes</a></li>
-								<li><a class="dropdown-item" href="#">Pérez</a></li>
-							</ul>
+							<label for="ciudad" class="form-label">Ciudad</label>
+							<select class="form-select" name="ciudad">
+								<option value="ROSARIO">Rosario</option>
+								<option value="BAIGORRIA">Baigoriia</option>
+								<option value="VGG">Villa Gobernador Galvez</option>
+								<option value="ACEBAL">Acebal</option>
+								<option value="ARROYOSECO">Arroyo Seco</option>
+								<option value="FUNES">Funes</option>
+								<option value="PUEBLOESTHER">Pueblo Esther</option>
+							</select>
 						</div>
 						<br />
-						<!-- <div class="mb-3">
-              <label for="nacionalidad" class="form-label">Nacionalidad</label>
-              <input
-                type="text"
-                class="form-control"
-                th:field="*{nacionalidad}"
-                placeholder="Nacionalidad"
-              />
-            </div> -->
-
-						<!--<div class="mb-3">
-              <label for="ciudad" class="form-label">Ciudad</label>
-              <input
-                type="text"
-                class="form-control"
-                th:field="*{ciudad}"
-                placeholder="Ciudad"
-              />
-            </div>-->
 
 						<div class="mb-3">
 							<label for="domicilio" class="form-label">Domicilio</label>
@@ -160,6 +126,7 @@
 								type="text"
 								class="form-control"
 								th:field="*{domicilio}"
+								name="domicilio"
 								placeholder="Domicilio"
 							/>
 						</div>
@@ -169,6 +136,7 @@
 								type="date"
 								class="form-control"
 								th:field="*{fechaDeNacimiento}"
+								name="fecha"
 								placeholder="Fecha de nacimiento"
 							/>
 						</div>
@@ -178,6 +146,7 @@
 								type="tel"
 								class="form-control"
 								th:field="*{telefono}"
+								name="telefono"
 								placeholder="Teléfono"
 							/>
 						</div>
@@ -240,8 +209,7 @@
 					<h2 class="título-sección">WorkMerge</h2>
 				</div>
 				<div class="redes-sociales">
-					<i class="fab fa-twitter"></i>
-					<i class="fab fa-facebook-f"></i>
+					<i class="fab fa-twitter"></i> <i class="fab fa-facebook-f"></i>
 					<i class="fab fa-youtube"></i>
 				</div>
 				<div class="contenedor">

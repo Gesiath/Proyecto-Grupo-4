@@ -22,19 +22,73 @@ public class CurriculumService {
 	private CurriculumRepository curriculumRepository;
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public Curriculum newCurriculum(String name, String surname, Long dni, Gender gender, Nationality nationality,
-			String address, City city, Date birthday, Integer phone, String education, String workexperience,
+	public Curriculum newCurriculum(String name, String surname, Integer dni, String gender, String nationality,
+			String address, String city, Date birthday, Integer phone, String education, String workexperience,
 			String language, String skills) throws ServiceException {
 		validate(name, surname, dni, gender, nationality, address, city, birthday, phone, education, workexperience,
 				language, skills);
 		Curriculum curriculum = new Curriculum();
 		curriculum.setName(name);
 		curriculum.setSurname(surname);
-		curriculum.setDni(dni);
-		curriculum.setGender(gender);
-		curriculum.setNationality(nationality);
+		Long dniLong = new Long(dni);
+		curriculum.setDni(dniLong);
+		if (gender.equalsIgnoreCase("female")) {
+			curriculum.setGender(Gender.FEMALE);
+		} else if (gender.equalsIgnoreCase("male")) {
+			curriculum.setGender(Gender.MALE);
+		} else if (gender.equalsIgnoreCase("nobinary")) {
+			curriculum.setGender(Gender.NOBINARY);
+		}
+
+		switch (nationality) {
+		case "ARGENTINA":
+			curriculum.setNationality(Nationality.ARGENTINA);
+			break;
+		case "CHILE":
+			curriculum.setNationality(Nationality.CHILE);
+			break;
+		case "PERU":
+			curriculum.setNationality(Nationality.PERU);
+			break;
+		case "URUGUAY":
+			curriculum.setNationality(Nationality.URUGUAY);
+			break;
+		case "BOLIVIA":
+			curriculum.setNationality(Nationality.BOLIVIA);
+			break;
+		case "BRASIL":
+			curriculum.setNationality(Nationality.BRASIL);
+			break;
+		case "PARAGUAY":
+			curriculum.setNationality(Nationality.PARAGUAY);
+			break;
+		}
+
+		switch (city) {
+		case "ROSARIO":
+			curriculum.setCity(City.ROSARIO);
+			break;
+		case "BAIGORRIA":
+			curriculum.setCity(City.GRANADERO_BAIGORRIA);
+			break;
+		case "VGG":
+			curriculum.setCity(City.VILLA_GOBERNADOR_GÁLVEZ);
+			break;
+		case "ACEBAL":
+			curriculum.setCity(City.ACEBAL);
+			break;
+		case "ARROYOSECO":
+			curriculum.setCity(City.ARROYO_SECO);
+			break;
+		case "FUNES":
+			curriculum.setCity(City.FUNES);
+			break;
+		case "PUEBLOESTHER":
+			curriculum.setCity(City.PUEBLO_ESTHER);
+			break;
+		}
+
 		curriculum.setAddress(address);
-		curriculum.setCity(city);
 		curriculum.setBirthday(birthday);
 		curriculum.setPhone(phone);
 		curriculum.setEducation(education);
@@ -45,8 +99,8 @@ public class CurriculumService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public Curriculum updateCurriculum(String id, String name, String surname, Long dni, Gender gender,
-			Nationality nationality, String address, City city, Date birthday, Integer phone, String education,
+	public Curriculum updateCurriculum(String id, String name, String surname, Integer dni, String gender,
+			String nationality, String address, String city, Date birthday, Integer phone, String education,
 			String workexperience, String language, String skills) throws ServiceException {
 		validate(name, surname, dni, gender, nationality, address, city, birthday, phone, education, workexperience,
 				language, skills);
@@ -55,11 +109,64 @@ public class CurriculumService {
 			Curriculum curriculum = respuesta.get();
 			curriculum.setName(name);
 			curriculum.setSurname(surname);
-			curriculum.setDni(dni);
-			curriculum.setGender(gender);
-			curriculum.setNationality(nationality);
+			Long dniLong = new Long(dni);
+			curriculum.setDni(dniLong);
+			if (gender.equalsIgnoreCase("female")) {
+				curriculum.setGender(Gender.FEMALE);
+			} else if (gender.equalsIgnoreCase("male")) {
+				curriculum.setGender(Gender.MALE);
+			} else if (gender.equalsIgnoreCase("nobinary")) {
+				curriculum.setGender(Gender.NOBINARY);
+			}
+
+			switch (nationality) {
+			case "ARGENTINA":
+				curriculum.setNationality(Nationality.ARGENTINA);
+				break;
+			case "CHILE":
+				curriculum.setNationality(Nationality.CHILE);
+				break;
+			case "PERU":
+				curriculum.setNationality(Nationality.PERU);
+				break;
+			case "URUGUAY":
+				curriculum.setNationality(Nationality.URUGUAY);
+				break;
+			case "BOLIVIA":
+				curriculum.setNationality(Nationality.BOLIVIA);
+				break;
+			case "BRASIL":
+				curriculum.setNationality(Nationality.BRASIL);
+				break;
+			case "PARAGUAY":
+				curriculum.setNationality(Nationality.PARAGUAY);
+				break;
+			}
+
+			switch (city) {
+			case "ROSARIO":
+				curriculum.setCity(City.ROSARIO);
+				break;
+			case "BAIGORRIA":
+				curriculum.setCity(City.GRANADERO_BAIGORRIA);
+				break;
+			case "VGG":
+				curriculum.setCity(City.VILLA_GOBERNADOR_GÁLVEZ);
+				break;
+			case "ACEBAL":
+				curriculum.setCity(City.ACEBAL);
+				break;
+			case "ARROYOSECO":
+				curriculum.setCity(City.ARROYO_SECO);
+				break;
+			case "FUNES":
+				curriculum.setCity(City.FUNES);
+				break;
+			case "PUEBLOESTHER":
+				curriculum.setCity(City.PUEBLO_ESTHER);
+				break;
+			}
 			curriculum.setAddress(address);
-			curriculum.setCity(city);
 			curriculum.setBirthday(birthday);
 			curriculum.setPhone(phone);
 			curriculum.setEducation(education);
@@ -82,9 +189,10 @@ public class CurriculumService {
 			throw new ServiceException("No se encontre el curriculum a borrar.");
 		}
 	}
+	
 
-	private void validate(String name, String surname, Long dni, Gender gender, Nationality nationality, String address,
-			City city, Date birthday, Integer phone, String education, String workexperience, String language,
+	private void validate(String name, String surname, Integer dni, String gender, String nationality, String address,
+			String city, Date birthday, Integer phone, String education, String workexperience, String language,
 			String skills) throws ServiceException {
 		if (name == null || name.isEmpty()) {
 			throw new ServiceException("El nombre no puede estar vacío o nulo.");

@@ -1,5 +1,6 @@
 package com.WorkMerge.services;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import com.WorkMerge.entities.Curriculum;
 import com.WorkMerge.entities.Photo;
 import com.WorkMerge.enums.Rol;
 import com.WorkMerge.exceptions.ServiceException;
-
 import com.WorkMerge.repositories.ClientRepository;
 
 
@@ -24,9 +24,14 @@ public class ClientService {
 	@Autowired
 	private ClientRepository clientRepository;
 	
+	@Autowired
+	private CurriculumService curriculumService;
+	
+	
+	
 	//Registrar cliente
 
-	public void registerClient(String id, Rol rol,String email, String password,String password2, boolean active) throws ServiceException{ //BUSCAMOS UNA CLIENTE Y DEVOLVEMOS UN OPTIONAL
+	public void registerClient(String email, String password,String password2) throws ServiceException{ //BUSCAMOS UNA CLIENTE Y DEVOLVEMOS UN OPTIONAL
 		validar(email,password,password2);
 		
 		Client cliente = new Client();
@@ -38,23 +43,35 @@ public class ClientService {
 			clientRepository.save(cliente);
 		}
 	
-	
+	public Client loadData(String id, String name, String surname, Integer dni, String  gender,
+			String nationality, String address, String  city, Date birthday, Integer phone, String education,
+			String workexperience, String language, String skills ) throws ServiceException {
+		
+		Optional<Client> client = clientRepository.findById(id);
+		
+		Curriculum cv = curriculumService.newCurriculum(name, surname, dni, gender, nationality, address, city, birthday, phone, education, workexperience, language, skills);
+		
+		Client c = client.get();
+		c.setCurriculum(cv);
+		
+		return clientRepository.save(c);
+	}
+		
 	//MODIFICAR CLIENTE
 
 	 //Transactional (se pone porque cambia algo en la base de datos)
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })//Transactional (se pone porque cambia algo en la base de datos)
 
-	public Client modifyClient(String id,Rol rol,String email, String password,String password2,Curriculum curriculum, Photo photo, boolean active) throws ServiceException {
+	public Client modifyClient(String id, String email, String password,String password2, Photo photo) throws ServiceException {
 		validar(email,password,password2);
 		Optional<Client> respuesta = clientRepository.findById(id);
 		if(respuesta.isPresent()) {
 		Client p = respuesta.get();
-		p.setRol(Rol.CLIENT);
 		p.setEmail(email);
 		String encript = new BCryptPasswordEncoder().encode(password); //ENCRIPTANDO PASSWORD
 		p.setPassword(encript);
-		p.setCurriculum(curriculum);
+		//p.setCurriculum(curriculum);
 		p.setPhoto(photo);
 		p.setActive(true);
 		return clientRepository.save(p);

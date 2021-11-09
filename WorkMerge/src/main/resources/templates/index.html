@@ -12,7 +12,7 @@
 
 
 
-    <link rel="stylesheet" href="/src/main/resources/static/css/index.css">
+    <link rel="stylesheet" href="css/index.css">
 
     <title>WorkMerge</title>
 
@@ -29,9 +29,10 @@
 
             </a>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-outline-light me-md-2" type="button"><a th:href="@{#}">Iniciar
+                <button class="btn btn-outline-light me-md-2" type="button"><a th:href="@{/login}">Iniciar
                         sesión</a></button>
-                <button class="btn btn-warning" type="button"><a th:href="@{#}"></a>Registrarse</a></button>
+                <button class="btn btn-warning" type="button"><a th:href="@{/client/form}">Registrarse como cliente </a></button>
+                <button class="btn btn-warning" type="button"><a th:href="@{/company/form}">Registrarse como empresa</a></button>
             </div>
         </div>
     </nav>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,7 +12,7 @@
     />
     <link rel="stylesheet" href="/src/main/resources/static/css/index.css" />
 
-    <title>Registro</title>
+    <title>Registro Cliente</title>
   </head>
 
 <body>
@@ -27,7 +27,7 @@
               height="24"
               class="d-inline-block align-text-top"
             />
-            <span class="titulo">Work Merge </span>
+            <span class="titulo">WorkMerge </span>
           </a>
         </div>
       </div>
@@ -41,7 +41,7 @@
               <h1>Registrarse con sus datos</h1>
             </div>
             <div class="card-body">
-              <form class="px-4 py-3">
+              <form th:action="@{/client/save}" class="px-4 py-3" method="POST">
                   
                 <div class="mb-3">
                   <label for="correoElectronico" class="form-label"
@@ -50,7 +50,7 @@
                   <input
                     type="email"
                     class="form-control"
-                    id="correoElectronico"
+                    name="email"
                     placeholder="email@ejemplo.com"
                   />
                 </div>
@@ -59,32 +59,20 @@
                   <input
                     type="password"
                     class="form-control"
-                    id="contraseña"
+                    name="password"
                     placeholder="********"
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="contraseña" class="form-label">Repita su contraseña:</label>
+                  <label for="contraseña2" class="form-label">Repita su contraseña:</label>
                   <input
                     type="password"
                     class="form-control"
-                    id="contraseñaRepetida"
+                    name="password2"
                     placeholder="********"
                   />
                 </div>
-                <div class="dropdown">
-                      <label for="elijaUnaOpcion" class="form-label"
-                    >Elija una opción:</label
-                  >
-                  <br>
-              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                Cliente/Empresa
-              </a>
-               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="#">Cliente</a></li>
-                <li><a class="dropdown-item" href="#">Empresa</a></li>
-               </ul>
-            </div>
+      
                 <br>
                   <button type="submit" class="btn btn-dark">
                     Registrarme
