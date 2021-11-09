@@ -12,7 +12,7 @@
     />
     <link rel="stylesheet" href="/src/main/resources/static/css/index.css" />
 
-    <title>Registro Cliente</title>
+    <title>Registro Empresa</title>
   </head>
 
 <body>
@@ -41,7 +41,7 @@
               <h1>Registrarse con sus datos</h1>
             </div>
             <div class="card-body">
-              <form th:action="@{/client/save}" class="px-4 py-3" method="POST">
+              <form th:action="@{/company/save}" class="px-4 py-3" method="POST">
                   
                 <div class="mb-3">
                   <label for="correoElectronico" class="form-label"
@@ -60,7 +60,7 @@
                     type="password"
                     class="form-control"
                     name="password"
-                    placeholder="********"
+                    placeholder="Contraseña"
                   />
                 </div>
                 <div class="mb-3">
@@ -69,10 +69,10 @@
                     type="password"
                     class="form-control"
                     name="password2"
-                    placeholder="********"
+                    placeholder="Repeta su contraseña"
                   />
                 </div>
-      
+  
                 <br>
                   <button type="submit" class="btn btn-dark">
                     Registrarme

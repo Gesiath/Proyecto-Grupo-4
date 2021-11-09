@@ -25,8 +25,7 @@ public class CurriculumService {
 	public Curriculum newCurriculum(String name, String surname, Integer dni, String gender, String nationality,
 			String address, String city, Date birthday, Integer phone, String education, String workexperience,
 			String language, String skills) throws ServiceException {
-		validate(name, surname, dni, gender, nationality, address, city, birthday, phone, education, workexperience,
-				language, skills);
+		//validate(name, surname, dni, gender, nationality, address, city, birthday, phone, education, workexperience,language, skills);
 		Curriculum curriculum = new Curriculum();
 		curriculum.setName(name);
 		curriculum.setSurname(surname);
