@@ -76,7 +76,7 @@ public class AdminService {
 		Optional<Admin> respuesta = adminRepository.findById(id);
 		if(respuesta.isPresent()) {
 			/*Elimino admin*/
-			adminRepository.deleteById(id);
+			adminRepository.delete(respuesta.get());
 		} else {
 			throw new ServiceException("No se encontro el admin a borrar.");
 		}

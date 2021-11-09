@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,14 +47,16 @@ public class AdminController {
 	}
 	
 	@GetMapping("/eliminar/{id}")
-	public String deleteAdmin(@PathVariable("id") String id) {
+	public String deleteAdmin(@RequestParam(required = true) String id) {
 		try {
 			adminService.deleteAdmin(id);
 			return "redirect:/admin";
-		} catch (ServiceException e) {
+	} catch (ServiceException e) {
 			e.printStackTrace();
 			return "redirect:/admin";
 		}
-		
+	
 	}
+	
+	
 }
