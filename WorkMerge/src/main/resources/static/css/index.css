@@ -227,6 +227,9 @@ footer .copy{
 
 
 
+
+
+
  .img1{
 	 /* border-radius: 100%; */
     border: 18px solid rgb(255 255 255 / 50%);
@@ -237,7 +240,7 @@ footer .copy{
 .img1:hover {
 
     border: 18px solid rgb(255 255 255 / 50%);
-    background: url(/src/main/resources/static/img/Anunciate!.png) no-repeat;
+    background: white;
     animation-name: animacionimagen1;
     animation-duration: 0.3s;
     animation-timing-function: ease-out;
@@ -247,6 +250,7 @@ footer .copy{
 
     0%{
         
+        size: 10%;
                
 
     }
