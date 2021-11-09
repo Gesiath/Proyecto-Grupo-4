@@ -30,8 +30,9 @@ public class CompanyService {
 	private PhotoService photoService;
 	//CREATE (crear)
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void newCompany(String email, String password, Photo photo,MultipartFile archive)throws ServiceException {
-		validate(email, password);
+	//Photo photo,MultipartFile archive (CARGAR FOTO)
+	public void newCompany(String email, String password, String password2)throws ServiceException {
+		validate(email, password, password2);
 		Company company = new Company();
 		company.setRol(Rol.COMPANY);
 		company.setActive(true);
@@ -39,8 +40,8 @@ public class CompanyService {
 		String encript = new BCryptPasswordEncoder().encode(password);
 		company.setPassword(encript);
 
-		photo = photoService.saved(archive);
-	    company.setPhoto(photo);
+		//photo = photoService.saved(archive); company.setPhoto(photo);
+	    
 		companyRepository.save(company);
 
 	}
@@ -53,8 +54,8 @@ public class CompanyService {
 	
 	// UPDATE (actualizar)
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void updateCompany(String id,String password, List<Job> job,Photo photo,MultipartFile archive,String email) throws ServiceException{
-		validate(email,password);
+	public void updateCompany(String id,String password, String password2, List<Job> job,Photo photo,MultipartFile archive,String email) throws ServiceException{
+		validate(email,password, password2);
 		Optional<Company> compy = companyRepository.findById(id);
 		Company company = compy.get();
 		String encript = new BCryptPasswordEncoder().encode(password);
@@ -94,12 +95,15 @@ public class CompanyService {
 		return company.getJob();
 	}
 	
-	public void validate(String email,String password) throws ServiceException {
+	public void validate(String email,String password, String password2) throws ServiceException {
 		if(email==null || email.isEmpty() || email.equals("")) {
 			throw new ServiceException ("El email no puede ser nulo/vacío.");
 		}
 		if(password==null || password.isEmpty()||password.equals("")) {
 			throw new ServiceException ("La contraseña no puede ser nula/vacía o 0.");
+		}
+		if(!password.equals(password2)){
+			throw new ServiceException("La contraseñas tienen que coincidir");
 		}
 		if(companyRepository.existByEmail(email)) {
 			throw new ServiceException("Ya existe una compañia con ese email.");

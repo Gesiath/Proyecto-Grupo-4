@@ -1,4 +1,4 @@
-package com.WorkMerge.controllers;
+ package com.WorkMerge.controllers;
 
 import java.util.List;
 
@@ -31,12 +31,12 @@ public class AdminController {
 	}
 	
 	@GetMapping("/registro")
-	public String registerAdmin() {
+	public String crearAdmin() {
 		return this.viewPath.concat("register-admin");
 	}
 	
-	@PostMapping("/registro")
-	public String createAdmin(@RequestParam("email") String email, @RequestParam("nickname") String nickname, @RequestParam("password") String password) {
+	@PostMapping("/guardar")
+	public String guardarAdmin(@RequestParam("email") String email, @RequestParam("nickname") String nickname, @RequestParam("password") String password) {
 		try {
 			adminService.newAdmin(email, password, nickname);
 			return "redirect:/admin";
