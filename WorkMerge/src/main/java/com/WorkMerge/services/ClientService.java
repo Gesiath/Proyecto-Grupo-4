@@ -26,12 +26,10 @@ public class ClientService {
 	
 	@Autowired
 	private CurriculumService curriculumService;
-	
-	
-	
-	//Registrar cliente
 
-	public void registerClient(String email, String password,String password2) throws ServiceException{ //BUSCAMOS UNA CLIENTE Y DEVOLVEMOS UN OPTIONAL
+	//REGISTRAR CLIENTE
+
+	public Client registerClient(String email, String password,String password2) throws ServiceException{ //BUSCAMOS UNA CLIENTE Y DEVOLVEMOS UN OPTIONAL
 		validar(email,password,password2);
 		
 		Client cliente = new Client();
@@ -40,18 +38,19 @@ public class ClientService {
 			cliente.setPassword(encript);
 			cliente.setRol(Rol.CLIENT);
 			cliente.setActive(true);
-			clientRepository.save(cliente);
+			return clientRepository.save(cliente);
 		}
+	
+	//CARGAR CV
 	
 	public Client loadData(String id, String name, String surname, Integer dni, String  gender,
 			String nationality, String address, String  city, Date birthday, Integer phone, String education,
-			String workexperience, String language, String skills ) throws ServiceException {
-		
-		Optional<Client> client = clientRepository.findById(id);
-		
+			String workexperience, String language, String skills, Client client ) throws ServiceException {
+				
 		Curriculum cv = curriculumService.newCurriculum(name, surname, dni, gender, nationality, address, city, birthday, phone, education, workexperience, language, skills);
 		
-		Client c = client.get();
+		Client c = this.obtenerPorId(id);
+		
 		c.setCurriculum(cv);
 		
 		return clientRepository.save(c);
@@ -59,30 +58,26 @@ public class ClientService {
 		
 	//MODIFICAR CLIENTE
 
-	 //Transactional (se pone porque cambia algo en la base de datos)
-
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })//Transactional (se pone porque cambia algo en la base de datos)
 
 	public Client modifyClient(String id, String email, String password,String password2, Photo photo) throws ServiceException {
 		validar(email,password,password2);
 		Optional<Client> respuesta = clientRepository.findById(id);
 		if(respuesta.isPresent()) {
-		Client p = respuesta.get();
-		p.setEmail(email);
-		String encript = new BCryptPasswordEncoder().encode(password); //ENCRIPTANDO PASSWORD
-		p.setPassword(encript);
-		//p.setCurriculum(curriculum);
-		p.setPhoto(photo);
-		p.setActive(true);
-		return clientRepository.save(p);
-	}else {
-		throw new ServiceException("No se encontro el cliente solicitado");
-	}	
+			Client p = respuesta.get();
+			p.setEmail(email);
+			String encript = new BCryptPasswordEncoder().encode(password); //ENCRIPTANDO PASSWORD
+			p.setPassword(encript);
+			//p.setCurriculum(curriculum);
+			p.setPhoto(photo);
+			p.setActive(true);
+			return clientRepository.save(p);
+		}else {
+			throw new ServiceException("No se encontro el cliente solicitado");
+		}	
 	}
 	
-	
-
-	//Eliminar cliente
+	//ELIMINAR CLIENTE
 
 	public void delete(String id) throws ServiceException {
 		Optional<Client> respuesta = clientRepository.findById(id);
@@ -94,7 +89,7 @@ public class ClientService {
 	}
 	
 
-	//Dar de baja cliente
+	//DAR DE ALTA CLIENTE
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void lowCustomer(String id) {
 		Optional<Client> respuesta = clientRepository.findById(id);
@@ -106,7 +101,7 @@ public class ClientService {
 	
 	
 
-	//Dar de alta cliente
+	//DAR DE BAJA CLIENTE
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void hightCustomer(String id) {
 		Optional<Client> respuesta = clientRepository.findById(id);
@@ -116,9 +111,25 @@ public class ClientService {
 		}
 	}
 	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public Client obtenerPorId(String id) throws ServiceException{
+		
+		Optional<Client> result  = clientRepository.findById(id);
+		
+		if (result.isEmpty()) {
+			throw new ServiceException("No se encontró el cliente");
+		} else {
+			return result.get();
+		}
+	}
 	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public Client obtenerPorMail(String email) throws ServiceException{
+		
+		return clientRepository.findByEmail(email);
+	}
 	
-	//Metodo validación
+	//METODO VALIDACION
 	public void validar(String email,String password,String password2)throws ServiceException{
 		if(email==null || email.isEmpty()) {
 			throw new ServiceException("El email no puede estar vacío");
@@ -132,7 +143,7 @@ public class ClientService {
 		}
 		if(clientRepository.existByEmail(email)) {
 			throw new ServiceException("Ya existe un usuario registrado con ese email.");
-		}
+		}	
 	}
 	}
 	
