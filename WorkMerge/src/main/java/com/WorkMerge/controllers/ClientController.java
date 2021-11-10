@@ -62,20 +62,10 @@ public class ClientController {
 			@RequestParam("ciudad") String ciudad, @RequestParam("domicilio") String domicilio, @RequestParam("fecha") String fecha, 
 			@RequestParam("educacion") String educacion, 
 			@RequestParam("experienciaLaboral") String experienciaLaboral, @RequestParam("idiomas") String idiomas,
-			@RequestParam("habilidadesInformáticas") String habilidadesInformáticas) {
+			@RequestParam("habilidadesInformáticas") String habilidadesInformáticas, @RequestParam("telefono") String telefono) {
 		try {
-			clientService.loadData(id, nombre, apellido, dni, genero, nacionalidad, ciudad, domicilio, fecha, "3412323" , educacion, experienciaLaboral, idiomas, habilidadesInformáticas);
-			System.out.println(id);
-			System.out.println(nombre);
-			System.out.println(apellido);
-			System.out.println(dni);
-			System.out.println(ciudad);
-			System.out.println(domicilio);
-			System.out.println(fecha);
-			System.out.println(educacion);
-			System.out.println(experienciaLaboral);
-			System.out.println(idiomas);
-			System.out.println(habilidadesInformáticas); 
+			System.out.println(telefono);
+			clientService.loadData(id, nombre, apellido, dni, genero, nacionalidad, ciudad, domicilio, fecha, telefono, educacion, experienciaLaboral, idiomas, habilidadesInformáticas);
 			return "index";
 		} catch (ServiceException e) {
 			e.printStackTrace();

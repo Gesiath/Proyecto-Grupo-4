@@ -47,7 +47,7 @@ public class ClientService {
 			String nationality, String address, String  city, String birthday, String phone, String education,
 			String workexperience, String language, String skills ) throws ServiceException, ParseException {
 				
-		Curriculum cv = curriculumService.newCurriculum(name, surname, dni, gender, nationality, address, city, birthday, phone, education, workexperience, language, skills);
+		Curriculum cv = curriculumService.newCurriculum(name, surname, dni, gender, nationality, city, address, birthday, phone, education, workexperience, language, skills);
 		
 		Client c = this.obtenerPorId(id);
 		
