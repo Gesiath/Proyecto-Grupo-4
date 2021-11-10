@@ -202,20 +202,30 @@ footer .copy {
 	width: 400px;
 }
 
-.img1 {
-	/* border-radius: 100%; */
-	border: 18px solid rgb(255 255 255 / 50%);
+ .img1{
+	 /* border-radius: 100%; */
+    border: 18px solid rgb(255 255 255 / 50%);
+ 
+
 }
 
 .img1:hover {
-	border: 18px solid rgb(255 255 255 / 50%);
-	background: url(/src/main/resources/static/img/Anunciate!.png) no-repeat;
-	animation-name: animacionimagen1;
-	animation-duration: 0.3s;
-	animation-timing-function: ease-out;
+
+    border: 18px solid rgb(255 255 255 / 50%);
+    background: white;
+    animation-name: animacionimagen1;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-out;
 }
 
 @keyframes animacionimagen1 {
-	0% {
-	}
-}
+
+    0%{
+        
+        size: 10%;
+               
+
+    }
+
+
+} 
