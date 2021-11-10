@@ -70,14 +70,14 @@ nav {
 
 .titulo {
 	font-family: 'Russo One', Arial, Helvetica, sans-serif;
-	font-size: 3rem;
+	font-size: 1rem;
 	color: white;
 }
 
 /*------------------footer--------------------------------------------*/
 
 footer {
-	background-color: #616160;
+	background-color: #dfdfa2;
 }
 
 footer .titulo-sección {
@@ -89,11 +89,11 @@ footer .copy {
 }
 .redes-sociales {
 	display: flex;
-	justify-content: right;
+	justify-content: center;
 }
 .redes-sociales i {
-	font-size: 30px;
-	padding: 20px;
+	font-size: 20px;
+	padding: 10px;
 }
 
 /*----------------------------------------------------------------------------------*/

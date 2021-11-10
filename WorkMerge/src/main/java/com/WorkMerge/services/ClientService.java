@@ -1,6 +1,6 @@
 package com.WorkMerge.services;
 
-import java.util.Date;
+import java.text.ParseException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class ClientService {
 	private CurriculumService curriculumService;
 
 	//REGISTRAR CLIENTE
-
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })//Transactional (se pone porque cambia algo en la base de datos)
 	public Client registerClient(String email, String password,String password2) throws ServiceException{ //BUSCAMOS UNA CLIENTE Y DEVOLVEMOS UN OPTIONAL
 		validar(email,password,password2);
 		
@@ -42,10 +42,10 @@ public class ClientService {
 		}
 	
 	//CARGAR CV
-	
-	public Client loadData(String id, String name, String surname, Integer dni, String  gender,
-			String nationality, String address, String  city, Date birthday, Integer phone, String education,
-			String workexperience, String language, String skills ) throws ServiceException {
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })//Transactional (se pone porque cambia algo en la base de datos)
+	public Client loadData(String id, String name, String surname, String dni, String  gender,
+			String nationality, String address, String  city, String birthday, String phone, String education,
+			String workexperience, String language, String skills ) throws ServiceException, ParseException {
 				
 		Curriculum cv = curriculumService.newCurriculum(name, surname, dni, gender, nationality, address, city, birthday, phone, education, workexperience, language, skills);
 		

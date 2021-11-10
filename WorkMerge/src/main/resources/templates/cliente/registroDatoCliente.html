@@ -56,12 +56,7 @@
 					>
 						<div class="mb-3">
 							<label for="nombre" class="form-label">Nombre</label>
-							<input
-								type="text"
-								class="form-control"
-								name="nombre"
-								th:value="${cliente.curriculum.name}"
-							/>
+							<input type="text" class="form-control" name="nombre" />
 						</div>
 						<div class="mb-3">
 							<label for="apellido" class="form-label">Apellido</label>
@@ -70,12 +65,7 @@
 
 						<div class="mb-3">
 							<label for="dni" class="form-label">DNI</label>
-							<input
-								type="number"
-								class="form-control"
-								name="dni"
-								th:value="${cliente.curriculum.dni}"
-							/>
+							<input type="text" class="form-control" name="dni" />
 						</div>
 
 						<div class="dropdown">
@@ -121,16 +111,18 @@
 						<div class="mb-3">
 							<label for="Fechadenacimiento" class="form-label">Fecha de nacimiento</label>
 							<input
-								type="date"
+								type="text"
 								class="form-control"
 								name="fecha"
 								placeholder="Fecha de nacimiento"
 							/>
 						</div>
+						<!--
 						<div class="mb-3">
 							<label for="telefono" class="form-label">Teléfono</label>
-							<input type="tel" class="form-control" name="telefono" placeholder="Teléfono" />
+							<input type="text" class="form-control" name="telefono" placeholder="Teléfono" />
 						</div>
+						-->
 						<div class="mb-3">
 							<label for="educacion" class="form-label">Educación</label>
 							<textarea
