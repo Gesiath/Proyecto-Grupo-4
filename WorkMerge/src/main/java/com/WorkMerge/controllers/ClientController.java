@@ -59,22 +59,20 @@ public class ClientController {
 	@PostMapping("/saveCv/{id}")
 	public String createCv(@PathVariable("id") String id, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido, 
 			@RequestParam("dni") String dni, @RequestParam("genero") String genero, @RequestParam("nacionalidad") String nacionalidad,
-			@RequestParam("ciudad") String ciudad, @RequestParam("domicilio") String domicilio, @RequestParam("fecha") String fecha, 
+			@RequestParam("ciudad") String ciudad, @RequestParam("domicilio") String domicilio, @RequestParam("fecha") String fecha, @RequestParam("telefono") String telefono, 
 			@RequestParam("educacion") String educacion, 
 			@RequestParam("experienciaLaboral") String experienciaLaboral, @RequestParam("idiomas") String idiomas,
-			@RequestParam("habilidadesInformáticas") String habilidadesInformáticas, @RequestParam("telefono") String telefono) {
+			@RequestParam("habilidadesInformáticas") String habilidadesInformáticas) {
 		try {
-			System.out.println(telefono);
 			clientService.loadData(id, nombre, apellido, dni, genero, nacionalidad, ciudad, domicilio, fecha, telefono, educacion, experienciaLaboral, idiomas, habilidadesInformáticas);
-			return "index";
+			return "redirect:/";
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			return "index";
+			return "redirect:/";
 		} catch (ParseException e) {
 			e.printStackTrace();
-			return "index";
+			return "redirect:/";
 		}
-		
 		
 	}
 }

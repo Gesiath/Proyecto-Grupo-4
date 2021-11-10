@@ -23,7 +23,7 @@ public class CompanyController {
 	public String registerCompany() {
 		return this.viewPath.concat("registroInicialEmpresa");
 	}
-	
+		
 	@PostMapping("/save")
 	public String createCompany(@RequestParam("email") String email, @RequestParam("password") String password,
 			@RequestParam("password2") String password2) {

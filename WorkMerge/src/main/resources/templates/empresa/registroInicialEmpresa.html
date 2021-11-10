@@ -10,9 +10,10 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/src/main/resources/static/css/index.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+    <!-- <link rel="stylesheet" href="/src/main/resources/static/css/index.css" /> -->
 
-    <title>Registro Empresa</title>
+    <title>WorkMerge | Registro Empresa</title>
   </head>
 
 <body>
@@ -20,8 +21,9 @@
       <div class="container-fluid">
         <div>
           <a class="navbar-brand" href="#">
+          <!-- src="/src/main/resources/static/img/LogoColor.png" -->
             <img
-              src="/src/main/resources/static/img/LogoColor.png"
+              src="../img/LogoColor.png"
               alt="WM"
               width="30"
               height="24"
@@ -40,9 +42,9 @@
             <div class="card-header d-flex">
               <h1>Registrarse con sus datos</h1>
             </div>
-            <div class="card-body">
+            
               <form th:action="@{/company/save}" class="px-4 py-3" method="POST">
-                  
+                  <div class="card-body">
                 <div class="mb-3">
                   <label for="correoElectronico" class="form-label"
                     >Correo Electrónico:</label
@@ -60,7 +62,7 @@
                     type="password"
                     class="form-control"
                     name="password"
-                    placeholder="Contraseña"
+                    placeholder="********"
                   />
                 </div>
                 <div class="mb-3">
@@ -69,10 +71,22 @@
                     type="password"
                     class="form-control"
                     name="password2"
-                    placeholder="Repeta su contraseña"
+                    placeholder="********"
                   />
                 </div>
-  
+                
+             
+               
+              
+          
+
+
+
+
+
+
+
+
                 <br>
                   <button type="submit" class="btn btn-dark">
                     Registrarme
@@ -82,8 +96,9 @@
           </div>
         </div>
         <div class="col-6 mt-5">
+        <!-- src="/src/main/resources/static/img/vale.jpg" -->
             <img
-             src="/src/main/resources/static/img/vale.jpg"
+             src="../img/vale.jpg"
             alt=""
             width="600"
             height="400"
