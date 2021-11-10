@@ -49,39 +49,23 @@
           </button> -->
 				</div>
 				<div class="card-body">
-					<form th:action="@{#}" method="POST" th:object="${#}" class="col-9 mx-auto">
-						<input hidden th:field="*{id}" />
-
+					<form
+						th:action="@{/client/saveCv/{id}(id=${cliente.id})}"
+						method="POST"
+						class="col-9 mx-auto"
+					>
 						<div class="mb-3">
 							<label for="nombre" class="form-label">Nombre</label>
-							<input
-								type="text"
-								class="form-control"
-								name="nombre"
-								th:field="*{nombre}"
-								placeholder="Nombre"
-							/>
+							<input type="text" class="form-control" name="nombre" />
 						</div>
 						<div class="mb-3">
 							<label for="apellido" class="form-label">Apellido</label>
-							<input
-								type="text"
-								class="form-control"
-								th:field="*{apellido}"
-								name="apellido"
-								placeholder="Apellido"
-							/>
+							<input type="text" class="form-control" name="apellido" placeholder="Apellido" />
 						</div>
 
 						<div class="mb-3">
 							<label for="dni" class="form-label">DNI</label>
-							<input
-								type="number"
-								class="form-control"
-								name="dni"
-								th:field="*{dni}"
-								placeholder="123456789"
-							/>
+							<input type="text" class="form-control" name="dni" />
 						</div>
 
 						<div class="dropdown">
@@ -122,41 +106,29 @@
 
 						<div class="mb-3">
 							<label for="domicilio" class="form-label">Domicilio</label>
-							<input
-								type="text"
-								class="form-control"
-								th:field="*{domicilio}"
-								name="domicilio"
-								placeholder="Domicilio"
-							/>
+							<input type="text" class="form-control" name="domicilio" placeholder="Domicilio" />
 						</div>
 						<div class="mb-3">
 							<label for="Fechadenacimiento" class="form-label">Fecha de nacimiento</label>
 							<input
-								type="date"
+								type="text"
 								class="form-control"
-								th:field="*{fechaDeNacimiento}"
 								name="fecha"
 								placeholder="Fecha de nacimiento"
 							/>
 						</div>
+						
 						<div class="mb-3">
 							<label for="telefono" class="form-label">Teléfono</label>
-							<input
-								type="tel"
-								class="form-control"
-								th:field="*{telefono}"
-								name="telefono"
-								placeholder="Teléfono"
-							/>
+							<input type="text" class="form-control" name="telefono" placeholder="Teléfono" />
 						</div>
+					
 						<div class="mb-3">
 							<label for="educacion" class="form-label">Educación</label>
 							<textarea
 								cols="50"
 								rows="3"
 								class="form-control"
-								th:field="*{educacion}"
 								placeholder="Ingrese sus últimos estudios alcanzados.."
 								name="educacion"
 							></textarea>
@@ -167,7 +139,6 @@
 								cols="50"
 								rows="3"
 								class="form-control"
-								th:field="*{experienciaLaboral}"
 								placeholder="Ingrese su última experiencia laboral.."
 								name="experienciaLaboral"
 							></textarea>
@@ -178,7 +149,6 @@
 								cols="50"
 								rows="3"
 								class="form-control"
-								th:field="*{idiomas}"
 								placeholder="Idiomas.."
 								name="idiomas"
 							></textarea>
@@ -191,12 +161,11 @@
 								cols="50"
 								rows="3"
 								class="form-control"
-								th:field="*{habilidadesInformáticas}"
 								placeholder="Ingrese sus habilidades.."
 								name="habilidadesInformáticas"
 							></textarea>
 						</div>
-						<button type="submit" class="btn btn-dark px-4 py-2 ms-auto" th="@{#}">Guardar</button>
+						<button type="submit" class="btn btn-dark px-4 py-2 ms-auto">Guardar</button>
 					</form>
 				</div>
 			</div>
