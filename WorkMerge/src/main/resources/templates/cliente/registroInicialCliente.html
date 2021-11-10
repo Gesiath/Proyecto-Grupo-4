@@ -10,35 +10,35 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="../css/index.css" />
 
     <title>Registro Cliente</title>
   </head>
 
   <body>
-    <nav class="navbar navbar-light">
-      <div class="container-fluid">
-        <div>
-          <a class="navbar-brand" href="#">
-            <img
-              src="/img/LogoColor.png"
-              alt="WM"
-              width="30"
-              height="24"
-              class="d-inline-block align-text-top"
-            />
-            <span class="titulo">WorkMerge </span>
-          </a>
-        </div>
-      </div>
-    </nav>
+    <!-- ======================= NAVBAR =======================-->
+    <div class="conteiner-fluid">
+      <nav class="navbar navbar-light">
+				<a class="navbar-brand" href="#">
+					<img
+						src="../img/LogoColor.png"
+						alt="WM"
+						width="90"
+						height="90"
+						class="d-inline-block align-text-top"
+					/>
+					<span class="titulo">Work Merge </span>
+				</a>
+		  </nav>  
+    </div>
+		<!--FIN NAVBAR-->
 
     <div class="container">
       <div class="row">
         <div class="col-6">
           <div class="card mt-5 mb-5">
             <div class="card-header d-flex">
-              <h1>Registrate con tus datos</h1>
+              <h1>Registro de Cliente</h1>
             </div>
             <div class="card-body">
               <form th:action="@{/client/save}" class="px-4 py-3" method="POST">
@@ -89,8 +89,8 @@
         </div>
       </div>
     </div>
-	<hr>
-    <footer class="text-center">
+    
+    <footer class="text-center bg-gradient">
       <div class="container-fluid">
         <div class="contenedor">
           <h2 class="título-sección">WorkMerge</h2>
