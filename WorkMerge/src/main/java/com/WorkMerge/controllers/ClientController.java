@@ -65,13 +65,13 @@ public class ClientController {
 			@RequestParam("habilidadesInformáticas") String habilidadesInformáticas) {
 		try {
 			clientService.loadData(id, nombre, apellido, dni, genero, nacionalidad, ciudad, domicilio, fecha, telefono, educacion, experienciaLaboral, idiomas, habilidadesInformáticas);
-			return "index";
+			return "redirect:/";
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			return "index";
+			return "redirect:/";
 		} catch (ParseException e) {
 			e.printStackTrace();
-			return "index";
+			return "redirect:/";
 		}
 		
 	}
