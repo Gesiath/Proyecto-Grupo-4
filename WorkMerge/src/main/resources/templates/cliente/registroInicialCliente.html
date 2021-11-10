@@ -10,43 +10,41 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/src/main/resources/static/css/index.css" />
+    <link rel="stylesheet" href="../css/index.css" />
 
     <title>Registro Cliente</title>
   </head>
 
-<body>
-    <nav class="navbar navbar-light">
-      <div class="container-fluid">
-        <div>
-          <a class="navbar-brand" href="#">
-            <img
-              src="/src/main/resources/static/img/LogoColor.png"
-              alt="WM"
-              width="30"
-              height="24"
-              class="d-inline-block align-text-top"
-            />
-            <span class="titulo">WorkMerge </span>
-          </a>
-        </div>
-      </div>
-    </nav>
+  <body>
+    <!-- ======================= NAVBAR =======================-->
+    <div class="conteiner-fluid">
+      <nav class="navbar navbar-light">
+				<a class="navbar-brand" href="#">
+					<img
+						src="../img/LogoColor.png"
+						alt="WM"
+						width="90"
+						height="90"
+						class="d-inline-block align-text-top"
+					/>
+					<span class="titulo">Work Merge </span>
+				</a>
+		  </nav>  
+    </div>
+		<!--FIN NAVBAR-->
 
     <div class="container">
       <div class="row">
         <div class="col-6">
           <div class="card mt-5 mb-5">
             <div class="card-header d-flex">
-              <h1>Registrarse con sus datos</h1>
+              <h1>Registro de Cliente</h1>
             </div>
             <div class="card-body">
               <form th:action="@{/client/save}" class="px-4 py-3" method="POST">
                   
                 <div class="mb-3">
-                  <label for="correoElectronico" class="form-label"
-                    >Correo Electrónico:</label
-                  >
+                  
                   <input
                     type="email"
                     class="form-control"
@@ -55,35 +53,35 @@
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="contraseña" class="form-label">Contraseña:</label>
+                  
                   <input
                     type="password"
                     class="form-control"
                     name="password"
-                    placeholder="********"
+                    placeholder="Contraseña"
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="contraseña2" class="form-label">Repita su contraseña:</label>
+                  
                   <input
                     type="password"
                     class="form-control"
                     name="password2"
-                    placeholder="********"
+                    placeholder="Repita su contraseña"
                   />
                 </div>
       
-                <br>
                   <button type="submit" class="btn btn-dark">
                     Registrarme
                   </button>
+
                 </div>
               </form>
           </div>
         </div>
-        <div class="col-6 mt-5">
+        <div class="col-6">
             <img
-             src="/src/main/resources/static/img/vale.jpg"
+             src="/img/vale.jpg"
             alt=""
             width="600"
             height="400"
@@ -91,22 +89,8 @@
         </div>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <footer>
+    
+    <footer class="text-center bg-gradient">
       <div class="container-fluid">
         <div class="contenedor">
           <h2 class="título-sección">WorkMerge</h2>
@@ -118,7 +102,7 @@
         </div>
         <div class="contenedor">
           <small class="copy">
-            WorkMerge 2021/Todos los derechos reservados</small
+            WorkMerge 2021 &copy; Todos los derechos reservados</small
           >
           <address class="copy">Argentina</address>
         </div>
