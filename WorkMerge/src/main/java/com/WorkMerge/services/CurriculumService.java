@@ -92,7 +92,7 @@ public class CurriculumService {
 		curriculum.setAddress(address);
 		Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(birthday); 
 		curriculum.setBirthday(date1);
-		Integer phoneInt = Integer.parseInt(phone);
+		Long phoneInt = Long.parseLong(phone);
 		curriculum.setPhone(phoneInt);
 		curriculum.setEducation(education);
 		curriculum.setWorkexperience(workexperience);
@@ -171,8 +171,8 @@ public class CurriculumService {
 			curriculum.setAddress(address);
 			Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(birthday); 
 			curriculum.setBirthday(date1);
-			Integer phoneInt = Integer.parseInt(phone);
-			curriculum.setPhone(phoneInt);
+			Long phoneLong = Long.parseLong(phone);
+			curriculum.setPhone(phoneLong);
 			curriculum.setEducation(education);
 			curriculum.setWorkexperience(workexperience);
 			curriculum.setLanguage(language);
