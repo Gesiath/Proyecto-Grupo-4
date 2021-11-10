@@ -50,7 +50,7 @@
 				</div>
 				<div class="card-body">
 					<form
-						th:href="@{/client/curriculum(idCurriculum)}"
+						th:action="@{/client/saveCv/{id}(id=${cliente.id})}"
 						method="POST"
 						class="col-9 mx-auto"
 					>
