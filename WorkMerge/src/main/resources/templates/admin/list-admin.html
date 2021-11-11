@@ -33,7 +33,7 @@
 						<td th:text="${admin.email}"></td>
 						<td th:text="${admin.nickname}"></td>
 						<td>
-							<a th:href="@{/admin/eliminar/{id}(id=${admin.id})}">Eliminar</a>
+							<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/eliminar/{id}(id=${admin.id})}">Eliminar</a>
 						</td>
 					</tr>
 				</tbody>

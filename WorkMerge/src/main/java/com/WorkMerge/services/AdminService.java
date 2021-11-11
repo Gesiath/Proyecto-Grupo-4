@@ -1,10 +1,17 @@
 package com.WorkMerge.services;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -22,7 +29,7 @@ import com.WorkMerge.repositories.CompanyRepository;
 import com.WorkMerge.repositories.JobRepository;
 
 @Service
-public class AdminService {
+public class AdminService implements UserDetailsService {
 	
 	@Autowired
 	private AdminRepository adminRepository;
@@ -138,6 +145,25 @@ public class AdminService {
 		}
 		if(adminRepository.existByEmail(email)) {
 			throw new ServiceException("El administrador con ese email ya existe.");
+		}
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+		
+		try {
+			Admin admin = adminRepository.findByEmail(mail);
+			User user;
+			
+			List<GrantedAuthority> authorities = new ArrayList<>();
+			
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + admin.getRol()));
+			
+			return new User(mail, admin.getPassword(), authorities);
+		} catch(Exception e) {
+			
+			throw new UsernameNotFoundException("El admin no existe");
+			
 		}
 	}
 	

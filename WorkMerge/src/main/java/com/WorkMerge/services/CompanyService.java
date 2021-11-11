@@ -3,6 +3,9 @@ package com.WorkMerge.services;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,7 +21,7 @@ import com.WorkMerge.repositories.JobRepository;
 
 
 @Service
-public class CompanyService {
+public class CompanyService implements UserDetailsService {
 	
 	@Autowired
 	private CompanyRepository companyRepository;
@@ -108,5 +111,11 @@ public class CompanyService {
 		if(companyRepository.existByEmail(email)) {
 			throw new ServiceException("Ya existe una compañia con ese email.");
 		}
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
