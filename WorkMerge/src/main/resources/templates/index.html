@@ -12,7 +12,7 @@
 
 
         <!--<link rel="stylesheet" href="../static/css/index.css">-->
-     	<link rel="stylesheet" href="../css/index.css"> 
+     	<link rel="stylesheet" href="../static/css/index.css"> 
 
     <title>WorkMerge</title>
 
@@ -24,8 +24,9 @@
         <div class="container-fluid" style="display:flex">
             <a class="navbar-brand" href="/">
             <!-- src="/src/main/resources/static/img/LogoColor.png" -->
+            <!--src= "../static/img/LogoColor.png"-->
                 <img 
-                	src="../img/LogoColor.png" 
+                	src="/src/main/resources/static/img/LogoColor.png" 
                 	alt="WM" 
                 	width="90" 
                 	height="90"                   
@@ -36,8 +37,8 @@
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <a th:href="@{/login}" class="btn btn-outline-light me-md-2">Iniciar
                         sesión</a>
-                <a th:href="@{/client/form}" class="btn btn-warning">Registrarse como cliente </a>
-                <a th:href="@{/company/form}" class="btn btn-warning">Registrarse como empresa</a>
+                <a id= "cliente" th:href="@{/client/form}" class="btn btn-warning">Registrarse como cliente </a>
+                <a id= "empresa" th:href="@{/company/form}" class="btn btn-warning">Registrarse como empresa</a>
             </div>
         </div>
     </nav>
@@ -47,9 +48,9 @@
     <section>
         <article>
             <div id="cajamadre">
-
+                <!-- src="../static/img/hello1.jpg"-->
 				<!-- src="/src/main/resources/static/img/hello1.jpg" -->
-                <img src="../img/hello1.jpg" alt="Hello Word" id="imagenintro">
+                <img src="/src/main/resources/static/img/hello1.jpg" alt="Hello Word" id="imagenintro">
                 <div class="cajaflex1">
 
                     <h1 class="textosobreimg1">Un universo de posibilidades esperándote ! </h1>
@@ -80,13 +81,14 @@
                         ofertas laborales.
                         Las posibilidades en la era de la hiperconectividad sobrepasan los limites de la presencialidad.
                         No te quedes afuera del cambio, ¡Anunciate y date a conocer con nuestras poderosas opciones
-                        especiales de alerta!.</p>
+                        especiales de alerta!. <a href="#cliente">Registrarse!</a></p>
                     <a href=""></a>
                 </div>
 
                 <div class="col_6 ImagenCentro">
+                <!-- src="../static/img/Anunciate!1.png-->    
                 <!-- src="/src/main/resources/static/img/Anunciate!1.png" -->
-                    <img class="img1" src="../img/Anunciate!1.png" alt="356-314">
+                    <img class="img1" src="/src/main/resources/static/img/Anunciate!1.png" alt="356-314">
 
                 </div>
             </div>
@@ -101,8 +103,9 @@
             <div class="col_10">
 
                 <div class="col_6 ImagenCentro">
+                <!-- src= "../static/img/recluters.png"-->    
                 <!-- src="/src/main/resources/static/img/recluters.png" -->
-                    <img class="img1" src="../img/recluters.png" alt="356-314">
+                    <img class="img1" src="/src/main/resources/static/img/recluters.png" alt="356-314">
 
                 </div>
 
@@ -114,10 +117,7 @@
                       <p>  ¡Es tan fácil como publicar y esperar a que nuestro
                         sitio se encargue de generar alertas a nuestros usuarios!. 
                         Consiga mas rápido para su empresa perfiles con nuestras opciones especiales 
-                        de URGENCIA.
-                    </p>
-                    
-                    <a href=""></a>
+                        de URGENCIA.  <a href="#empresa">Registrarse!</a> </p>                   
                 </div>
             </div>
 
@@ -126,7 +126,8 @@
 
     <footer class="container-fluid">
         <div class="contenedor">
-            <h2 class="título-sección">WorkMerge</h2>
+                <img class="loguito" src="../static/img/isovalenteLogo.png" width="50" height="50">
+                <h2 class="titulo-seccion">WorkMerge</h2>
         </div>
         <div class="redes-sociales">
             <i class="fab fa-twitter"></i>
@@ -134,10 +135,11 @@
             <i class="fab fa-youtube"></i>
         </div>
         <div class="contenedor">
-            <small class="copy"> WorkMerge 2021/Todos los derechos reservados</small>
-            <address class="copy">Argentina</address>
+            <small class="copy"> WorkMerge 2021/Todos los derechos reservados. 
+                <address class="copy2" align= "center">Argentina</address></small>
         </div>
     </footer>
+
 
     <script src="https://kit.fontawesome.com/bdbed0aafa.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

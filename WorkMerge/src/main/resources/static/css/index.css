@@ -78,30 +78,44 @@ nav{
     font-family: 'Russo One', Arial, Helvetica, sans-serif;
     font-size: 3rem;
     color: white;
+    margin: 25px;
 }
 
 /*------------------footer--------------------------------------------*/
 
 footer{
     background-color: #616160;
+    
+    
 }
 
-footer .titulo-sección{
-    color: black;
+footer .titulo-seccion{
+    color: white;
     font-family: 'Russo One', sans-serif;
+    margin: 25px;
+   
 }
 footer .copy{
     color: black; 
 }
+
 .redes-sociales{
     display: flex;
-    justify-content: right;
+    justify-content: center;
 }
 .redes-sociales i{
     font-size: 30px;
     padding:  20px  ;
 }
 
+.contenedor{
+display: flex;
+justify-content: center;
+}
+
+.loguito{
+    margin: 15px;
+}
 
 
 /*----------------------------------------------------------------------------------*/

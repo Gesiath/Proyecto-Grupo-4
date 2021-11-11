@@ -11,7 +11,7 @@
 			crossorigin="anonymous"
 		/>
 		<!--<link rel="stylesheet" href="/src/main/resources/static/css/index.css" /> -->		
-		 <link rel="stylesheet" href="/css/index.css" />		
+		 <link rel="stylesheet" href="/src/main/resources/static/css/index.css" />		
 		 
 		<title>WorkMerge | Datos Cliente</title>
 	</head>
@@ -19,21 +19,20 @@
 	<body>
 	<div class="container-fluid">
 		<nav class="navbar navbar-light">
-			
-				<div>
-					<a class="navbar-brand" href="#">
-						<!-- src="/src/main/resources/static/img/LogoColor.png" -->
-						<img							
-							src="/img/LogoColor.png"
-							alt="WM"
-							width="30"
-							height="24"
-							class="d-inline-block align-text-top"
-						/>
-						<span class="titulo">WorkMerge </span>
-					</a>
-				</div>
-				</nav>
+			<div class="container-fluid" style="display:flex">
+			  <!--href /index-->
+				<a class="navbar-brand" href="/src/main/resources/templates/index.html">
+				<!-- src="/src/main/resources/static/img/LogoColor.png" -->
+					<img 
+					  src="/src/main/resources/static/img/LogoColor.png" 
+					  alt="WM" 
+					  width="90" 
+					  height="90"                   
+					 /> <!-- class="d-inline-block align-text-top" -->
+					<span class="titulo">WorkMerge</span>
+				</a>
+			</div>
+		</nav>
 			</div>
 		
 
@@ -195,19 +194,20 @@
 		</div>
 		<br />
 		<br />
-		<footer>
-			<div class="container-fluid">
-				<div class="contenedor">
-					<h2 class="título-sección">WorkMerge</h2>
-				</div>
-				<div class="redes-sociales">
-					<i class="fab fa-twitter"></i> <i class="fab fa-facebook-f"></i>
-					<i class="fab fa-youtube"></i>
-				</div>
-				<div class="contenedor">
-					<small class="copy"> WorkMerge 2021/Todos los derechos reservados</small>
-					<address class="copy">Argentina</address>
-				</div>
+
+		<footer class="container-fluid">
+			<div class="contenedor">
+					<img class="loguito" src="/src/main/resources/static/img/isovalenteLogo.png" width="50" height="50">
+					<h2 class="titulo-seccion">WorkMerge</h2>
+			</div>
+			<div class="redes-sociales">
+				<i class="fab fa-twitter"></i>
+				<i class="fab fa-facebook-f"></i>
+				<i class="fab fa-youtube"></i>
+			</div>
+			<div class="contenedor">
+				<small class="copy"> WorkMerge 2021/Todos los derechos reservados. 
+					<address class="copy2" align= "center">Argentina</address></small>
 			</div>
 		</footer>
 
