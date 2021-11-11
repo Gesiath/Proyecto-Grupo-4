@@ -58,11 +58,7 @@
 						<td th:text="${admin.email}"></td>
 						<td th:text="${admin.nickname}"></td>
 						<td>
-<<<<<<< HEAD
-							<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/eliminar/{id}(id=${admin.id})}">Eliminar</a>
-=======
-							<a th:href="@{/admin/eliminar/{id}(id=${admin.id})}" class="btn btn-danger">Eliminar</a>
->>>>>>> 62a5121fe985274f52312eef5b44d95d3d0395b8
+							<a class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin/eliminar/{id}(id=${admin.id})}">Eliminar</a>
 						</td>
 					</tr>
 				</tbody>

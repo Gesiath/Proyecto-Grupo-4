@@ -153,7 +153,6 @@ public class AdminService implements UserDetailsService {
 		
 		try {
 			Admin admin = adminRepository.findByEmail(mail);
-			User user;
 			
 			List<GrantedAuthority> authorities = new ArrayList<>();
 			

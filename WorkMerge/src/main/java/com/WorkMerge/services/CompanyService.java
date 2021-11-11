@@ -1,10 +1,14 @@
 package com.WorkMerge.services;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -147,8 +151,20 @@ public class CompanyService implements UserDetailsService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+		
+		try {
+			Company company = companyRepository.findByEmail(mail);
+			
+			List<GrantedAuthority> authorities = new ArrayList<>();
+			
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + company.getRol()));
+			
+			return new User(mail, company.getPassword(), authorities);
+		} catch(Exception e) {
+			
+			throw new UsernameNotFoundException("El admin no existe");
+			
+		}
 	}
 }
