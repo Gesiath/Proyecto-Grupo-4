@@ -1,13 +1,16 @@
 package com.WorkMerge.services;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.WorkMerge.entities.Company;
 import com.WorkMerge.entities.Job;
 import com.WorkMerge.entities.Photo;
@@ -44,6 +47,17 @@ public class CompanyService {
 	    
 		companyRepository.save(company);
 
+	}
+	
+	//CARGAR NOMBRE COMPAÑIA
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })//Transactional (se pone porque cambia algo en la base de datos)
+	public Company loadData(String id, String name) throws ServiceException, ParseException {
+				
+		Company c = this.obtenerPorId(id);
+		
+		c.setName(name);
+		
+		return companyRepository.save(c);
 	}
 	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
@@ -88,6 +102,25 @@ public class CompanyService {
 	            throw new ServiceException("No se encontro la compañía.");
 	        }
 		
+	}
+	
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public Company obtenerPorId(String id) throws ServiceException{
+		
+		Optional<Company> result  = companyRepository.findById(id);
+		
+		if (result.isEmpty()) {
+			throw new ServiceException("No se encontró el cliente");
+		} else {
+			return result.get();
+		}
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public Company obtenerPorMail(String email) throws ServiceException{
+		
+		return companyRepository.findByEmail(email);
 	}
 	
 	@Transactional(readOnly = true)
