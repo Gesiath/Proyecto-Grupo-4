@@ -39,6 +39,16 @@ public class AdminController {
 		return this.viewPath.concat("register-admin");
 	}
 	
+	@GetMapping("/adminEmpresas")
+	public String adminEmpresas() {
+		return this.viewPath.concat("tableroAdminEmpresas");
+	}
+	
+	@GetMapping("/adminClientes")
+	public String adminClientes() {
+		return this.viewPath.concat("tableroAdminUsuarios");
+	}
+	
 	@PostMapping("/guardar")
 	public String guardarAdmin(@RequestParam("email") String email, @RequestParam("nickname") String nickname, @RequestParam("password") String password) {
 		try {

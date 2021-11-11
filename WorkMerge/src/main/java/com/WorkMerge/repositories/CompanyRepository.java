@@ -22,6 +22,9 @@ public interface CompanyRepository extends JpaRepository<Company, String>{
 	
 	@Query("SELECT c FROM Company c WHERE c.email = :email")
 	public Company findByEmail(@Param("email") String email);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 62a5121fe985274f52312eef5b44d95d3d0395b8
 	
 }
