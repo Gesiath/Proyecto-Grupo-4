@@ -159,7 +159,6 @@ public class ClientService implements UserDetailsService {
 		
 		try {
 			Client client = clientRepository.findByEmail(mail);
-			User user;
 			
 			List<GrantedAuthority> authorities = new ArrayList<>();
 			

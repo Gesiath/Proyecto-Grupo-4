@@ -9,7 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.WorkMerge.services.AdminService;
 import com.WorkMerge.services.ClientService;
+import com.WorkMerge.services.CompanyService;
 
 @Configuration
 @EnableWebSecurity
@@ -20,11 +22,21 @@ public class mainConfiguration extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private ClientService clientService;
 	
+	@Autowired
+	private CompanyService companyService;
+	
+	@Autowired
+	private AdminService adminService;
+	
 	//Metodo para autenticacion
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(clientService).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(companyService).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(adminService).passwordEncoder(new BCryptPasswordEncoder());
 	}
+	
+
 	
 	//Configuracion de las peticiones http
 	@Override
