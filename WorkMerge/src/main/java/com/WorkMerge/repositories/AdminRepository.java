@@ -11,5 +11,8 @@ import com.WorkMerge.entities.Admin;
 public interface AdminRepository extends JpaRepository<Admin, String>{
 	@Query("SELECT COUNT(a) > 0 FROM Admin a WHERE a.email = :email")
 	public boolean existByEmail(@Param("email") String email);
+	
+	@Query("SELECT a FROM Admin a WHERE a.email = :email")
+	public Admin findByEmail(@Param("email") String email);
 
 }
