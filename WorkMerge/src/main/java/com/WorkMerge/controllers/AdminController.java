@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.WorkMerge.entities.Admin;
+import com.WorkMerge.entities.Company;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.services.AdminService;
 
@@ -39,9 +40,22 @@ public class AdminController {
 		return this.viewPath.concat("register-admin");
 	}
 	
-	@GetMapping("/adminEmpresas")
-	public String adminEmpresas() {
+	@GetMapping("/adminEmpresas1")
+	public String adminEmpresas(ModelMap modelo) {
+		
+		List<Company> listCompanies = adminService.listCompanies();
+		modelo.addAttribute("companies", listCompanies);
 		return this.viewPath.concat("tableroAdminEmpresas");
+		
+	}
+	
+	@GetMapping("/adminEmpresas2")
+	public String adminEmpresas(ModelMap modelo, @RequestParam(value = "q", required = false) String q) {
+		
+		List<Company> listCompaniesByParam = adminService.listCompanyByParam(q);
+		modelo.addAttribute("companiesPorParam", listCompaniesByParam);
+		return this.viewPath.concat("tableroAdminEmpresas");
+		
 	}
 	
 	@GetMapping("/adminClientes")
@@ -64,7 +78,7 @@ public class AdminController {
 	public String deleteAdmin(@PathVariable("id") String id) {
 		try {
 			adminService.deleteAdmin(id);
-			return "redirect:/admin";
+			return "redirect:/admin/adminEmpresas";
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			return "redirect:/admin";

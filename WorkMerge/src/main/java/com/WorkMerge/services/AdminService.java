@@ -117,6 +117,11 @@ public class AdminService implements UserDetailsService {
 	public List<Job> listJobs() {
 		return jobRepository.findAll();
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Company> listCompanyByParam(String name) {
+		return companyRepository.findByName(name);
+	}
 
 	@Transactional(readOnly = true)
 	public List<Company> listCompanies(){

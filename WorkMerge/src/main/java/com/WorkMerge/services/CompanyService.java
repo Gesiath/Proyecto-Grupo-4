@@ -88,11 +88,10 @@ public class CompanyService implements UserDetailsService {
 	}
 	//DELETE
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void deleteCompany (String id,String password, List<Job> job,Photo photo,MultipartFile archive) throws ServiceException{
+	public void deleteCompany (String id) throws ServiceException{
 		Optional<Company> compy = companyRepository.findById(id);
 		if (compy.isPresent()) {
-	            Company company = compy.get();
-	            companyRepository.delete(company);
+	            companyRepository.deleteById(id);
 	        } else {
 	            throw new ServiceException("No se encontro la compañía.");
 	        }

@@ -70,5 +70,17 @@ public class CompanyController {
 		}
 		
 	}
+	
+	@GetMapping("/eliminar/{id}")
+	public String deleteCompany(@PathVariable("id") String id) {
+		try {
+			companyService.deleteCompany(id);
+			return "redirect:/admin";
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return "redirect:/admin";
+		}
+		
+	}
 				
 }
