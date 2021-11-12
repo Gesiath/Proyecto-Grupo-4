@@ -10,28 +10,31 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <!-- <link rel="stylesheet" href="/src/main/resources/static/css/index.css" /> -->
     <link rel="stylesheet" href="/src/main/resources/static/css/index.css" />
 
-    <title>Registro Empresa</title>
+    <title>WorkMerge | Registro Cliente</title>
   </head>
 
 <body>
+
+	<div class="container-fluid">
     <nav class="navbar navbar-light">
-      <div class="container-fluid">
-        <div>
-          <a class="navbar-brand" href="#">
-            <img
-              src="/src/main/resources/static/img/LogoColor.png"
-              alt="WM"
-              width="30"
-              height="24"
-              class="d-inline-block align-text-top"
-            />
-            <span class="titulo">WorkMerge </span>
+      <div class="container-fluid" style="display:flex">
+        <!--href /index-->
+          <a class="navbar-brand" href="/">
+          <!-- src="/src/main/resources/static/img/LogoColor.png" -->
+              <img 
+                src="/src/main/resources/static/img/LogoColor.png" 
+                alt="WM" 
+                width="90" 
+                height="90"                   
+               /> <!-- class="d-inline-block align-text-top" -->
+              <span class="titulo">WorkMerge</span>
           </a>
-        </div>
       </div>
-    </nav>
+  </nav>
+    </div>
 
     <div class="container">
       <div class="row">
@@ -40,13 +43,12 @@
             <div class="card-header d-flex">
               <h1>Registrarse con sus datos</h1>
             </div>
+            <form th:action="@{/client/save}" class="px-4 py-3" method="POST">
             <div class="card-body">
-              <form th:action="@{/company/save}" class="px-4 py-3" method="POST">
+              
                   
                 <div class="mb-3">
-                  <label for="correoElectronico" class="form-label"
-                    >Correo Electrónico:</label
-                  >
+                  
                   <input
                     type="email"
                     class="form-control"
@@ -55,45 +57,35 @@
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="contraseña" class="form-label">Contraseña:</label>
+                  
                   <input
                     type="password"
                     class="form-control"
                     name="password"
-                    placeholder="********"
+                    placeholder="Contraseña"
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="contraseña2" class="form-label">Repita su contraseña:</label>
+                  
                   <input
                     type="password"
                     class="form-control"
                     name="password2"
-                    placeholder="********"
+                    placeholder="Repita su contraseña"
                   />
                 </div>
-                
-             
-               
-              
-          
-
-
-
-
-
-
-
-
-                <br>
+      
                   <button type="submit" class="btn btn-dark">
                     Registrarme
                   </button>
-                </div>
-              </form>
+	
+			
+              </div>  
+              </form>            
           </div>
         </div>
         <div class="col-6 mt-5">
+        <!-- src="/src/main/resources/static/img/vale.jpg" -->
             <img
              src="/src/main/resources/static/img/vale.jpg"
             alt=""
@@ -104,38 +96,29 @@
       </div>
     </div>
 
+<!--Quizás no hagan falta los BR-->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <footer>
-      <div class="container-fluid">
-        <div class="contenedor">
-          <h2 class="título-sección">WorkMerge</h2>
-        </div>
-        <div class="redes-sociales">
+    <footer class="container-fluid">
+      <div class="contenedor">
+              <img class="loguito" src="/src/main/resources/static/img/isovalenteLogo.png" width="50" height="50">
+              <h2 class="titulo-seccion">WorkMerge</h2>
+      </div>
+      <div class="redes-sociales">
           <i class="fab fa-twitter"></i>
           <i class="fab fa-facebook-f"></i>
           <i class="fab fa-youtube"></i>
-        </div>
-        <div class="contenedor">
-          <small class="copy">
-            WorkMerge 2021/Todos los derechos reservados</small
-          >
-          <address class="copy">Argentina</address>
-        </div>
       </div>
-    </footer>
+      <div class="contenedor">
+          <small class="copy"> WorkMerge 2021/Todos los derechos reservados. 
+              <address class="copy2" align= "center">Argentina</address></small>
+      </div>
+  </footer>
 
     <script
       src="https://kit.fontawesome.com/bdbed0aafa.js"

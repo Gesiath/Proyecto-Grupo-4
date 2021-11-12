@@ -10,28 +10,31 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/src/main/resources/static/css/index.css" />
+    <!--<link rel="stylesheet" href="../css/index.css" />-->
+    <link rel="stylesheet"  href="/src/main/resources/static/css/index.css" />
+    <!-- <link rel="stylesheet" href="/src/main/resources/static/css/index.css"-->
 
-    <title>Registro Cliente</title>
+    <title>WorkMerge | Registro Empresa</title>
   </head>
 
 <body>
-    <nav class="navbar navbar-light">
-      <div class="container-fluid">
-        <div>
-          <a class="navbar-brand" href="#">
-            <img
-              src="/src/main/resources/static/img/LogoColor.png"
-              alt="WM"
-              width="30"
-              height="24"
-              class="d-inline-block align-text-top"
-            />
-            <span class="titulo">WorkMerge </span>
-          </a>
-        </div>
-      </div>
-    </nav>
+    
+  <nav class="navbar navbar-light">
+    <div class="container-fluid" style="display:flex">
+      <!-- href="/index">-->
+        <a class="navbar-brand" href="/src/main/resources/templates/index.html">
+        <!-- src="/src/main/resources/static/img/LogoColor.png" -->
+            <img 
+              src="/src/main/resources/static/img/LogoColor.png" 
+              alt="WM" 
+              width="90" 
+              height="90"                   
+             /> <!-- class="d-inline-block align-text-top" -->
+            <span class="titulo">WorkMerge</span>
+
+        </a>
+    </div>
+</nav>
 
     <div class="container">
       <div class="row">
@@ -40,9 +43,9 @@
             <div class="card-header d-flex">
               <h1>Registrarse con sus datos</h1>
             </div>
-            <div class="card-body">
-              <form th:action="@{/client/save}" class="px-4 py-3" method="POST">
-                  
+            
+              <form th:action="@{/company/save}" class="px-4 py-3" method="POST">
+                  <div class="card-body">
                 <div class="mb-3">
                   <label for="correoElectronico" class="form-label"
                     >Correo Electrónico:</label
@@ -72,7 +75,8 @@
                     placeholder="********"
                   />
                 </div>
-      
+                
+
                 <br>
                   <button type="submit" class="btn btn-dark">
                     Registrarme
@@ -82,6 +86,8 @@
           </div>
         </div>
         <div class="col-6 mt-5">
+        <!-- src="/src/main/resources/static/img/vale.jpg" -->
+        <!--src="../img/vale.jpg"-->
             <img
              src="/src/main/resources/static/img/vale.jpg"
             alt=""
@@ -96,34 +102,22 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-  <footer>
-      <div class="container-fluid">
-        <div class="contenedor">
-          <h2 class="título-sección">WorkMerge</h2>
-        </div>
-        <div class="redes-sociales">
+    <footer class="container-fluid">
+      <div class="contenedor">
+        <!-- src="../static/img/isovalenteLogo.png"-->
+              <img class="loguito" src="/src/main/resources/static/img/isovalenteLogo.png" width="50" height="50">
+              <h2 class="titulo-seccion">WorkMerge</h2>
+      </div>
+      <div class="redes-sociales">
           <i class="fab fa-twitter"></i>
           <i class="fab fa-facebook-f"></i>
           <i class="fab fa-youtube"></i>
-        </div>
-        <div class="contenedor">
-          <small class="copy">
-            WorkMerge 2021/Todos los derechos reservados</small
-          >
-          <address class="copy">Argentina</address>
-        </div>
       </div>
-    </footer>
+      <div class="contenedor">
+          <small class="copy"> WorkMerge 2021/Todos los derechos reservados. 
+              <address class="copy2" align= "center">Argentina</address></small>
+      </div>
+  </footer>
 
     <script
       src="https://kit.fontawesome.com/bdbed0aafa.js"
