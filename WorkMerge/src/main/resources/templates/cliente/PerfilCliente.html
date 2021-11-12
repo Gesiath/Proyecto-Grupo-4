@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WorkMerge | Perfil Cliente</title>
+        <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        
+ 
+        <link rel="stylesheet" href="/src/main/resources/static/css/index.css">
+        <link rel="stylesheet" href="/src/main/resources/static/css/PerfilCliente.css">
+        <link  rel="icon"   href="/src/main/resources/static/favicon.ico" type="image.ico"/>
+    </head>
+
+<body>
+
+<!--     ------------------NavBar-------------------------------------------- -->
+    <nav class="navbar navbar-light">
+        <div class="container-fluid" style="display:flex">
+            <a class="navbar-brand" href="/">
+            <!-- src="/src/main/resources/static/img/LogoColor.png" -->
+            <!--src= "../static/img/LogoColor.png"-->
+                <img 
+                	src="/src/main/resources/static/img/LogoColor.png" 
+                	alt="WM" 
+                	width="90" 
+                	height="90"                   
+                 /> <!-- class="d-inline-block align-text-top" -->
+                <span class="titulo">WorkMerge</span>
+
+            </a>
+        </div>
+    </nav>
+
+
+
+<!-------------------------Portada----------------------------------------------->
+    <section class="seccion-perfil-usuario">
+        <div class="perfil-usuario-header">
+            <div class="perfil-usuario-portada">
+                <div class="perfil-usuario-avatar">
+                    <img src="http://localhost/multimedia/relleno/img-c9.png" alt="img-avatar">
+                    <button type="button" class="boton-avatar">
+                        <i class="far fa-image"></i>
+                    </button>
+                </div>
+                <button type="button" class="boton-portada">
+                    <i class="far fa-image"></i> Cambiar fondo
+                </button>
+            </div>
+        </div>
+
+<!--------------------Datos Cliente---------------------------------------------->
+        <div class="perfil-usuario-body">
+            <div class="perfil-usuario-bio">
+                <h3>C.V</h3>
+                <h3 class="name">NOMBRE</h3>
+                <h3 class="name">APELLIDO</h3>
+            </div>
+
+
+            <div class="perfil-usuario-footer">
+                <ul class="lista-datos">
+                    <li><i class="icono fas fa-address-card"></i> Documento:</li>
+                    <li><i class="icono fas fa-flag"></i> Nacionalidad:</li>
+                    <li><i class="icono fas fa-map-marker-alt"></i> Ciudad:</li>
+                    <li><i class="icono fas fa-map-signs"></i> Domicilio:</li>
+                    <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento.</li>
+                    <br>
+                    <li><i class="icono fas fa-phone-alt"></i> Telefono:</li>
+                    <li><i class="icono fas fa-envelope"></i> Email</li>
+
+                </ul>
+            </div>
+
+            <div class="perfil-usuario-strings"> <!-- 133ln -->
+                <h3>Educación</h3>
+                <ul >
+                    <br>
+                    <li><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut vel excepturi ullam suscipit! Corporis earum ea minus, quam ex accusamus. Odio repellat accusantium architecto quis quia ratione adipisci libero incidunt.</p></li>
+                </ul>
+            </div>
+
+            <div class="perfil-usuario-strings">
+                <h3>Experiencia laboral</h3>
+                <ul >
+                    <br>
+                    <li><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut vel excepturi ullam suscipit! Corporis earum ea minus, quam ex accusamus. Odio repellat accusantium architecto quis quia ratione adipisci libero incidunt.</p></li>
+                </ul>
+            </div>
+
+            <div class="perfil-usuario-strings">
+                <h3>Idiomas</h3>
+                <ul >
+                    <br>
+                    <li><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut vel excepturi ullam suscipit! Corporis earum ea minus, quam ex accusamus. Odio repellat accusantium architecto quis quia ratione adipisci libero incidunt.</p></li>
+                </ul>
+            </div>
+
+            <div class="perfil-usuario-strings">
+                <h3>Habilidades informáticas</h3>
+                <ul >
+                    <br>
+                    <li><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut vel excepturi ullam suscipit! Corporis earum ea minus, quam ex accusamus. Odio repellat accusantium architecto quis quia ratione adipisci libero incidunt.</p></li>
+                </ul>
+            </div>
+            <br>
+
+        </div>
+       
+ 
+    </section>
+    <br>
+     
+    <button>
+        <a id= "cliente" th:href="@{/client/form}" class="btn btn-light">Editar Información</a>
+    </button>
+                            
+
+    <br>
+    <br>
+    <br>
+
+<!--------------------Footer---------------------------------------->
+    <footer class="container-fluid">
+        <div class="contenedor">
+                <img class="loguito" src="/src/main/resources/static/img/isovalenteLogo.png" width="50" height="50">
+                <h2 class="titulo-seccion">WorkMerge</h2>
+        </div>
+        <div class="redes-sociales">
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-youtube"></i>
+        </div>
+        <div class="contenedor">
+            <small class="copy"> WorkMerge 2021/Todos los derechos reservados. 
+                <address class="copy2" align= "center">Argentina</address></small>
+        </div>
+
+    </footer>
+
+
+
+ 
+
+
+
+    <script src="https://kit.fontawesome.com/bdbed0aafa.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="javaScript.js" type="text/javascript"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
+
+    
+</body>
+</html>
+
+
+
+<!-- <div class="form_linea valid">
+    <div class="form_texto">
+        <p>Nombre<span>*</span></p>
+    </div>
+    
+    <div class="form_inputs inputs">
+        <input name="ctl00$ContainerGeneralOverWrite$ContainerGeneral$nombre" type="text" value="Federico" id="ContainerGeneralOverWrite_ContainerGeneral_nombre" class="cm-12" aria-required="true" aria-invalid="false">
+    </div>
+</div> -->
