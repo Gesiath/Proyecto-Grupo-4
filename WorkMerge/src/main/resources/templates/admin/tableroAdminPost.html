@@ -19,7 +19,7 @@
 <body>
     <nav class="navbar navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/src/main/resources/templates/index.html">
+            <a class="navbar-brand" href="#">
                 <img src="/src/main/resources/static/img/LogoColor.png" alt="WM" width="90" height="90"
                     class="d-inline-block" />
                 <span class="titulo">WorkMerge </span>
@@ -45,59 +45,72 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <div class="card mt-3">
-            <div class="card-header d-flex">
-                <!--dflex p poder alinear el boton a la der-->
-                <h1>Administrador: Clientes</h1>
-                <button class="btn-dark px-5 py-2 ms-auto">
+            <div class="card mt-3">
+                <div class="card-header d-flex">
+                  <h1>Postulaciones</h1>
+                  <button class="btn-dark px-5 py-2 ms-auto">
                     <!--ms-auto es p alineac del boton-->
                     <a href="/src/main/resources/templates/admin/MainAdmin.html">Inicio</a>
                     <!--le cambie el persona/form y el boton de crear persona-->
                 </button>
-            </div>
-            <div class="card-body">
-                <form class="row g-3" th:action="@{/persona/list}" method="GET">
+                </div>
+                <div class="card-body">
+                  <form class="row g-3" th:action="@{#}" method="GET">
                     <div class="col">
-                        <input type="text" style="width: 100%;" name="q" placeholder="Buscar..">
+                      <input
+                        type="text"
+                        style="width: 100%"
+                        name="q"
+                        placeholder="Buscar.."
+                      />
                     </div>
                     <div class="col-2">
-                        <button type="submit" class="btn btn-dark mb-3">Buscar</button>
+                      <button type="submit" class="btn btn btn-primary">Buscar</button>
                     </div>
-                </form>
-                <table class="col-md-8 table table-dark table-hover">
+                  </form>
+                  <table class="table table-success table-striped table-bordered">
                     <thead>
-
-                        <tr>
-                            <th>Clientes</th>
-                            <th>Numero</th>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-
-                            <th>Acciones</th>
-                        </tr>
+                      <tr>
+                        <th>Numero</th>
+                        <th>Id</th>
+                        <th>Título</th>
+                        <th>Fecha posteo</th>
+                        <th>Disponibilidad</th>
+                        <th>Categoría</th>
+                        <th>Descripción</th>
+                        <th>Salario</th>
+                        <th>Experiencia Req</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                      </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="p, iterator : ${personas}">
-                            <td th:text="${' '}"></td>
-                            <td th:text="${iterator.index+1}"></td>
-                            <td th:text="${p.id}"></td>
-                            <td th:text="${p.nombre}"></td>
-                            <td th:text="${p.apellido}"></td>
-                            <!--							<td th:text="${p.apellido}"></td>
-                                                                                            <td th:text="${p.edad}"></td>-->
-                            <td>
-                                <button class="btn-dark"><a th:href="@{/persona/delete}+'?id='+${p.id}"
-                                        class="px-5 py-2">Eliminar</a></button>
-                                <button class="btn-dark"><a th:href="@{/persona/form}+'?id='+${p.id}"
-                                        class="px-5 py-2">Alta/Baja</a></button>
-                            </td>
-                        </tr>
+                      <tr th:each="t, iterator : ${trabajos}">
+                        <td th:text="${iterator.index+1}"></td>
+                        <td th:text="${t.id}"></td>
+                        <td th:text="${t.titulo}"></td>
+                        <td th:text="${t.fechadepost}"></td>
+                        <td th:text="${t.disponibilidad}"></td>
+                        <td th:text="${t.categoria}"></td>
+                        <td th:text="${t.descripcion}"></td>
+                        <td th:text="${t.salario}"></td>
+                        <td th:text="${t.experienciarequerida}"></td>
+                        <td th:text="${t.activo}"></td>
+                        <td>
+                          <button class="btn btn btn-primary btn-sm">
+                            <a
+                              th:href="@{/persona/delete}+'?id='+${p.id}"
+                              class="px-2 py-2"
+                              >Eliminar</a>
+                          </button>
+                        </td>
+                      </tr>
                     </tbody>
-                    
-                    <p th:if="${personas.isEmpty()}">No hay personas para mostrar!</p>
+                    <p th:if="${trabajos.isEmpty()}">No hay anuncios para mostrar.</p>
+                  </table>
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
 </table>
 </section>  
 
@@ -129,17 +142,22 @@
     </div>
 </footer>
 
-
 <script src="https://kit.fontawesome.com/bdbed0aafa.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
-<script src="javaScript.js" type="text/javascript"></script>
+
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
 
-</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
 
+</body>
 
 </html>
 

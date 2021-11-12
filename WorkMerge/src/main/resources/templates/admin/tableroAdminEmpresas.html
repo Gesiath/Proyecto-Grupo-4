@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="/src/main/resources/static/css/index ede.css">
+    <link rel="stylesheet" href="/src/main/resources/static/css/index.css">
 
     <title>WorkMerge</title>
 
@@ -19,19 +19,15 @@
 <body>
     <nav class="navbar navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/src/main/resources/templates/index.html">
                 <img src="/src/main/resources/static/img/LogoColor.png" alt="WM" width="90" height="90"
                     class="d-inline-block" />
                 <span class="titulo">WorkMerge </span>
 
             </a>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-outline-light me-md-2" type="button"><a th:href="@{/login}">Iniciar
+                <button class="btn btn-outline-light me-md-2" type="button"><a th:href="@{/login}">Cerrar
                         sesión</a></button>
-                <button id="Usuario" class="btn btn-warning" type="button"><a th:href="@{/client/form}">Registrarse como
-                        cliente </a></button>
-                <button id="Empresa" class="btn btn-warning" type="button"><a th:href="@{/company/form}">Registrarse
-                        como empresa</a></button>
             </div>
         </div>
     </nav>
@@ -51,10 +47,10 @@
         <div class="card mt-3">
             <div class="card-header d-flex">
                 <!--dflex p poder alinear el boton a la der-->
-                <h1>Tablero de Administrador</h1>
+                <h1>Administrador: Empresas</h1>
                 <button class="btn-dark px-5 py-2 ms-auto">
                     <!--ms-auto es p alineac del boton-->
-                    <a th:href="@{/}">Inicio</a>
+                    <a href="/src/main/resources/templates/admin/MainAdmin.html">Inicio</a>
                     <!--le cambie el persona/form y el boton de crear persona-->
                 </button>
             </div>
@@ -71,12 +67,10 @@
                     <thead>
 
                         <tr>
-                            <th>Usuarios</th>
+                            <th>Empresas</th>
                             <th>Numero</th>
                             <th>Id</th>
                             <th>Nombre</th>
-                            <th>Apellido</th>
-
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -86,9 +80,6 @@
                             <td th:text="${iterator.index+1}"></td>
                             <td th:text="${p.id}"></td>
                             <td th:text="${p.nombre}"></td>
-                            <td th:text="${p.apellido}"></td>
-                            <!--							<td th:text="${p.apellido}"></td>
-                                                                                            <td th:text="${p.edad}"></td>-->
                             <td>
                                 <button class="btn-dark"><a th:href="@{/persona/delete}+'?id='+${p.id}"
                                         class="px-5 py-2">Eliminar</a></button>
@@ -116,19 +107,21 @@
 <br>
 <footer class="container-fluid">
     <div class="contenedor">
-        <div class="d-flex align-items-center">
-            <img src="../static/img/isovalenteLogo.png" width="50" height="50">
-            <h2 class="titulo-seccion">WorkMerge</h2>
-        </div>
-        <div class="redes-sociales">
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-facebook-f"></i>
-            <i class="fab fa-youtube"></i>
-        </div>
-        <div class="contenedor">
-            <small class="copy"> WorkMerge 2021/Todos los derechos reservados</small>
-            <address class="copy">Argentina</address>
-        </div>
+
+        <!--"../static/img/isovalenteLogo.png"-->
+        <img class="loguito" src="/src/main/resources/static/img/isovalenteLogo.png" width="50" height="50">
+        <h2 class="titulo-seccion">WorkMerge</h2>
+    </div>
+    <div class="redes-sociales">
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-facebook-f"></i>
+        <i class="fab fa-youtube"></i>
+    </div>
+    <div class="contenedor">
+        <small class="copy"> WorkMerge 2021/Todos los derechos reservados.
+            <address class="copy2" align="center">Argentina</address>
+        </small>
+    </div>
 </footer>
 
 
