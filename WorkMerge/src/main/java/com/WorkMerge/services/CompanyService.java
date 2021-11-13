@@ -24,7 +24,6 @@ import com.WorkMerge.entities.Photo;
 import com.WorkMerge.enums.Rol;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.repositories.CompanyRepository;
-import com.WorkMerge.repositories.JobRepository;
 
 
 @Service
@@ -32,32 +31,34 @@ public class CompanyService implements UserDetailsService {
 	
 	@Autowired
 	private CompanyRepository companyRepository;
+	
 	@Autowired
-
-	private JobRepository jobRepository;
-	@Autowired
-
-	private PhotoService photoService;
-	//CREATE (crear)
+	private JobService jobService;
+	
+	//@Autowired private PhotoService photoService;
+	
+	//CREAR COMPAÑIA
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	//Photo photo,MultipartFile archive (CARGAR FOTO)
 	public void newCompany(String email, String password, String password2)throws ServiceException {
+		
 		validate(email, password, password2);
+		
 		Company company = new Company();
+		String encript = new BCryptPasswordEncoder().encode(password);
+		
 		company.setRol(Rol.COMPANY);
 		company.setActive(true);
 		company.setEmail(email);
-		String encript = new BCryptPasswordEncoder().encode(password);
 		company.setPassword(encript);
-
+		
 		//photo = photoService.saved(archive); company.setPhoto(photo);
 	    
 		companyRepository.save(company);
-
 	}
 	
 	//CARGAR NOMBRE COMPAÑIA
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })//Transactional (se pone porque cambia algo en la base de datos)
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Company loadData(String id, String name) throws ServiceException, ParseException {
 				
 		Company c = this.obtenerPorId(id);
@@ -67,26 +68,37 @@ public class CompanyService implements UserDetailsService {
 		return companyRepository.save(c);
 	}
 	
+	//CARGAR TRABAJOS
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void uploadJobs(Company company, Job job) {
-		Optional<Job> job2 = jobRepository.findById(job.getId());
-		company.getJob().add(job2.get());
+	public void uploadJobs(String idCompany, String title, String datepost, String availability, String category, String description,Integer salary, String experienceRequired) throws ServiceException, ParseException {
+		
+		List<Job> listJobs = jobService.listJobs(idCompany, title, datepost, availability, category, description, salary, experienceRequired);
+		
+		Company company = this.obtenerPorId(idCompany);
+		
+		company.setJob(listJobs);
+		
+		companyRepository.save(company);
 	}
 	
-	// UPDATE (actualizar)
+	// ACTUALIZAR
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void updateCompany(String id,String password, String password2, List<Job> job,Photo photo,MultipartFile archive,String email) throws ServiceException{
-		validate(email,password, password2);
+	public void updateCompany(String id, String password, String password2, String email) throws ServiceException{
+		
+		validate(email, password, password2);
+		
 		Optional<Company> compy = companyRepository.findById(id);
 		Company company = compy.get();
 		String encript = new BCryptPasswordEncoder().encode(password);
+		
 		company.setPassword(encript);
-		company.setJob(job);
-		photo = photoService.saved(archive);
-	    company.setPhoto(photo);
+		//company.setJob(job);
+		//photo = photoService.saved(archive); company.setPhoto(photo);
+	    
 		companyRepository.save(company);
 	}
-	//DELETE
+	
+	//ELIMINAR
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void deleteCompany (String id) throws ServiceException{
 		Optional<Company> compy = companyRepository.findById(id);
@@ -97,20 +109,22 @@ public class CompanyService implements UserDetailsService {
 	        }
 		
 	}
-	//DOWNGRADE (dar de baja)
+	
+	//DAR DE BAJA
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void downgradeCompany (String id,String password, List<Job> job,Photo photo,MultipartFile archive)throws ServiceException{
-		Optional<Company> compy = companyRepository.findById(id);
-		if (compy.isPresent()) {
-	            Company company = compy.get();
-	            company.setActive(false);
-	        } else {
-	            throw new ServiceException("No se encontro la compañía.");
-	        }
 		
+		Optional<Company> compy = companyRepository.findById(id);
+		
+		if (compy.isPresent()) {
+	          Company company = compy.get();
+	            company.setActive(false);
+	    } else {
+	          throw new ServiceException("No se encontro la compañía.");
+	    }
 	}
 	
-	
+	//OBETER COMPAÑIA POR ID
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Company obtenerPorId(String id) throws ServiceException{
 		
@@ -123,36 +137,45 @@ public class CompanyService implements UserDetailsService {
 		}
 	}
 	
+	//OBETER COMPAÑIA POR EMAIL
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Company obtenerPorMail(String email) throws ServiceException{
 		
 		return companyRepository.findByEmail(email);
 	}
 	
+	//LISTA TRABAJOS
 	@Transactional(readOnly = true)
 	public List<Job> listMyJobs(Company company){
+		
 		return company.getJob();
 	}
 	
+	//VALIDACION
 	public void validate(String email,String password, String password2) throws ServiceException {
+		
 		if(email==null || email.isEmpty() || email.equals("")) {
 			throw new ServiceException ("El email no puede ser nulo/vacío.");
 		}
+		
 		if(password==null || password.isEmpty()||password.equals("")) {
 			throw new ServiceException ("La contraseña no puede ser nula/vacía o 0.");
 		}
+		
 		if(!password.equals(password2)){
 			throw new ServiceException("La contraseñas tienen que coincidir");
 		}
+		
 		if(companyRepository.existByEmail(email)) {
 			throw new ServiceException("Ya existe una compañia con ese email.");
 		}
 	}
-
+	
 	@Override
 	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
 		
 		try {
+			
 			Company company = companyRepository.findByEmail(mail);
 			
 			List<GrantedAuthority> authorities = new ArrayList<>();
@@ -160,6 +183,7 @@ public class CompanyService implements UserDetailsService {
 			authorities.add(new SimpleGrantedAuthority("ROLE_" + company.getRol()));
 			
 			return new User(mail, company.getPassword(), authorities);
+			
 		} catch(Exception e) {
 			
 			throw new UsernameNotFoundException("El admin no existe");
