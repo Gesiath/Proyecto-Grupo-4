@@ -16,6 +16,27 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-light">
+      <div class="container-fluid" style="display: flex">
+        <a class="navbar-brand" href="/">
+          <!-- src="/src/main/resources/static/img/LogoColor.png" -->
+          <!--src= "../static/img/LogoColor.png"-->
+          <img
+            src="../static/img/LogoColor.png"
+            alt="WM"
+            width="90"
+            height="90"
+          />
+          <span class="titulo">WorkMerge</span>
+        </a>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button class="btn btn-outline-light me-md-2" type="button">
+            <a th:href="@{/login}">Cerrar sesión </a>
+          </button>
+        </div>
+      </div>
+    </nav>
+
     <section class="seccion-perfil-usuario">
       <div class="perfil-usuario-header">
         <div class="perfil-usuario-portada">
