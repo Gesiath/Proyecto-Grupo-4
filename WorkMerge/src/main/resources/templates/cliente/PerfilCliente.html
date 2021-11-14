@@ -19,22 +19,27 @@
 <body>
 
 <!--     ------------------NavBar-------------------------------------------- -->
-    <nav class="navbar navbar-light">
-        <div class="container-fluid" style="display:flex">
-            <a class="navbar-brand" href="/">
-            <!-- src="/src/main/resources/static/img/LogoColor.png" -->
-            <!--src= "../static/img/LogoColor.png"-->
-                <img 
-                	src="/src/main/resources/static/img/LogoColor.png" 
-                	alt="WM" 
-                	width="90" 
-                	height="90"                   
-                 /> <!-- class="d-inline-block align-text-top" -->
-                <span class="titulo">WorkMerge</span>
+<nav class="navbar navbar-light">
+    <div class="container-fluid" style="display:flex">
+        <a class="navbar-brand" href="/src/main/resources/templates/index.html">
+        <!-- src="/src/main/resources/static/img/LogoColor.png" -->
+        <!--src= "../static/img/LogoColor.png"-->
+            <img 
+                src="/src/main/resources/static/img/LogoColor.png" 
+                alt="WM" 
+                width="90" 
+                height="90"                   
+             /> <!-- class="d-inline-block align-text-top" -->
+            <span class="titulo">WorkMerge</span>
 
-            </a>
+        </a>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-outline-light me-md-2" type="button"><a th:href="@{/login}">Cerrar
+                    sesión</a></button>
+            <button id="cliente" class="btn btn-warning" type="button"><a th:href="@{/client/form}">Volver a inicio </a></button>
         </div>
-    </nav>
+    </div>
+</nav>
 
 
 
