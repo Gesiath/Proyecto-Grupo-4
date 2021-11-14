@@ -1,10 +1,17 @@
 package com.WorkMerge.services;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -21,7 +28,7 @@ import com.WorkMerge.repositories.JobRepository;
 
 
 @Service
-public class CompanyService {
+public class CompanyService implements UserDetailsService {
 	
 	@Autowired
 	private CompanyRepository companyRepository;
@@ -81,11 +88,10 @@ public class CompanyService {
 	}
 	//DELETE
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void deleteCompany (String id,String password, List<Job> job,Photo photo,MultipartFile archive) throws ServiceException{
+	public void deleteCompany (String id) throws ServiceException{
 		Optional<Company> compy = companyRepository.findById(id);
 		if (compy.isPresent()) {
-	            Company company = compy.get();
-	            companyRepository.delete(company);
+	            companyRepository.deleteById(id);
 	        } else {
 	            throw new ServiceException("No se encontro la compañía.");
 	        }
@@ -140,6 +146,24 @@ public class CompanyService {
 		}
 		if(companyRepository.existByEmail(email)) {
 			throw new ServiceException("Ya existe una compañia con ese email.");
+		}
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+		
+		try {
+			Company company = companyRepository.findByEmail(mail);
+			
+			List<GrantedAuthority> authorities = new ArrayList<>();
+			
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + company.getRol()));
+			
+			return new User(mail, company.getPassword(), authorities);
+		} catch(Exception e) {
+			
+			throw new UsernameNotFoundException("El admin no existe");
+			
 		}
 	}
 }

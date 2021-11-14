@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
 	<head>
 		<meta charset="UTF-8" />
@@ -39,19 +39,28 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-6">
+					<div th:if="${error}" class="alert alert-danger"><!--El if verifica si hay un error, y el th text muestra el mensaje del error-->
+					    <span th:text="${error}"></span>
+					    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+					<div th:if="${param.logout}" class="alert alert-success">
+					    <span>Ha finalizado la sesión con exito</span>
+					    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
 					<div class="card mt-5 mb-5">
 						<div class="card-header d-flex">
 							<h1>Ingrese sus datos</h1>
 						</div>
 						<div class="card-body">
-							<form class="px-4 py-3">
+							<form class="px-4 py-3" th:action="@{/logincheck}" method="POST">
 								<div class="mb-3">
-									<label for="correoElectronico" class="form-label">Correo Electrónico</label>
+									<label for="mail" class="form-label">Correo Electrónico</label>
 									<input
-										type="email"
+										type="text"
 										class="form-control"
-										id="correoElectronico"
+										name="mail"
 										placeholder="email@ejemplo.com"
+										th:value="${mail}" 
 									/>
 								</div>
 								<div class="mb-3">
@@ -59,15 +68,11 @@
 									<input
 										type="password"
 										class="form-control"
-										id="contraseña"
+										name="password"
 										placeholder="********"
 									/>
 								</div>
 								<div class="mb-3">
-									<div class="form-check">
-										<input type="checkbox" class="form-check-input" id="dropdownCheck" />
-										<label class="form-check-label" for="dropdownCheck"> Recordar </label>
-									</div>
 									<button type="submit" class="btn btn-dark">Iniciar sesión</button>
 								</div>
 							</form>

@@ -23,4 +23,7 @@ public interface CompanyRepository extends JpaRepository<Company, String>{
 	@Query("SELECT c FROM Company c WHERE c.email = :email")
 	public Company findByEmail(@Param("email") String email);
 	
+	@Query("SELECT c FROM Company c WHERE c.name LIKE :name GROUP BY c.name")
+	public List<Company> findByName(@Param("name") String name);
+	
 }
