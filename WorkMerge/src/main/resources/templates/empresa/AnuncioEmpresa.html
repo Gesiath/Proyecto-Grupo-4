@@ -14,7 +14,7 @@
     <!--href="/src/main/resources/static/css/index.css"-->
     <link rel="stylesheet" href="/src/main/resources/static/css/index.css">
 
-    <title>WorkMerge | Nuevo Empleo</title>
+    <title>WorkMerge | Nuevo Anuncio</title>
   </head>
   <body>
     <nav class="navbar navbar-light">
@@ -41,7 +41,7 @@
 
 
 
-    <div class="container">
+    <div class="container col-5" style="margin-bottom: 50px;">
 		<div class="card mt-5">
 			<div class="card-header d-flex">
 				<h1>Crear anuncio</h1>
@@ -85,7 +85,7 @@
 						<label for="acciones" class="form-label">Acciones</label>
 						<input type="text" class="form-control" th:field="*{acciones}" placeholder="Acciones" />
 					</div>
-					<button type="submit" class="btn btn btn-dark btn-sm">
+					<button type="submit" class="btn btn btn-dark btn-sm" style="margin-left: 95px;">
 						Guardar
 					</button>
 				</form>

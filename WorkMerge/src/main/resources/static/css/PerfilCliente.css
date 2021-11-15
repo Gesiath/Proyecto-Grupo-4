@@ -37,7 +37,7 @@ Copiar esto
     width: 100%;
     display: flex;
     justify-content: center;
-    background: linear-gradient(#B873FF, transparent);
+    /* background: linear-gradient(#B873FF, transparent); */
     margin-bottom: 1.25rem;
 }
 
@@ -46,7 +46,7 @@ Copiar esto
     position: relative;
     width: 90%;
     height: 17rem;
-    background: linear-gradient(45deg, #BC3CFF, #317FFF);
+    background: linear-gradient(45deg, #ffffff, #afaaaa);
     border-radius: 0 0 20px 20px;
 }
 
