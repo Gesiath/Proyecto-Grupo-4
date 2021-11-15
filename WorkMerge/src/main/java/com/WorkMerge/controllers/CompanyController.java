@@ -88,7 +88,7 @@ public class CompanyController {
 	public String deleteCompany(@PathVariable("id") String id) {
 		try {
 			companyService.deleteCompany(id);
-			return "redirect:/admin";
+			return "redirect:/admin/adminEmpresas1";
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			return "redirect:/admin";

@@ -56,12 +56,12 @@
                 
             </div>
             <div class="card-body">
-                <form class="row g-3" th:action="@{/admin/adminEmpresas2}" method="POST">
+                <form class="row g-3" th:action="@{/admin/adminEmpresas}" method="POST">
                     <div class="col">
-                        <input type="text" style="width: 100%;" class="form-control"  name="q" placeholder="Buscar..">
+                        <input type="text" style="width: 100%;" class="form-control"  name="search" required placeholder="Buscar..">
                     </div>
                     <div class="col-2">                        
-                        <a th:href="@{/admin/adminEmpresas2}" class="btn btn-dark mb-3" type="submit">Buscar</a>
+                        <a th:href="@{/admin/adminEmpresas1}" class="btn btn-dark mb-3" type="submit">Buscar</a>
                     </div>
                 </form>
                 <table class="col-md-8 table table-dark table-hover">
