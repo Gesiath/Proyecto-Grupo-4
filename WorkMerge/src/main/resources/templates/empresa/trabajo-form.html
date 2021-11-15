@@ -10,12 +10,27 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../static/css/index.css">
+    <!-- href="../static/css/index.css"-->
+    <!--href="/src/main/resources/static/css/index.css"-->
+    <link rel="stylesheet" href="/src/main/resources/static/css/index.css">
 
     <title>WorkMerge | Nuevo Empleo</title>
   </head>
   <body>
+    <nav class="navbar navbar-light">
+        <div class="container-fluid" style="display:flex">
+            <a class="navbar-brand" href="/src/main/resources/templates/index.html">
+            <!-- src="/src/main/resources/static/img/LogoColor.png" -->
+            <!--src= "../static/img/LogoColor.png"-->
+                <img 
+                	src="/src/main/resources/static/img/LogoColor.png" 
+                	alt="WM" 
+                	width="90" 
+                	height="90"                   
+                 /> <!-- class="d-inline-block align-text-top" -->
+                <span class="titulo">WorkMerge</span>
 
+<<<<<<< HEAD
 	<nav class="navbar navbar-light">
         <div class="container-fluid">
             <div class="d-flex align-items-center">
@@ -24,15 +39,17 @@
                 <img src="../static/img/LogoColor.png" alt="WM" width="90" height="90"
                     class="d-inline-block" />
                 <span class="titulo">WorkMerge </span>
+=======
+>>>>>>> 28784c1de1de36965ffad82c715baf0bc4d359b4
             </a>
-            </div> 
-			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button class="btn btn-outline-light me-md-2" type="button"><a th:href="@{/login}">Cerrar
                         sesión</a></button>
                 <button id="cliente" class="btn btn-warning" type="button"><a th:href="@{/client/form}">Volver a mi perfil </a></button>
             </div>
         </div>
     </nav>
+
 
 
     <div class="container">
@@ -92,7 +109,8 @@
 	<footer class="container-fluid">
         <div class="contenedor">
             <div class="d-flex align-items-center">
-                <img src="../static/img/isovalenteLogo.png" width="50" height="50">
+               <!-- src="../static/img/isovalenteLogo.png"-->
+                <img src="/src/main/resources/static/img/isovalenteLogo.png" width="50" height="50">
                 <h2 class="titulo-seccion">WorkMerge</h2>
             </div>
         </div>
@@ -106,6 +124,14 @@
             <address class="copy">Argentina</address>
         </div>
     </footer>
+
+    <script src="https://kit.fontawesome.com/bdbed0aafa.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="javaScript.js" type="text/javascript"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
 
 
   </body>
