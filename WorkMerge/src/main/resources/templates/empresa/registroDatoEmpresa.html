@@ -10,16 +10,20 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/src/main/resources/static/css/index.css">
+    <!-- <link rel="stylesheet" href="/src/main/resources/static/css/index.css"> -->
+    <link rel="stylesheet" href="../css/index.css">
 
-    <title>Datos Empresa</title>
+    <title>WorkMerge | Datos Empresa</title>
 
-    <nav class="navbar navbar-light">
+     <body>
+     
+     <nav class="navbar navbar-light">
         <div class="container-fluid">
             <div>
                 <a class="navbar-brand" href="#">
+                <!-- src="/src/main/resources/static/img/LogoColor.png" -->
                       <img
-                        src="/src/main/resources/static/img/LogoColor.png"
+                        src="../img/LogoColor.png"
                         alt="WM"
                         width="30"
                         height="24"
@@ -30,8 +34,8 @@
           </div>
         </div>
       </nav>
-
-      <body>
+      
+      
         <div class="container">
           <div class="card mt-5">
             <div class="card-header d-flex">
@@ -44,8 +48,7 @@
             <div class="card-body">
               <form
                 th:action="@{#}"
-                method="POST"
-                th:object="${#}"
+                method="POST"                
                 class="col-6 mx-auto"
               >
                 <input hidden th:field="*{id}" />
@@ -54,13 +57,12 @@
                   <label for="nombre" class="form-label">Nombre</label>
                   <input
                     type="text"
-                    class="form-control"
-                    th:field="*{nombre}"
+                    class="form-control"                    
                     placeholder="Nombre"
                   />
                 </div>
                 <br>           
-                <button type="submit" class="btn btn-dark px-4 py-2 ms-auto" th="@{#}">
+                <button type="submit" class="btn btn-dark px-4 py-2 ms-auto">
                   Guardar
                 </button>
               </form>
