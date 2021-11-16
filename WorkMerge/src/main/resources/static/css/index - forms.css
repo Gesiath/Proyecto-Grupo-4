@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap');
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    heigh: 10px;
+    background-image: url("/src/main/resources/static/img/briefcase.jpg");
+    background-repeat: repeat;
+    background-size: 7rem;
+}
+
+section {
+     width: 100%;
+     margin: 0% auto;
+     padding: 0%;    
+}
+
+#cajamadre{
+        width: 100%;
+        height: auto;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 5%;
+}
+
+#imagenintro{
+    width: 1349px;
+}
+
+
+
+.textosobreimg1{
+    display: flex;
+    position: absolute;
+    
+    margin: 5%;
+    bottom: 30%; 
+    z-index: 10;
+    /* background: chartreuse; */
+    width: 40%;
+    height: 15%;
+    padding: 5em 0% 20%;
+
+    font-family: 'Roboto';
+    font-style:  Bold 700;
+    
+
+}
+
+.textosobreimg2{
+    
+    display: flex;
+    position: absolute;
+    
+    /* margin: 2%; */
+    margin-top: 0%;
+    margin-left: 5%;
+    bottom:30%; 
+    z-index: 10;
+ /*    background-color: blue; */
+    width: 30%;
+    height: 15%;
+    padding: 2em 0% 14%;
+
+    font-family: 'Roboto';
+    font-style:  Light 300;
+
+}
+
+/*------------------NavBar--------------------------------------------*/
+
+nav{
+    background-color: #577EB7;
+}
+
+.titulo {
+    font-family: 'Russo One', Arial, Helvetica, sans-serif;
+    font-size: 3rem;
+    color: white;
+    margin: 25px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: white;
+}
+
+
+
+/*------------------footer--------------------------------------------*/
+
+footer{
+    background-color: #616160;
+    
+    
+}
+
+footer .titulo-seccion{
+    color: white;
+    font-family: 'Russo One', sans-serif;
+    margin: 25px;
+   
+}
+footer .copy{
+    color: black; 
+}
+
+.redes-sociales{
+    display: flex;
+    justify-content: center;
+}
+.redes-sociales i{
+    font-size: 30px;
+    padding:  20px  ;
+}
+
+.contenedor{
+display: flex;
+justify-content: center;
+}
+
+.loguito{
+    margin: 15px;
+}
+
+
+/*----------------------------------------------------------------------------------*/
+
+
+.CentroPagina{
+	display: flex;
+	justify-content: center;
+	padding-top: 6em;
+    padding-bottom: 6em;
+    background-color: rgb(185, 185, 185);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+[class*="col_"] {
+    float: left;
+    border-radius: 7rem;
+}
+
+/*----------------------------------------------------------------------------------*/
+
+.TextoCentro>h1{
+	
+    font-size: 3rem;
+    color: black;
+    font-family: 'Roboto';
+    font-style:  Bold 700;
+}
+
+.TextoCentro>h2{
+	
+    font-size: 2rem;
+    color: black;
+    padding-bottom: 1em;
+    font-family: 'Roboto';
+    font-style:  Bold 700;     
+
+}
+
+.TextoCentro>p {
+    
+    color: black;
+    width: 35em;
+   padding-bottom: 0.8em;
+   padding-right: 8rem;
+   font-size: 1.2rem;
+   font-family: 'Roboto';
+   font-style:  Light 300;
+}
+
+.TextoCentro>a{
+	float:left; /* Ajusta el ancho al contenido (a seguir leyendo..) */
+	display: block;
+    text-decoration: none;
+    color: white;
+    margin-top: 1em;
+    background: var(--verde);
+    border-radius: 2em;
+    align-items: center;
+    padding: 0.5em
+}
+
+
+/*----------------------------------------------------------------------------------*/
+
+.TextoCentro2>h1{
+	padding-left: 8rem;
+    font-size: 3rem;
+    color: black;
+    font-family: 'Roboto';
+    font-style:  Bold 700;
+}
+
+.TextoCentro2>h2{
+	
+    font-size: 2rem;
+    color: black;
+    padding-bottom: 1em;
+    padding-left: 8rem;
+    font-family: 'Roboto';
+    font-style:  Bold 700;     
+
+}
+
+.TextoCentro2>p {
+    
+    color: black;
+    width: 35em;
+   padding-bottom: 0.8em;
+   padding-left: 8rem;
+   font-size: 1rem;
+   font-family: 'Roboto';
+   font-style:  Light 300;
+}
+
+.TextoCentro2>a{
+	float:left; /* Ajusta el ancho al contenido (a seguir leyendo..) */
+	display: block;
+    text-decoration: none;
+    color: white;
+    margin-top: 1em;
+    background: var(--verde);
+    border-radius: 2em;
+    align-items: center;
+    padding: 0.5em
+}
+
+
+/*----------------------------------------------------------------------------------*/
+
+
+.ImagenCentro{
+	display: flex;
+	justify-content: center;
+    height: 400px;
+    width: 400px;
+
+}
+
+
+
+
+
+
+ .img1{
+	 /* border-radius: 100%; */
+    border: 18px solid rgb(255 255 255 / 50%);
+ 
+
+}
+
+.img1:hover {
+
+    border: 18px solid rgb(255 255 255 / 50%);
+    background: white;
+    animation-name: animacionimagen1;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-out;
+}
+
+.card-header{
+    background: #F6A713;
+    border: 2px solid black
+}
+
+.card-body{
+    border: 2px solid black
+}
+
+@keyframes animacionimagen1 {
+
+    0%{
+        
+        size: 10%;
+               
+
+    }
+
+
+} 
+
