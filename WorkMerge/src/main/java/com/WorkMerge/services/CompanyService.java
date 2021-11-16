@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,6 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.WorkMerge.entities.Company;
@@ -36,6 +40,33 @@ public class CompanyService implements UserDetailsService {
 	private JobService jobService;
 	
 	//@Autowired private PhotoService photoService;
+	
+	@Override
+	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+		
+		try {
+			
+			Company company = companyRepository.findByEmail(mail);
+			
+			List<GrantedAuthority> authorities = new ArrayList<>();
+			
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + company.getRol()));
+			
+			// Se extraen atributos de contexto del navegador -> INVESTIGAR
+			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+			// Se crea la sesion y se agrega el cliente a la misma -> FIUMBA
+			HttpSession session = attr.getRequest().getSession(true);
+			session.setAttribute("companysession", company);
+			
+			return new User(mail, company.getPassword(), authorities);
+			
+		} catch(Exception e) {
+			
+			throw new UsernameNotFoundException("El admin no existe");
+			
+		}
+	}
 	
 	//CREAR COMPAÑIA
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
@@ -70,7 +101,7 @@ public class CompanyService implements UserDetailsService {
 	
 	//CARGAR TRABAJOS
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void uploadJobs(String idCompany, String title, String datepost, String availability, String category, String description,Integer salary, String experienceRequired) throws ServiceException, ParseException {
+	public void uploadJobs(String idCompany, String title, String datepost, String availability, String category, String description,String salary, String experienceRequired) throws ServiceException, ParseException {
 		
 		List<Job> listJobs = jobService.listJobs(idCompany, title, datepost, availability, category, description, salary, experienceRequired);
 		
@@ -98,16 +129,17 @@ public class CompanyService implements UserDetailsService {
 		companyRepository.save(company);
 	}
 	
-	//ELIMINAR
+	//ELIMINAR TRABAJO
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void deleteCompany (String id) throws ServiceException{
+	public void deleteCompany(String id) throws ServiceException{
 		Optional<Company> compy = companyRepository.findById(id);
-		if (compy.isPresent()) {
-	            companyRepository.deleteById(id);
-	        } else {
-	            throw new ServiceException("No se encontro la compañía.");
-	        }
-		
+				
+				if (compy.isPresent()) {
+			          Company company = compy.get();
+			            companyRepository.delete(company);
+			    } else {
+			          throw new ServiceException("No se encontro la compañía.");
+			    }
 	}
 	
 	//DAR DE BAJA
@@ -146,8 +178,9 @@ public class CompanyService implements UserDetailsService {
 	
 	//LISTA TRABAJOS
 	@Transactional(readOnly = true)
-	public List<Job> listMyJobs(Company company){
+	public List<Job> listMyJobs(String id) throws ServiceException{
 		
+		Company company = this.obtenerPorId(id);
 		return company.getJob();
 	}
 	
@@ -171,23 +204,5 @@ public class CompanyService implements UserDetailsService {
 		}
 	}
 	
-	@Override
-	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
-		
-		try {
-			
-			Company company = companyRepository.findByEmail(mail);
-			
-			List<GrantedAuthority> authorities = new ArrayList<>();
-			
-			authorities.add(new SimpleGrantedAuthority("ROLE_" + company.getRol()));
-			
-			return new User(mail, company.getPassword(), authorities);
-			
-		} catch(Exception e) {
-			
-			throw new UsernameNotFoundException("El admin no existe");
-			
-		}
-	}
+	
 }

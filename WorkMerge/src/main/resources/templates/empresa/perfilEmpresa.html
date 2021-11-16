@@ -14,8 +14,10 @@
 			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 			crossorigin="anonymous"
 		/>
-		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="/css/index.css" />
 		<title>WorkMerge | Perfil Empresa</title>
+		<!--Iconos-->
+		<script src="https://kit.fontawesome.com/f67994367c.js" crossorigin="anonymous"></script>
 	</head>
 
 	<body>
@@ -23,17 +25,12 @@
 			<div class="container-fluid">
 				<div class="d-flex align-items-center">
 					<a class="navbar-brand" href="/">
-						<img
-							src="../img/LogoColor.png"
-							alt="WM"
-							width="90"
-							height="90"
-							class="d-inline-block"
-						/>
+						<img src="/img/LogoColor.png" alt="WM" width="90" height="90" class="d-inline-block" />
 						<span class="titulo">WorkMerge </span>
 					</a>
 				</div>
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<h3 class=" me-md-2">Bienvenido, <span th:text="${company.name}"></span></h3>
 					<a th:href="@{/login}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
 					<!-- <button id="cliente" class="btn btn-warning" type="button"><a th:href="@{/client/form}">Registrarse como cliente </a></button>
                 <button id="empresa" class="btn btn-warning" type="button"><a th:href="@{/company/form}">Registrarse como empresa</a></button> -->
@@ -65,11 +62,12 @@
 					<h1>Mis anuncios</h1>
 					<a
 						class="btn btn-success ms-auto text-center p-3"
-						th:href="/company/registerCom/{id}(id=${company.id})"
+						th:href="@{/company/loadJob/{id}(id=${company.id})}"
 						>Crear Anuncio</a
 					>
 				</div>
 				<div class="card-body">
+					<!--
 					<form
 						class="row g-3"
 						th:action="@{/company/perfilCom/{id}(id=${company.id})}"
@@ -82,6 +80,7 @@
 							<button type="submit" class="btn btn btn-primary">Buscar</button>
 						</div>
 					</form>
+					-->
 					<table class="table table-success table-striped table-bordered">
 						<thead>
 							<tr>
@@ -95,32 +94,38 @@
 								<th>Salario</th>
 								<th>Experiencia Req</th>
 								<th>Activo</th>
-								<th>Acciones</th>
+								<th>Eliminar</th>
+								<th>Alta/Baja</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="t, iterator : ${trabajos}">
+							<tr th:each="job, iterator : ${jobs}">
 								<td th:text="${iterator.index+1}"></td>
-								<td th:text="${t.id}"></td>
-								<td th:text="${t.titulo}"></td>
-								<td th:text="${t.fechadepost}"></td>
-								<td th:text="${t.disponibilidad}"></td>
-								<td th:text="${t.categoria}"></td>
-								<td th:text="${t.descripcion}"></td>
-								<td th:text="${t.salario}"></td>
-								<td th:text="${t.experienciarequerida}"></td>
-								<td th:text="${t.activo}"></td>
+								<td th:text="${job.id}"></td>
+								<td th:text="${job.title}"></td>
+								<td th:text="${job.datepost}"></td>
+								<td th:text="${job.availability}"></td>
+								<td th:text="${job.category}"></td>
+								<td th:text="${job.description}"></td>
+								<td th:text="${job.salary}"></td>
+								<td th:text="${job.experienceRequired}"></td>
+								<td th:text="${job.active}"></td>
 								<td>
-									<a th:href="@{#}+'?id='+${p.id}" class="px-2 py-2 btn btn btn-primary btn-sm"
-										>Eliminar</a
-									>
-									<a th:href="@{#}+'?id='+${p.id}" class="px-2 py-2 btn btn btn-primary btn-sm"
-										>Editar</a
-									>
+									<a th:href="@{/company/delete/{id}(id=${job.id})}"><i class="fas fa-trash link-emotic"></i></a>
 								</td>
+								<td>
+								<a th:href="@{/company/alta/{idJob}(idJob=${job.id})/{idCon}(idCon=${company.id})}">
+									<i th:if="${job.active}" class="fas fa-arrow-up alta"></i>
+									<i th:unless="${job.active}" class="fas fa-arrow-up link-emotic"></i>
+								</a>
+								<a th:href="@{/company/baja/{id}(id=${company.id})}">
+									<i th:if="${job.active}" class="fas fa-arrow-down link-emotic"></i>
+									<i th:unless="${job.active}" class="fas fa-arrow-down baja"></i>
+								</a>
+							</td>
 							</tr>
 						</tbody>
-						<p th:if="${trabajos.isEmpty()}">No hay anuncios para mostrar.</p>
+						<p class="text-center" th:if="${jobs.isEmpty()}">No hay anuncios para mostrar.</p>
 					</table>
 				</div>
 			</div>
@@ -129,7 +134,7 @@
 		<footer class="container-fluid">
 			<div class="contenedor">
 				<div class="d-flex align-items-center">
-					<img src=".c/img/isovalenteLogo.png" width="50" height="50" />
+					<img src="/img/isovalenteLogo.png" width="50" height="50" />
 					<h2 class="titulo-seccion">WorkMerge</h2>
 				</div>
 			</div>

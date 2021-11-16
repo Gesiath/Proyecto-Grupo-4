@@ -113,6 +113,13 @@ public class AdminService implements UserDetailsService {
 		}
 	}
 	
+	//OBTENER POR MAIL
+		@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+		public Admin obtenerPorMail(String email) throws ServiceException{
+			
+			return adminRepository.findByEmail(email);
+		}
+	
 	@Transactional(readOnly = true)
 	public List<Job> listJobs() {
 		return jobRepository.findAll();

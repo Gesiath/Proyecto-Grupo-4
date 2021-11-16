@@ -119,6 +119,7 @@ public class ClientService implements UserDetailsService {
 		}
 	}
 	
+	//OBTENER POR ID
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Client obtenerPorId(String id) throws ServiceException{
 		
@@ -131,6 +132,7 @@ public class ClientService implements UserDetailsService {
 		}
 	}
 	
+	//OBTENER POR MAIL
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Client obtenerPorMail(String email) throws ServiceException{
 		
