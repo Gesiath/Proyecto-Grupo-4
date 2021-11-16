@@ -25,11 +25,7 @@ public class CompanyController {
 	@Autowired
 	private CompanyService companyService;
 	
-<<<<<<< HEAD
 	@Autowired 
-=======
-	@Autowired
->>>>>>> 9f9fe2c0447620aa9b67f4b2c7d60133b8af3177
 	private JobService jobService;
 	
 	private final String viewPath = "empresa/";
@@ -97,25 +93,8 @@ public class CompanyController {
 	@GetMapping("/delete/{id}")
 	public String deleteJob(@PathVariable("id") String id) {
 		try {
-<<<<<<< HEAD
 			jobService.deleteJob(id);
 			return "redirect:/company/perfil/".concat(id);
-=======
-			companyService.deleteCompany(id);
-			return "redirect:/admin/adminEmpresas";
-		} catch (ServiceException e) {
-			e.printStackTrace();
-			return "redirect:/admin";
-		}
-		
-	}
-	
-	@GetMapping("/eliminarTrabajo/{id}")
-	public String deleteJob(@PathVariable("id") String id) {
-		try {
-			jobService.deleteJob(id);
-			return "redirect:/admin/adminEmpresas";
->>>>>>> 9f9fe2c0447620aa9b67f4b2c7d60133b8af3177
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			return "redirect:/admin";
@@ -127,7 +106,7 @@ public class CompanyController {
 	public String createJob(ModelMap modelo, @PathVariable("id") String id) {
 		try {
 			modelo.addAttribute("company", companyService.obtenerPorId(id));
-			return this.viewPath.concat("trabajo-form");
+			return this.viewPath.concat("AnuncioEmpresa");
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			return "redirect:/company/perfil/".concat(id);
@@ -151,19 +130,19 @@ public class CompanyController {
 		
 	}
 	
-	@GetMapping("alta/{id}")
-	public String alta(@PathVariable("id") String id) {
+	@GetMapping("alta/{idJob}/{idCon}")
+	public String alta(@PathVariable("idJob") String idJob, @PathVariable("idCon") String idCon) {
 		try {
-			jobService.upgradeJob(id);
-			return "redirect:/company/perfil/".concat(id);
+			jobService.upgradeJob(idJob);
+			return "redirect:/company/perfil/".concat(idCon);
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			return "redirect:/company/perfil/".concat(id);
+			return "redirect:/company/perfil/".concat(idCon);
 		}
 		
 	}
 	
-	@GetMapping("baja/{idJob}/{idCom}")
+	@GetMapping("baja/{idJob}/{idCon}")
 	public String baja(@PathVariable("idJob") String idJob, @PathVariable("idCon") String idCon) {
 		try {
 			jobService.downgradeJob(idJob);

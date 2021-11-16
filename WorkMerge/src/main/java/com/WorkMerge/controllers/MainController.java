@@ -1,31 +1,35 @@
 package com.WorkMerge.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.WorkMerge.services.AdminService;
-import com.WorkMerge.services.ClientService;
-import com.WorkMerge.services.CompanyService;
+import com.WorkMerge.exceptions.ServiceException;
 
 
 @Controller
 @RequestMapping("/")
 public class MainController {
-	
-	@Autowired
-	private CompanyService companyService;
-	
-	@Autowired
-	private ClientService clientService;
-	
-	@Autowired
-	private AdminService adminService;
-	
+		
 	@GetMapping()
 	public String index() {
 		return "index";
 	}
 	
+	@GetMapping("/login")
+	public String login(Model model, @RequestParam(required = false) String error, @RequestParam(required = false) String mail, 
+			@RequestParam(required = false) String logout) throws ServiceException {
+		if (error != null) {
+			model.addAttribute("error", "El usuario ingresado o la contraseña son incorrectas");
+		}
+		
+		if (mail != null) {
+			model.addAttribute("mail", mail);			
+		}
+		
+		return "login/login";
+		
+	}
 }

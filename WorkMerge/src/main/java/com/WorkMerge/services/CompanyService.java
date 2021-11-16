@@ -57,13 +57,13 @@ public class CompanyService implements UserDetailsService {
 
 			// Se crea la sesion y se agrega el cliente a la misma -> FIUMBA
 			HttpSession session = attr.getRequest().getSession(true);
-			session.setAttribute("companysession", company);
+			session.setAttribute("usersession", company);
 			
 			return new User(mail, company.getPassword(), authorities);
 			
 		} catch(Exception e) {
 			
-			throw new UsernameNotFoundException("El admin no existe");
+			throw new UsernameNotFoundException("El compañia no existe");
 			
 		}
 	}
