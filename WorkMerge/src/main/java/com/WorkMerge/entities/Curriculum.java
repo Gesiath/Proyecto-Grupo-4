@@ -34,7 +34,7 @@ public class Curriculum {
 	private City city;
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
-	private Integer phone;
+	private Long phone;
 	private String education;
 	private String workexperience;
 	private String language;
@@ -52,7 +52,7 @@ public class Curriculum {
 	}
 
 	public Curriculum(String id, String name, String surname, Long dni, Gender gender, Nationality nationality,
-			String address, City city, Date birthday, Integer phone, String education,
+			String address, City city, Date birthday, Long phone, String education,
 			String workexperience, String language, String skills) {
 		super();
 		this.id = id;
@@ -143,11 +143,11 @@ public class Curriculum {
 		this.birthday = birthday;
 	}
 
-	public Integer getPhone() {
+	public Long getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(Long phone) {
 		this.phone = phone;
 	}
 

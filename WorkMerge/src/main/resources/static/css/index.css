@@ -10,8 +10,6 @@ body {
     
 }
 
-
-
 section {
      width: 100%;
      margin: 0% auto;
@@ -20,11 +18,10 @@ section {
 
 #cajamadre{
         width: 100%;
-        height: auto%;
+        height: auto;
         position: relative;
         overflow: hidden;
         margin-bottom: 5%;
-
 }
 
 #imagenintro{
@@ -81,30 +78,51 @@ nav{
     font-family: 'Russo One', Arial, Helvetica, sans-serif;
     font-size: 3rem;
     color: white;
+    margin: 25px;
 }
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+
 
 /*------------------footer--------------------------------------------*/
 
 footer{
     background-color: #616160;
+    
+    
 }
 
-footer .titulo-sección{
-    color: black;
+footer .titulo-seccion{
+    color: white;
     font-family: 'Russo One', sans-serif;
+    margin: 25px;
+   
 }
 footer .copy{
     color: black; 
 }
+
 .redes-sociales{
     display: flex;
-    justify-content: right;
+    justify-content: center;
 }
 .redes-sociales i{
     font-size: 30px;
     padding:  20px  ;
 }
 
+.contenedor{
+display: flex;
+justify-content: center;
+}
+
+.loguito{
+    margin: 15px;
+}
 
 
 /*----------------------------------------------------------------------------------*/
@@ -227,6 +245,9 @@ footer .copy{
 
 
 
+
+
+
  .img1{
 	 /* border-radius: 100%; */
     border: 18px solid rgb(255 255 255 / 50%);
@@ -237,7 +258,7 @@ footer .copy{
 .img1:hover {
 
     border: 18px solid rgb(255 255 255 / 50%);
-    background: url(/src/main/resources/static/img/Anunciate!.png) no-repeat;
+    background: white;
     animation-name: animacionimagen1;
     animation-duration: 0.3s;
     animation-timing-function: ease-out;
@@ -247,9 +268,11 @@ footer .copy{
 
     0%{
         
+        size: 10%;
                
 
     }
 
 
 } 
+
