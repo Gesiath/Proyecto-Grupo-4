@@ -10,8 +10,8 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../static/css/index.css" />
-    <link rel="stylesheet" href="../static/css/PerfilCliente.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/index.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/PerfilCliente.css" />
     <title>WorkMerge</title>
   </head>
 
@@ -22,7 +22,7 @@
           <!-- src="/src/main/resources/static/img/LogoColor.png" -->
           <!--src= "../static/img/LogoColor.png"-->
           <img
-            src="../static/img/LogoColor.png"
+            src="/src/main/resources/static/img/LogoColor.png"
             alt="WM"
             width="90"
             height="90"
@@ -42,16 +42,17 @@
         <div class="perfil-usuario-portada">
           <div class="perfil-usuario-avatar">
             <img
-              src="http://localhost/multimedia/relleno/img-c9.png"
+              src="/src/main/resources/static/img/avatar_user.png"
+             
               alt="img-avatar"
             />
             <button type="button" class="boton-avatar">
               <i class="far fa-image"></i>
             </button>
           </div>
-          <button type="button" class="boton-portada">
+<!--           <button type="button" class="boton-portada">
             <i class="far fa-image"></i> Cambiar fondo
-          </button>
+          </button> -->
         </div>
       </div>
       <div class="perfil-usuario-body">
@@ -61,7 +62,7 @@
       </div>
     </section>
 
-    <div class="container">
+    <div class="container-xxl ">
       <!--Botones de error y exito-->
       <div
         th:if="${error}"
@@ -92,11 +93,7 @@
       <div class="card mt-3">
         <div class="card-header d-flex">
           <h1>Mis anuncios</h1>
-          <button class="btn btn-success px-3 py-2 ms-auto">
-            <a class="btn btn-success px-3 py-2 ms-auto" href="trabajo-form"
-              >Crear Anuncio</a
-            >
-          </button>
+            <a class="btn btn-dark px-3 py-2 ms-auto" href="AnuncioEmpresa.html" style="line-height: 4; padding-top: 0 !important; padding-bottom: 0 !important;">Crear Anuncio</a>
         </div>
         <div class="card-body">
           <form class="row g-3" th:action="@{#}" method="GET">
@@ -108,15 +105,15 @@
                 placeholder="Buscar.."
               />
             </div>
-            <div class="col-2">
-              <button type="submit" class="btn btn btn-primary">Buscar</button>
+            <div class="col-1">
+              <button type="submit" class="btn btn btn-dark">Buscar</button>
             </div>
           </form>
-          <table class="table table-success table-striped table-bordered">
+          <table class="table table-dark table-hover table-bordered">
             <thead>
               <tr>
                 <th>Numero</th>
-                <th>Id</th>
+                <!-- <th>Id</th> -->
                 <th>Título</th>
                 <th>Fecha posteo</th>
                 <th>Disponibilidad</th>
@@ -131,7 +128,7 @@
             <tbody>
               <tr th:each="t, iterator : ${trabajos}">
                 <td th:text="${iterator.index+1}"></td>
-                <td th:text="${t.id}"></td>
+                <!-- <td th:text="${t.id}"></td> -->
                 <td th:text="${t.titulo}"></td>
                 <td th:text="${t.fechadepost}"></td>
                 <td th:text="${t.disponibilidad}"></td>
@@ -141,20 +138,19 @@
                 <td th:text="${t.experienciarequerida}"></td>
                 <td th:text="${t.activo}"></td>
                 <td>
-                  <button class="btn btn btn-primary btn-sm">
+                 
                     <a
                       th:href="@{/persona/delete}+'?id='+${p.id}"
-                      class="px-2 py-2"
+                      class="btn btn-secondary btn-sm"
                       >Eliminar</a
                     >
-                  </button>
-                  <button class="btn btn btn-primary btn-sm">
+                  
                     <a
                       th:href="@{/persona/form}+'?id='+${p.id}"
-                      class="px-2 py-2"
+                      class="btn btn-secondary btn-sm"
                       >Editar</a
                     >
-                  </button>
+                  
                 </td>
               </tr>
             </tbody>
@@ -166,20 +162,20 @@
 
     <footer class="container-fluid">
       <div class="contenedor">
-        <h2 class="título-sección">WorkMerge</h2>
+              <img class="loguito" src="/src/main/resources/static/img/isovalenteLogo.png" width="50" height="50">
+              <h2 class="titulo-seccion">WorkMerge</h2>
       </div>
       <div class="redes-sociales">
-        <i class="fab fa-twitter"></i>
-        <i class="fab fa-facebook-f"></i>
-        <i class="fab fa-youtube"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-youtube"></i>
       </div>
       <div class="contenedor">
-        <small class="copy">
-          WorkMerge 2021/Todos los derechos reservados</small
-        >
-        <address class="copy">Argentina</address>
+          <small class="copy"> WorkMerge 2021/Todos los derechos reservados. 
+              <address class="copy2" align= "center">Argentina</address></small>
       </div>
-    </footer>
+  </footer>
+
 
     <script
       src="https://kit.fontawesome.com/bdbed0aafa.js"
