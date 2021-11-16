@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.WorkMerge.entities.Admin;
 import com.WorkMerge.entities.Client;
 import com.WorkMerge.entities.Company;
+import com.WorkMerge.entities.Job;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.services.AdminService;
 
@@ -30,41 +31,43 @@ public class AdminController {
 	private final String viewPath = "admin/";
 	
 	@GetMapping()
+	public String mainAdmin(ModelMap modelo) {		
+		return this.viewPath.concat("MainAdmin");
+	}
+	
+	@GetMapping("/listasAdmin")
 	public String listAdmin(ModelMap modelo) {
 		List<Admin> listAdmin = adminService.listAdmins();
 		modelo.addAttribute("admins", listAdmin);
-		return this.viewPath.concat("list-admin");
+		return this.viewPath.concat("listasAdmin");
 	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@GetMapping("/registro")
 	public String crearAdmin() {
-		return this.viewPath.concat("register-admin");
+		return this.viewPath.concat("crearAdmin");
 	}
 	
-	@GetMapping("/adminEmpresas1")
+	@GetMapping("/adminEmpresas")
 	public String adminEmpresas(ModelMap modelo,@Param("search") String search) {
 		List<Company> listCompanies = adminService.listCompanies();
 		modelo.addAttribute("companies", listCompanies);
-		return this.viewPath.concat("tableroAdminEmpresas");
-		
+		return this.viewPath.concat("tableroAdminEmpresas");		
 	}
 	
-	///@GetMapping("/adminEmpresas2")
-	///public String adminEmpresas(ModelMap modelo, @RequestParam(value = "q", required = false) String q) {
-		
-	///	List<Company> listCompaniesByParam = adminService.listCompanyByParam(q);
-///		modelo.addAttribute("companiesPorParam", listCompaniesByParam);
-//		return this.viewPath.concat("tableroAdminEmpresas");
-		
-//	}
 	
 	@GetMapping("/adminClientes")
-	public String adminClientes(ModelMap modelo) {
-		
-		List<Client>listClients = adminService.listClients();
+	public String adminClientes(ModelMap modelo) {		
+		List<Client> listClients = adminService.listClients();
 		modelo.addAttribute("clients", listClients);
 		return this.viewPath.concat("tableroAdminUsuarios");
+	}
+	
+	@GetMapping("/adminTrabajos")
+	public String adminTrabajos(ModelMap modelo) {		
+		List<Job> listJobs = adminService.listJobs();
+		modelo.addAttribute("jobs", listJobs);
+		return this.viewPath.concat("tableroAdminPost");
 	}
 	
 	@PostMapping("/guardar")
@@ -74,7 +77,7 @@ public class AdminController {
 			return "redirect:/admin";
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			return this.viewPath.concat("register-admin");
+			return this.viewPath.concat("crearAdmin");
 		}
 	}
 	

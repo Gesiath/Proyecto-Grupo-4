@@ -5,44 +5,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/normalize.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-<<<<<<< HEAD
     <link rel="stylesheet" href="../css/index.css"> 
-=======
-    <link rel="stylesheet" href="/src/main/resources/static/css/index.css">
->>>>>>> 28784c1de1de36965ffad82c715baf0bc4d359b4
-
-    <title>WorkMerge | Centro de control Empresas</title>
+    
+	<title>WorkMerge | Centro de control Empresas</title>
 
 </head>
 
 <body>
     <nav class="navbar navbar-light">
-        <div class="container-fluid">
-<<<<<<< HEAD
-            <a class="navbar-brand" href="/">
-                <img src="/img/LogoColor.png" alt="WM" width="90" height="90"
-=======
-            <a class="navbar-brand" href="/src/main/resources/templates/index.html">
-                <img src="/src/main/resources/static/img/LogoColor.png" alt="WM" width="90" height="90"
->>>>>>> 28784c1de1de36965ffad82c715baf0bc4d359b4
-                    class="d-inline-block" />
-                <span class="titulo">WorkMerge </span>
-
-            </a>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-<<<<<<< HEAD
-                <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn btn-outline-light me-md-2">Iniciar sesión</a>
-                <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
-                <a sec:authorize="isAuthenticated()" th:href="@{/admin}" class="btn btn-warning">Volver</a>
+		<div class="container-fluid" style="display:flex">
+			<a class="navbar-brand" href="/">
+				<!-- src="/src/main/resources/static/img/LogoColor.png" -->
+				<!--src= "../static/img/LogoColor.png"-->
+				<img src="../img/LogoColor.png" alt="WM" width="90" height="90" />
+				<!-- class="d-inline-block align-text-top" -->
+				<span class="titulo">WorkMerge</span>
+			</a>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+		
+			<a href="/admin" class="btn btn-dark px-5 py-2 ms-auto">Inicio</a>
+            <a th:href="@{/admin/adminClientes}" class="btn btn-warning">Tabla clientes</a>
+            <a th:href="@{/admin/adminEmpresas}" class="btn btn-warning">Tabla empresas</a>
+            <a th:href="@{/admin/adminTrabajos}" class="btn btn-warning">Tabla trabajos</a>
+			<a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn btn-outline-light me-md-2">Iniciar sesión</a>
+            <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
+        </div>    
+		</div>
+	</nav>
                 
-=======
-                <button class="btn btn-outline-light me-md-2" type="button"><a th:href="@{/login}">Cerrar
-                        sesión</a></button>
->>>>>>> 28784c1de1de36965ffad82c715baf0bc4d359b4
+                
+
             </div>
         </div>
     </nav>
@@ -62,18 +59,14 @@
         <div class="card mt-3">
             <div class="card-header d-flex">
                 <!--dflex p poder alinear el boton a la der-->
-<<<<<<< HEAD
-                <h1>Tablero de Administrador</h1>
+
+                <!--  <h1>Tablero de Administrador</h1> <a th:href="@{/}" class="btn btn-dark px-5 py-2 ms-auto">Inicio</a>-->
                 
                     <!--ms-auto es p alineac del boton-->
-                    <a th:href="@{/}" class="btn btn-dark px-5 py-2 ms-auto">Inicio</a>
-=======
+                    
+
                 <h1>Administrador: Empresas</h1>
-                <button class="btn-dark px-5 py-2 ms-auto">
-                    <!--ms-auto es p alineac del boton-->
-                    <a href="/src/main/resources/templates/admin/MainAdmin.html">Inicio</a>
->>>>>>> 28784c1de1de36965ffad82c715baf0bc4d359b4
-                    <!--le cambie el persona/form y el boton de crear persona-->
+                
                 
             </div>
             <div class="card-body">
@@ -82,30 +75,24 @@
                         <input type="text" style="width: 100%;" class="form-control"  name="search" required placeholder="Buscar..">
                     </div>
                     <div class="col-2">                        
-                        <a th:href="@{/admin/adminEmpresas1}" class="btn btn-dark mb-3" type="submit">Buscar</a>
+                        <a th:href="@{/admin/adminEmpresas}" class="btn btn-dark mb-3" type="submit">Buscar</a>
                     </div>
                 </form>
                 <table class="col-md-8 table table-dark table-hover">
                     <thead>
 
                         <tr>
-<<<<<<< HEAD
+
                             
                             <th>Nombre de companía</th>
                             <th>Id</th>
                             <th>Email</th>
                             <!-- <th>Trabajos de la compañia</th> -->
-=======
-                            <th>Empresas</th>
-                            <th>Numero</th>
-                            <th>Id</th>
-                            <th>Nombre</th>
->>>>>>> 28784c1de1de36965ffad82c715baf0bc4d359b4
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-<<<<<<< HEAD
+
                         <tr th:each="company : ${companies}">
                             
                             
@@ -114,14 +101,7 @@
                             <td th:text="${company.email}"></td>
                             
                             <!-- <td th:text="${company.job}"></td> <tr th:each="job : ${company}"><td> <td th:text="{job.id}"></td> -->
-                            
-=======
-                        <tr th:each="p, iterator : ${personas}">
-                            <td th:text="${' '}"></td>
-                            <td th:text="${iterator.index+1}"></td>
-                            <td th:text="${p.id}"></td>
-                            <td th:text="${p.nombre}"></td>
->>>>>>> 28784c1de1de36965ffad82c715baf0bc4d359b4
+
                             <td>
                                 <a th:href="@{/company/eliminar/{id}(id=${company.id})}"
                                         class="px-5 py-2 btn-dark">Eliminar</a>
@@ -148,40 +128,24 @@
 <br>
 <br>
 <footer class="container-fluid">
-    <div class="contenedor">
-<<<<<<< HEAD
-        <div class="d-flex align-items-center">
-            <img src="../img/isovalenteLogo.png" width="50" height="50">
-            <h2 class="titulo-seccion">WorkMerge</h2>
-        </div>
-        <div class="redes-sociales">
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-facebook-f"></i>
-            <i class="fab fa-youtube"></i>
-        </div>
-        <div class="contenedor">
-            <small class="copy"> WorkMerge 2021/Todos los derechos reservados</small>
-            <address class="copy">Argentina</address>
-        </div>
-        </div>
-=======
+		<div class="contenedor">
 
-        <!--"../static/img/isovalenteLogo.png"-->
-        <img class="loguito" src="/src/main/resources/static/img/isovalenteLogo.png" width="50" height="50">
-        <h2 class="titulo-seccion">WorkMerge</h2>
-    </div>
-    <div class="redes-sociales">
-        <i class="fab fa-twitter"></i>
-        <i class="fab fa-facebook-f"></i>
-        <i class="fab fa-youtube"></i>
-    </div>
-    <div class="contenedor">
-        <small class="copy"> WorkMerge 2021/Todos los derechos reservados.
-            <address class="copy2" align="center">Argentina</address>
-        </small>
-    </div>
->>>>>>> 28784c1de1de36965ffad82c715baf0bc4d359b4
-</footer>
+			<!--"../static/img/isovalenteLogo.png"-->
+			<img class="loguito" src="../img/isovalenteLogo.png" width="50" height="50">
+			<h2 class="titulo-seccion">WorkMerge</h2>
+		</div>
+		<div class="redes-sociales">
+			<i class="fab fa-twitter"></i>
+			<i class="fab fa-facebook-f"></i>
+			<i class="fab fa-youtube"></i>
+		</div>
+		<div class="contenedor">
+			<small class="copy"> WorkMerge 2021/Todos los derechos reservados.
+				<address class="copy2" align="center">Argentina</address>
+			</small>
+		</div>
+		<div class="contenedor"><a th:href="@{/admin}" class="btn btn-danger">Admins entry </a></div>
+	</footer>
 
 
 <script src="https://kit.fontawesome.com/bdbed0aafa.js" crossorigin="anonymous"></script>

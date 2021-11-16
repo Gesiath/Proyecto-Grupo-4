@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>WorkMerge/InicioUser</title>
+    <title>WorkMerge | InicioUser</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/src/main/resources/static/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="/src/main/resources/static/css/InicioCliente.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/main/resources/static/css/index.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link href="../css/InicioCliente.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/index.css">
+    
 </head>
 
 <body>
@@ -19,11 +21,11 @@
 <!--     ------------------NavBar-------------------------------------------- -->
 <nav class="navbar navbar-light">
     <div class="container-fluid" style="display:flex">
-        <a class="navbar-brand" href="/src/main/resources/templates/index.html">
+        <a class="navbar-brand" href="/">
         <!-- src="/src/main/resources/static/img/LogoColor.png" -->
         <!--src= "../static/img/LogoColor.png"-->
             <img 
-                src="/src/main/resources/static/img/LogoColor.png" 
+                src="../img/LogoColor.png" 
                 alt="WM" 
                 width="90" 
                 height="90"                   
@@ -32,8 +34,7 @@
 
         </a>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button class="btn btn-outline-light me-md-2" type="button"><a th:href="@{/login}">Cerrar
-                    sesión</a></button>
+            <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
             <button id="cliente" class="btn btn-warning" type="button"><a th:href="@{/client/form}">Ir a mi perfil</a></button>
         </div>
     </div>
@@ -230,7 +231,7 @@
     <!--------------------Footer---------------------------------------->
     <footer class="container-fluid">
         <div class="contenedor">
-            <img class="loguito" src="/src/main/resources/static/img/isovalenteLogo.png" width="50" height="50">
+            <img class="loguito" src="../img/isovalenteLogo.png" width="50" height="50">
             <h2 class="titulo-seccion">WorkMerge</h2>
         </div>
         <div class="redes-sociales">
