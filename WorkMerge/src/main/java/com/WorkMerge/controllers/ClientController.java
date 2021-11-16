@@ -74,5 +74,17 @@ public class ClientController {
 			return "redirect:/";
 		}
 		
+		
+	}
+	@GetMapping("/eliminar/{id}")
+	public String deleteClint(@PathVariable("id") String id) {
+		try {
+			clientService.delete(id);
+			return "redirect:/admin/adminClientes";
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return "redirect:/admin";
+		}
+		
 	}
 }

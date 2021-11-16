@@ -25,7 +25,11 @@ public class CompanyController {
 	@Autowired
 	private CompanyService companyService;
 	
+<<<<<<< HEAD
 	@Autowired 
+=======
+	@Autowired
+>>>>>>> 9f9fe2c0447620aa9b67f4b2c7d60133b8af3177
 	private JobService jobService;
 	
 	private final String viewPath = "empresa/";
@@ -93,8 +97,25 @@ public class CompanyController {
 	@GetMapping("/delete/{id}")
 	public String deleteJob(@PathVariable("id") String id) {
 		try {
+<<<<<<< HEAD
 			jobService.deleteJob(id);
 			return "redirect:/company/perfil/".concat(id);
+=======
+			companyService.deleteCompany(id);
+			return "redirect:/admin/adminEmpresas";
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return "redirect:/admin";
+		}
+		
+	}
+	
+	@GetMapping("/eliminarTrabajo/{id}")
+	public String deleteJob(@PathVariable("id") String id) {
+		try {
+			jobService.deleteJob(id);
+			return "redirect:/admin/adminEmpresas";
+>>>>>>> 9f9fe2c0447620aa9b67f4b2c7d60133b8af3177
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			return "redirect:/admin";
