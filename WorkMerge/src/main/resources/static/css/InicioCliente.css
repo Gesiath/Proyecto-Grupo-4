@@ -4613,11 +4613,28 @@ textarea.form-control-lg {
 .card-img-bottom {
   width: 100%;
 }
-
+/*------------------------------------------*/
 .card-img,
 .card-img-top {
-  border-top-left-radius: calc(0.25rem - 1px);
-  border-top-right-radius: calc(0.25rem - 1px);
+
+  /* border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px); */
+  display: flex;
+  width: 180px;
+  height: 180px;
+  align-items: center;
+  justify-content: center;
+  border: 7px solid #FFFFFF;
+  background-color: #DFE5F2;
+  border-radius: 50%;
+  /* box-shadow: 0 0 12px rgba(0, 0, 0, .2); */
+  /* position: absolute; */
+  bottom: -40px;
+  left: calc(50% - 90px);
+  z-index: 1;
+  margin-left: 1em;
+  margin-top: 1em;
+
 }
 
 .card-img,
