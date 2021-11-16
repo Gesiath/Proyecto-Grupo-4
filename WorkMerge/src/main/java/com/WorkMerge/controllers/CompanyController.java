@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.WorkMerge.entities.Company;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.services.CompanyService;
+import com.WorkMerge.services.JobService;
 
 @Controller
 @RequestMapping("/company")
@@ -21,6 +22,9 @@ public class CompanyController {
 	
 	@Autowired
 	private CompanyService companyService;
+	
+	@Autowired
+	private JobService jobService;
 	
 	private final String viewPath = "empresa/";
 	
@@ -88,7 +92,19 @@ public class CompanyController {
 	public String deleteCompany(@PathVariable("id") String id) {
 		try {
 			companyService.deleteCompany(id);
+			return "redirect:/admin/adminEmpresas";
+		} catch (ServiceException e) {
+			e.printStackTrace();
 			return "redirect:/admin";
+		}
+		
+	}
+	
+	@GetMapping("/eliminarTrabajo/{id}")
+	public String deleteJob(@PathVariable("id") String id) {
+		try {
+			jobService.deleteJob(id);
+			return "redirect:/admin/adminEmpresas";
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			return "redirect:/admin";

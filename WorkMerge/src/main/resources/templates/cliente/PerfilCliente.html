@@ -5,20 +5,31 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>WorkMerge | Perfil Cliente</title>
+<<<<<<< HEAD
         <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+=======
+        <link rel="stylesheet" href="../css/normalize.css">
+>>>>>>> 9f9fe2c0447620aa9b67f4b2c7d60133b8af3177
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         
  
+<<<<<<< HEAD
         <link rel="stylesheet" href="/src/main/resources/static/css/index.css">
         <link rel="stylesheet" href="/src/main/resources/static/css/PerfilCliente.css">
         <link  rel="icon"   href="/src/main/resources/static/favicon.ico" type="image.ico"/>
+=======
+        <link rel="stylesheet" href="../css/index.css">
+        <link rel="stylesheet" href="../css/PerfilCliente.css">
+        <link  rel="icon"   href="../favicon.ico" type="image.ico"/>
+>>>>>>> 9f9fe2c0447620aa9b67f4b2c7d60133b8af3177
     </head>
 
 <body>
 
 <!--     ------------------NavBar-------------------------------------------- -->
+<<<<<<< HEAD
     <nav class="navbar navbar-light">
         <div class="container-fluid" style="display:flex">
             <a class="navbar-brand" href="/">
@@ -35,6 +46,28 @@
             </a>
         </div>
     </nav>
+=======
+<nav class="navbar navbar-light">
+    <div class="container-fluid" style="display:flex">
+        <a class="navbar-brand" href="/">
+        <!-- src="/src/main/resources/static/img/LogoColor.png" -->
+        <!--src= "../static/img/LogoColor.png"-->
+            <img 
+                src="../img/LogoColor.png" 
+                alt="WM" 
+                width="90" 
+                height="90"                   
+             /> <!-- class="d-inline-block align-text-top" -->
+            <span class="titulo">WorkMerge</span>
+
+        </a>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
+            <button id="cliente" class="btn btn-warning" type="button"><a th:href="@{/client/form}">Volver a inicio </a></button>
+        </div>
+    </div>
+</nav>
+>>>>>>> 9f9fe2c0447620aa9b67f4b2c7d60133b8af3177
 
 
 
@@ -62,6 +95,12 @@
                 <h3 class="name">APELLIDO</h3>
 
             </div>
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 9f9fe2c0447620aa9b67f4b2c7d60133b8af3177
             <div class="perfil-usuario-footer">
                 <ul class="lista-datos">
                     <li><i class="icono fas fa-address-card"></i> Documento:</li>
@@ -108,9 +147,24 @@
                 </ul>
             </div>
 
+<<<<<<< HEAD
      
         </div>
     </section>
+=======
+            <br>
+
+        </div>
+       
+ 
+    </section>
+    <br>
+     
+    <button>
+        <a id= "cliente" th:href="@{/client/form}" class="btn btn-light">Editar Información</a>
+    </button>
+                            
+>>>>>>> 9f9fe2c0447620aa9b67f4b2c7d60133b8af3177
 
 
     <br>
@@ -120,7 +174,11 @@
 <!--------------------Footer---------------------------------------->
     <footer class="container-fluid">
         <div class="contenedor">
+<<<<<<< HEAD
                 <img class="loguito" src="/src/main/resources/static/img/isovalenteLogo.png" width="50" height="50">
+=======
+                <img class="loguito" src="../img/isovalenteLogo.png" width="50" height="50">
+>>>>>>> 9f9fe2c0447620aa9b67f4b2c7d60133b8af3177
                 <h2 class="titulo-seccion">WorkMerge</h2>
         </div>
         <div class="redes-sociales">
@@ -138,6 +196,12 @@
 
 
 
+<<<<<<< HEAD
+=======
+ 
+
+
+>>>>>>> 9f9fe2c0447620aa9b67f4b2c7d60133b8af3177
 
 
     <script src="https://kit.fontawesome.com/bdbed0aafa.js" crossorigin="anonymous"></script>
@@ -150,4 +214,10 @@
 
     
 </body>
+<<<<<<< HEAD
 </html>
+=======
+
+</html>
+
+>>>>>>> 9f9fe2c0447620aa9b67f4b2c7d60133b8af3177
