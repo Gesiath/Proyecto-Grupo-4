@@ -8,4 +8,9 @@ public class ServiceException extends Exception{
 		super(msn);
 	}
 
+	public void getMessage(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

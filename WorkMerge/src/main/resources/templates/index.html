@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,6 @@
 
 
 
-<<<<<<< HEAD
 
     <link rel="stylesheet" href="css/index.css">
 
@@ -152,10 +151,10 @@
 
             </a>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a th:href="@{/login}" class="btn btn-outline-light me-md-2">Iniciar
-                        sesión</a>
-                <a th:href="@{/client/form}" class="btn btn-warning">Registrarse como cliente </a>
-                <a th:href="@{/company/form}" class="btn btn-warning">Registrarse como empresa</a>
+                <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn btn-outline-light me-md-2">Iniciar sesión</a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
+                <a sec:authorize="!isAuthenticated()" th:href="@{/client/form}" class="btn btn-warning">Registrarse como cliente </a>
+                <a sec:authorize="!isAuthenticated()" th:href="@{/company/form}" class="btn btn-warning">Registrarse como empresa</a>
             </div>
         </div>
     </nav>
@@ -251,10 +250,11 @@
             <i class="fab fa-facebook-f"></i>
             <i class="fab fa-youtube"></i>
         </div>
-        <div class="contenedor">
+        <div class="contenedor">        
             <small class="copy"> WorkMerge 2021/Todos los derechos reservados</small>
             <address class="copy">Argentina</address>
         </div>
+        <div class="contenedor"><a th:href="@{/admin}" class="btn btn-danger">Admins entry </a></div>
     </footer>
 
     <script src="https://kit.fontawesome.com/bdbed0aafa.js" crossorigin="anonymous"></script>

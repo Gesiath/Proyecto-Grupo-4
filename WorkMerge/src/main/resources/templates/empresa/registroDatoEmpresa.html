@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,7 +11,7 @@
       crossorigin="anonymous"
     />
     <!-- <link rel="stylesheet" href="/src/main/resources/static/css/index.css"> -->
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="/css/index.css">
 
     <title>WorkMerge | Datos Empresa</title>
 
@@ -20,10 +20,10 @@
      <nav class="navbar navbar-light">
         <div class="container-fluid">
             <div>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/">
                 <!-- src="/src/main/resources/static/img/LogoColor.png" -->
                       <img
-                        src="../img/LogoColor.png"
+                        src="/img/LogoColor.png"
                         alt="WM"
                         width="30"
                         height="24"
@@ -47,11 +47,11 @@
             </div>
             <div class="card-body">
               <form
-                th:action="@{#}"
+                th:action="@{/company/saveCom/{id}(id=${company.id})}"
                 method="POST"                
                 class="col-6 mx-auto"
               >
-                <input hidden th:field="*{id}" />
+                <!-- <input hidden th:field="*{id}" /> -->
     
                 <div class="mb-3">
                   <label for="nombre" class="form-label">Nombre</label>
@@ -59,6 +59,7 @@
                     type="text"
                     class="form-control"                    
                     placeholder="Nombre"
+                    name="name"
                   />
                 </div>
                 <br>           
@@ -85,6 +86,7 @@
                 <small class="copy"> WorkMerge 2021/Todos los derechos reservados</small>
                 <address class="copy">Argentina</address>
              </div>
+             <div class="contenedor"><a th:href="@{/admin}" class="btn btn-danger">Admins entry </a></div>
         </div>   
     
     </footer>

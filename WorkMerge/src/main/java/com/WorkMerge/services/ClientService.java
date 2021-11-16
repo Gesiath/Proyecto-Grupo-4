@@ -1,9 +1,17 @@
 package com.WorkMerge.services;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -19,7 +27,7 @@ import com.WorkMerge.repositories.ClientRepository;
 
 
 @Service
-public class ClientService {
+public class ClientService implements UserDetailsService {
 	
 	@Autowired
 	private ClientRepository clientRepository;
@@ -147,7 +155,29 @@ public class ClientService {
 			throw new ServiceException("Ya existe un usuario registrado con ese email.");
 		}	
 	}
+
+	@Override
+	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+		
+		try {
+			Client client = clientRepository.findByEmail(mail);
+			
+			List<GrantedAuthority> authorities = new ArrayList<>();
+			
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + client.getRol()));
+			
+			return new User(mail, client.getPassword(), authorities);
+		} catch(Exception e) {
+			
+			throw new UsernameNotFoundException("El usuario no existe");
+			
+		}
+		
+		
+		
+		
 	}
+}
 	
 	
 
