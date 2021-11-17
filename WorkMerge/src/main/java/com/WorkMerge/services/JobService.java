@@ -126,6 +126,11 @@ public class JobService {
 		}
 
 	}
+	//LISTAR TRABAJOS ACTIVOS
+		public List<Job> listActives(){
+			return jobRepository.findActive();
+		}
+
 	
 	//VALIDACION
 	public void validate(String title, Date datepost, String availability, String category, String description,Integer salary, String experienceRequired)throws ServiceException{

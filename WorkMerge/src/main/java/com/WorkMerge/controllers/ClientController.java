@@ -2,22 +2,21 @@ package com.WorkMerge.controllers;
 
 
 import java.text.ParseException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
 import com.WorkMerge.entities.Client;
+import com.WorkMerge.entities.Job;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.services.ClientService;
+import com.WorkMerge.services.JobService;
 
 @Controller
 @RequestMapping("/client")
@@ -26,12 +25,35 @@ public class ClientController {
 	@Autowired
 	private ClientService clientService;
 	
+	@Autowired
+	private JobService jobService;
+	
 	private final String viewPath = "cliente/";
 	
 	@GetMapping("/form")
 	public String register() {
 		return this.viewPath.concat("registroInicialCliente");
 	}
+	
+	@GetMapping("/perfilCli/{id}")
+	public String perfilClient (@PathVariable("id") String id, ModelMap modelo)	{
+		try {
+			Client c = clientService.obtenerPorId(id);
+			modelo.addAttribute("client", c);	
+			return this.viewPath.concat("PerfilCliente");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return "index";
+		}
+	}	
+
+	@GetMapping("/hubCli/{id}")
+	public String inicioClient (@PathVariable("id") String id, ModelMap modelo)	{
+		List<Job> jobs = jobService.listActives();
+		modelo.addAttribute("jobs",jobs);
+		return this.viewPath.concat("InicioCliente");
+	}
+	
 	 
 	@PostMapping("/save")
 	public String createClient(@RequestParam("email") String email, @RequestParam("password") String password,

@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/login")
 public class LoginController {
 	
-	@GetMapping("")
-	public String login(Model model, @RequestParam(required = false) String error, @RequestParam(required = false) String mail, 
-			@RequestParam(required = false) String logout) {
-		if (error != null) {
-			model.addAttribute("error", "El usuario ingresado o la contraseña son incorrectas");
-		}
-		
-		if (mail != null) {
-			model.addAttribute("mail", mail);
-		}
-		
-		return "login/login";
-	}
+	//@GetMapping("")
+//	public String login(Model model, @RequestParam(required = false) String error, @RequestParam(required = false) String mail, 
+//			@RequestParam(required = false) String logout) {
+//		if (error != null) {
+//			model.addAttribute("error", "El usuario ingresado o la contraseña son incorrectas");
+//		}
+//		
+//		if (mail != null) {
+//			model.addAttribute("mail", mail);
+//		}
+//		
+//		return "login/login";
+//	}
 	
 }
