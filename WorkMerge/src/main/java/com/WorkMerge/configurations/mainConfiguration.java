@@ -36,15 +36,13 @@ public class mainConfiguration extends WebSecurityConfigurerAdapter{
 		auth.userDetailsService(adminService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
-
-	
 	//Configuracion de las peticiones http
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
 				.antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll()
-				.and().formLogin()
+			.and().formLogin()
 				.loginPage("/login")
 				.usernameParameter("mail")
 				.passwordParameter("password")
