@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<html
-  lang="es"
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:th="http://www.thymeleaf.org"
->
+<html lang="es" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+	<link rel="stylesheet" href="../css/normalize.css">
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -17,9 +13,10 @@
     />
 
     <!--<link rel="stylesheet" href="../static/css/index.css">-->
-    <link rel="stylesheet" href="/src/main/resources/static/css/index.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/css/index.css " />
+    
 
-    <title>WorkMerge</title>
+    <title>WorkMerge | Registro Admin</title>
   </head>
 
   <body>
@@ -29,13 +26,18 @@
           <!-- src="/src/main/resources/static/img/LogoColor.png" -->
           <!--src= "../static/img/LogoColor.png"-->
           <img
-          src="/src/main/resources/static/img/LogoColor.png"
+          src="../img/LogoColor.png"
             alt="WM"
             width="90"
             height="90"
           />
           <span class="titulo">WorkMerge</span>
         </a>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a sec:authorize="isAuthenticated()" th:href="@{/admin}" class="btn btn-warning">Volver</a>
+                <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn btn-outline-light me-md-2">Iniciar sesión</a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
+                </div>
       </div>
     </nav>
 <br>
@@ -46,39 +48,33 @@
       <div class="card mt-5">
         <div class="card-header d-flex">
           <h1>Crear Administrador</h1>
-          <a class="px-4 py-2  btn btn-dark ms-auto" href="/src/main/resources/templates/admin/listasAdmin.html">Volver</a>
           
         </div>
         <div class="card-body">
           <form
-            th:action="@{#}"
+            th:action="@{/admin/guardar}"
             method="POST"
-            th:object="${#}"
             class="col-6 mx-auto"
-          >
-            <input hidden th:field="*{id}" />
-            <div class="mb-3">
-              <label for="nombre" class="form-label">Nombre</label>
-              <input
-                type="text"
-                class="form-control"
-                th:field="*{nombre}"
-                placeholder="Nombre"
-              />
+          >            
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Email</label>
+                <input type="text" class="form-control" name="email" placeholder="Email" requiered>
             </div>
-            <div class="mb-3">
-              <label for="apellido" class="form-label">Email</label>
-              <input
-                type="email"
-                class="form-control"
-                th:field="*{email}"
-                placeholder="Email"
-              />
+			<br>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">NickName</label>
+                <input type="text" class="form-control" name="nickname" placeholder="Nick Name" requiered>
             </div>
-            <button type="submit" class="btn btn-dark px-5 py-2 ms-auto">
-              Registrar
-            </button>
-          </form>
+			<br>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Password" requiered>
+            </div>
+			<br>
+            <div>
+                <button type="submit" class="btn btn-secondary btn-lg">Registrar</button>
+            </div>
+        </form>
         </div>
       </div>
     </div>
@@ -98,7 +94,7 @@
         <img
           class="loguito"
      
-          src="/src/main/resources/static/img/isovalenteLogo.png"
+          src="../img/isovalenteLogo.png"
           width="50"
           height="50"
         />
@@ -115,6 +111,7 @@
           <address class="copy2" align="center">Argentina</address></small
         >
       </div>
+      <div class="contenedor"><a th:href="@{/admin}" class="btn btn-danger">Admins entry </a></div>
     </footer>
 
     <script
