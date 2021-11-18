@@ -7,12 +7,12 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>WorkMerge | InicioUser</title>
+    <link rel="stylesheet" href="/css/normalize.css">
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/src/main/resources/static/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link href="../css/InicioCliente.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/index.css">
+    <link href="/css/InicioCliente.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/index.css">
     
 </head>
 
@@ -25,7 +25,7 @@
         <!-- src="/src/main/resources/static/img/LogoColor.png" -->
         <!--src= "../static/img/LogoColor.png"-->
             <img 
-                src="../img/LogoColor.png" 
+                src="/img/LogoColor.png" 
                 alt="WM" 
                 width="90" 
                 height="90"                   
@@ -73,23 +73,38 @@
 
                 <!-- Nested row for non-featured blog posts-->
                 <div class="row">
-                <div th:each="job : ${jobs}"> 
-                    <div class="col-lg-6">
+                <div th:each="job : ${jobs}" class="col-lg-6"> 
+                    
                         
                         <!-- Blog post-->
-                        <div class="card mb-4">
-                            <img class="card-img-top"
-                                    src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." />
-                            <div class="card-body" >
-                                <div class="small text-muted" th:text="${job.datepost}"></div>
-                                <h2 class="card-title h4" th:text="${job.title}"></h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Reiciendis aliquid atque, nulla.</p>
-                               
-                            </div>
-                        </div>
-                    </div>
-                  </div>
+						<div class="card mb-4">
+
+							<img class="card-img-top"
+								src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." />
+							<div class="card-body">
+
+								<div class="small text-muted" th:text="${job.datepost}"></div>
+								
+								<h2 class="card-title" th:text="${job.title}"></h2>
+								<hr>
+								<label class="h4">Disponibilidad:</label>
+								<p class="card-text h5" th:text="${job.availability}"></p>
+								<hr>
+								<label class="h4">Categoria:</label>
+								<p class="card-text" th:text="${job.category}"></p>
+								<hr>
+								<label class="h4">Salario:</label>
+								<p class="card-text" th:text="${job.salary}"></p>
+								<hr>
+								<label class="h4">Experiencia Requerida:</label>
+								<p class="card-text" th:text="${job.experienceRequired}"></p>
+								<hr>
+								<label class="h4"><b>Descripción:</b></label>
+								<p class="card-text" th:text="${job.description}" ></p>
+							</div>
+						</div>
+
+					</div>
               </div>   
                       
                       
@@ -204,7 +219,7 @@
     <!--------------------Footer---------------------------------------->
     <footer class="container-fluid">
         <div class="contenedor">
-            <img class="loguito" src="../img/isovalenteLogo.png" width="50" height="50">
+            <img class="loguito" src="/img/isovalenteLogo.png" width="50" height="50">
             <h2 class="titulo-seccion">WorkMerge</h2>
         </div>
         <div class="redes-sociales">
