@@ -565,6 +565,7 @@ progress {
   
   padding-left: 1rem;
   list-style: none;
+  
 }
 
 .list-inline {
@@ -11318,8 +11319,46 @@ textarea.form-control-lg {
     font-family: 'Russo One', Arial, Helvetica, sans-serif;
     font-size: 3rem;
     color: white;
+} }
+
+
+#categ{
+  color: black;
+  text-decoration: none;
+  display:block !important;
+  -webkit-transition:-webkit-transform 0.5s ease-out;
+  -moz-transition:-moz-transform 0.5s ease-out;
+  -o-transition:-o-transform 0.5s ease-out;
+  -ms-transition:-ms-transform 0.5s ease-out;
+  transition:transform 0.5s ease-out;
+  }
+
+  #categ:hover{
+   color: #5c636a; 
+  -moz-transform: scale(2.2);
+  -webkit-transform: scale(2.2);
+  -o-transform: scale(2.2);
+  -ms-transform: scale(2.2);
+  transform: scale(1.5)
+  }
+
+  .seccion-perfil-usuario .perfil-usuario-avatar {
+    display: flex;
+    width: 180px;
+    height: 180px;
+    align-items: center;
+    justify-content: center;
+    border: 7px solid #FFFFFF;
+    background-color: #DFE5F2;
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+    position: absolute;
+    bottom: -40px;
+    left: calc(50% - 90px);
+    z-index: 1;
 }
 
-
-
+#lista__desordenada{
+  margin-top: 1rem;
 }
+
