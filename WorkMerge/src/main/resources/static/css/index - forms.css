@@ -7,10 +7,13 @@
 
 body {
     font-family: 'Times New Roman', Times, serif;
-    heigh: 10px;
-    background-image: url("/src/main/resources/static/img/briefcase.jpg");
-    background-repeat: repeat;
-    background-size: 7rem;
+    height: 10px;
+
+    
+    background-image: url("/src/main/resources/static/img/image-from-rawpixel-id-555782-jpeg.jpg");  
+    background-attachment: fixed;
+    background-size: 100%;
+    
 }
 
 section {
