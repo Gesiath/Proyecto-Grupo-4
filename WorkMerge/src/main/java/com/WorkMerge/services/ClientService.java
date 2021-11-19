@@ -18,12 +18,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-<<<<<<< HEAD
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-=======
 import org.springframework.web.multipart.MultipartFile;
->>>>>>> 71396690629607d3dd3b96cd2ad3a163ed5bd731
+
 
 import com.WorkMerge.entities.Client;
 import com.WorkMerge.entities.Curriculum;
