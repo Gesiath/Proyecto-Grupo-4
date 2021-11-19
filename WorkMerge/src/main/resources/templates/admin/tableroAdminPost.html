@@ -92,17 +92,26 @@
                       <tr th:each="t, iterator : ${jobs}">
                         <td th:text="${iterator.index+1}"></td>
                         <td th:text="${t.id}"></td>
-                        <td th:text="${t.titulo}"></td>
-                        <td th:text="${t.fechadepost}"></td>
-                        <td th:text="${t.disponibilidad}"></td>
-                        <td th:text="${t.categoria}"></td>
-                        <td th:text="${t.descripcion}"></td>
-                        <td th:text="${t.salario}"></td>
-                        <td th:text="${t.experienciarequerida}"></td>
-                        <td th:text="${t.activo}"></td>
+                        <td th:text="${t.title}"></td>
+                        <td th:text="${t.datepost}"></td>
+                        <td th:text="${t.availability}"></td>
+                        <td th:text="${t.category}"></td>
+                        <td th:text="${t.description}"></td>
+                        <td th:text="${t.salary}"></td>
+                        <td th:text="${t.experienceRequired}"></td>
+                        <td th:text="${t.active}"></td>
                         <td>
                           
-                            <a
+                            
+                              
+                              <a class="btn btn-outline-light me-md-2" th:href="@{/admin/alta/{id}(id=${t.id}}">
+									ALTA
+								</a>
+								<a class="btn btn-outline-light me-md-2" th:href="@{/admin/baja/{id}(id=${t.id}}">
+									BAJA
+								</a>
+								
+								<a
                               th:href="@{/company/eliminarTrabajo/{id}(id=${t.id})}"
                               class="btn btn btn-primary btn-sm px-2 py-2"
                               >Eliminar</a>

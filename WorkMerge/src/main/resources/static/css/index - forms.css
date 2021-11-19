@@ -7,6 +7,12 @@
 
 body {
     font-family: 'Times New Roman', Times, serif;
+    height: 10px;
+
+    
+    background-image: url("../img/image-from-rawpixel-id-555782-jpeg.jpg");  
+    background-attachment: fixed;
+    background-size: 100%;
     
 }
 
@@ -236,80 +242,53 @@ justify-content: center;
 }
 
 
-/*---------------------------img--------------------------------------------------*//*---------------------------img--------------------------------------------------*//*---------------------------img--------------------------------------------------*//*---------------------------img--------------------------------------------------*/
-/*---------------------------img--------------------------------------------------*/
-/*---------------------------img--------------------------------------------------*/
+/*----------------------------------------------------------------------------------*/
 
 
 .ImagenCentro{
-    
-	
+	display: flex;
 	justify-content: center;
     height: 400px;
     width: 400px;
 
-    display: flex;
-    position: relative;
-    
-    
 }
 
 
 
-.contenedor:hover .imagen {-webkit-transform:scale(1.3);transform:scale(1.3);}
-
-.contenedor {overflow:hidden;}
 
 
 
- .sobre{
-	
+ .img1{
+	 /* border-radius: 100%; */
     border: 18px solid rgb(255 255 255 / 50%);
-    overflow: hidden;
-    position: sticky;
-
+ 
 
 }
 
+.img1:hover {
 
-
-/*------------------------img2 debajo ----------------------------------*/
-
-
-
-.debajo{
-	
-    opacity: 0%;
     border: 18px solid rgb(255 255 255 / 50%);
-
-    height: 400px;
-    width: 400px;
-
-    bottom: 2px;
-    /* left: 5px; */
-    
-    display: flex;
-    position: absolute;
-
+    background: white;
+    animation-name: animacionimagen1;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-out;
 }
 
-.debajo:hover {
-    opacity: 100%;
-    animation-name: animacionimagen2;
-    animation-duration: 0.4s;
-    animation-timing-function: ease-in;
-    animation-fill-mode: forwards; /* La animacion persiste en su ultimo key frame */
-
+.card-header{
+    background: #F6A713;
+    border: 2px solid black
 }
 
-@keyframes animacionimagen2 {
+.card-body{
+    border: 2px solid black
+}
 
-    100%{
+@keyframes animacionimagen1 {
+
+    0%{
         
         size: 10%;
-        box-shadow: 0px 0px 15px 15px #ec731e;
-        webkit-box-shadow: 0px 0px 15px 15px #ec731e;
-        opacity: 100%;
+               
 
     }
 
