@@ -133,6 +133,11 @@ public class JobService {
 		public List<Job> listActives(){
 			return jobRepository.findActive();
 		}
+	
+		//LISTAR TRABAJOS ACTIVOS
+				public List<Job> findActiveByQ(String q){
+					return jobRepository.findActiveByQ("%"+q+"%");
+				}
 
 	
 	//OBETER EMPLEO POR ID

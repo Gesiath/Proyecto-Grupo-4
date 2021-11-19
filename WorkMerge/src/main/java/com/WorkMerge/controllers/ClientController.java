@@ -48,11 +48,19 @@ public class ClientController {
 	}	
 
 	@GetMapping("/hubCli/{id}")
-	public String inicioClient (@PathVariable("id") String id, ModelMap modelo)	{
-		List<Job> jobs = jobService.listActives();
-		modelo.addAttribute("jobs",jobs);
+	public String inicioClient (@PathVariable("id") String id, ModelMap modelo,@RequestParam(required = false) String q)	{
+		
+
+		if(q != null) {
+			modelo.addAttribute("jobs", jobService.findActiveByQ(q));
+		}else {
+			List<Job> jobs = jobService.listActives();
+			modelo.addAttribute("jobs",jobs);
+			modelo.addAttribute("jobs", jobService.listActives());
+		}
 		return this.viewPath.concat("InicioCliente");
 	}
+	
 	
 	 
 	@PostMapping("/save")
