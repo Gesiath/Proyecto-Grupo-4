@@ -62,7 +62,7 @@ public class ClientController {
 		}
 		return this.viewPath.concat("InicioCliente");
 	}
-	 
+	
 	@PostMapping("/save")
 	public String createClient(@RequestParam("email") String email, @RequestParam("password") String password,
 			@RequestParam("password2") String password2,@RequestParam("photo") MultipartFile file) {

@@ -39,8 +39,9 @@
 
         </a>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        	<a th:href="@{/client/hubCli/}+${session.usersession.id}" class="btn btn-warning">Volver a inicio </a>
             <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
-            <a th:href="@{/client/hubCli/}+${session.usersession.id}" class="btn btn-warning">Volver a inicio </a>
+            
         </div>
     </div>
 </nav>
@@ -53,14 +54,16 @@
         <div class="perfil-usuario-header">
             <div class="perfil-usuario-portada">
                 <div class="perfil-usuario-avatar">
+
                     <img  src="/img/avatar_user.png" alt="img-avatar">
+
                     <button type="button" class="boton-avatar">
                         <i class="far fa-image"></i>
                     </button>
                 </div>
-                <button type="button" class="boton-portada">
+<!--                 <button type="button" class="boton-portada">
                     <i class="far fa-image"></i> Cambiar fondo
-                </button>
+                </button> -->
             </div>
         </div>
 
@@ -94,42 +97,33 @@
                     <p th:text="${client.curriculum.phone}"></p>
                 <li><i class="icono fas fa-envelope"></i> Email</li> 
                      <p th:text="${client.email}"></p>
+
                 </ul>
             </div>
             
        
 
             <div class="perfil-usuario-strings">  
-                <h3>Educación</h3>
-                <ul >
-                    <br>
-                    <li><p th:text="${client.curriculum.education}"></p></li>
-                </ul>
+                <h3>Educación</h3>                
+                <div class="perfil-usuario-strings2"><p th:text="${client.curriculum.education}"></p></div>
             </div>
 
             <div class="perfil-usuario-strings">
-                <h3>Experiencia laboral</h3>
-                <ul >
-                    <br>
-                    <li><p th:text="${client.curriculum.workexperience}"></p></li>
-                </ul>
+                <h3>Experiencia laboral</h3>                
+                <div class="perfil-usuario-strings2"><p th:text="${client.curriculum.workexperience}"></p></div>
             </div>
 
-            <div class="perfil-usuario-strings">
+            <div class="perfil-usuario-strings">                
                 <h3>Idiomas</h3>
-                <ul >
-                    <br>
-                    <li><p th:text="${client.curriculum.language}"></p></li>
-                </ul>
+           		<div class="perfil-usuario-strings2"><p th:text="${client.curriculum.language}"></p></div>
             </div>
 
             <div class="perfil-usuario-strings">
-                <h3>Habilidades informáticas</h3>
-                <ul >
-                    <br>
-                     <li><p th:text="${client.curriculum.skills}"></p></li>
-                </ul>
+             	<h3>Habilidades informáticas</h3>
+           		<div class="perfil-usuario-strings2"><p th:text="${client.curriculum.skills}"></p></div>               	
+                
             </div>
+            
 
             <br>
 
@@ -138,10 +132,11 @@
     </section>
     <br>
      
-    <button>
-        <a id= "cliente" th:href="@{/client/form}" class="btn btn-light">Editar Información</a>
+
+    <button style="display:block; margin-left: auto; margin-right: auto;">
+        <a id= "cliente" th:href="@{/client/form}" class="btn btn-light">Editar información</a>
     </button>
-                            
+       
 
     <br>
     <br>
@@ -162,7 +157,7 @@
         </div>
         <div class="contenedor">
             <small class="copy"> WorkMerge 2021/Todos los derechos reservados. 
-                <address class="copy2" align= "center">Argentina</address></small>
+                <address class="copy2" style="text-align: center;">Argentina</address></small>
         </div>
 
     </footer>
