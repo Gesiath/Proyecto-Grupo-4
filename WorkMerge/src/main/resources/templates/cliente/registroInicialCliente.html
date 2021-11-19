@@ -47,7 +47,7 @@
             <div class="card-header d-flex">
               <h1>Registrarse con sus datos</h1>
             </div>
-            <form th:action="@{/client/save}" class="px-4 py-3" method="POST">
+            <form th:action="@{/client/save}" class="px-4 py-3" method="POST" enctype="multipart/form-data">
             <div class="card-body">
               
                   
@@ -78,6 +78,16 @@
                     placeholder="Repita su contraseña"
                   />
                 </div>
+                
+                <div class="mb-3">
+                    		<label for="Photo">Foto* - Máximo 1MB</label>
+                   <input
+                   		 
+                   		type="file" 
+                   		class="form-control" 
+                   		name="photo" 
+                   		th:value="${photo}" >
+                </div>	
       
                   <button type="submit" class="btn btn-dark">
                     Registrarme

@@ -18,8 +18,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+<<<<<<< HEAD
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+=======
+import org.springframework.web.multipart.MultipartFile;
+>>>>>>> 71396690629607d3dd3b96cd2ad3a163ed5bd731
 
 import com.WorkMerge.entities.Client;
 import com.WorkMerge.entities.Curriculum;
@@ -37,11 +41,13 @@ public class ClientService implements UserDetailsService {
 	private ClientRepository clientRepository;
 	
 	@Autowired
+	private PhotoService photoService;
+	@Autowired
 	private CurriculumService curriculumService;
 
 	//REGISTRAR CLIENTE
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })//Transactional (se pone porque cambia algo en la base de datos)
-	public Client registerClient(String email, String password,String password2) throws ServiceException{ //BUSCAMOS UNA CLIENTE Y DEVOLVEMOS UN OPTIONAL
+	public Client registerClient(String email, String password,String password2,MultipartFile file) throws ServiceException{ //BUSCAMOS UNA CLIENTE Y DEVOLVEMOS UN OPTIONAL
 		validar(email,password,password2);
 		
 		Client cliente = new Client();
@@ -50,6 +56,10 @@ public class ClientService implements UserDetailsService {
 			cliente.setPassword(encript);
 			cliente.setRol(Rol.CLIENT);
 			cliente.setActive(true);
+			
+			Photo photo = photoService.saved(file);
+			cliente.setPhoto(photo);
+			
 			return clientRepository.save(cliente);
 		}
 	
