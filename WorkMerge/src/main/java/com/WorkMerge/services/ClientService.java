@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,6 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.WorkMerge.entities.Client;
@@ -126,6 +130,7 @@ public class ClientService implements UserDetailsService {
 		}
 	}
 	
+	//OBTENER POR ID
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Client obtenerPorId(String id) throws ServiceException{
 		
@@ -138,6 +143,7 @@ public class ClientService implements UserDetailsService {
 		}
 	}
 	
+	//OBTENER POR MAIL
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Client obtenerPorMail(String email) throws ServiceException{
 		
@@ -161,6 +167,7 @@ public class ClientService implements UserDetailsService {
 		}
 	}
 
+	
 	@Override
 	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
 		
@@ -170,6 +177,13 @@ public class ClientService implements UserDetailsService {
 			List<GrantedAuthority> authorities = new ArrayList<>();
 			
 			authorities.add(new SimpleGrantedAuthority("ROLE_" + client.getRol()));
+			
+			// Se extraen atributos de contexto del navegador -> INVESTIGAR
+						ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+			// Se crea la sesion y se agrega el cliente a la misma -> FIUMBA
+			HttpSession session = attr.getRequest().getSession(true);
+			session.setAttribute("usersession", client);
 			
 			return new User(mail, client.getPassword(), authorities);
 		} catch(Exception e) {

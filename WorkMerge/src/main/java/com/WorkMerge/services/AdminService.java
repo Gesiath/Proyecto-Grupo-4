@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,6 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.WorkMerge.entities.Admin;
 import com.WorkMerge.entities.Client;
@@ -113,6 +117,13 @@ public class AdminService implements UserDetailsService {
 		}
 	}
 	
+	//OBTENER POR MAIL
+		@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+		public Admin obtenerPorMail(String email) throws ServiceException{
+			
+			return adminRepository.findByEmail(email);
+		}
+	
 	@Transactional(readOnly = true)
 	public List<Job> listJobs() {
 		return jobRepository.findAll();
@@ -163,6 +174,13 @@ public class AdminService implements UserDetailsService {
 			
 			authorities.add(new SimpleGrantedAuthority("ROLE_" + admin.getRol()));
 			
+			// Se extraen atributos de contexto del navegador -> INVESTIGAR
+						ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+				// Se crea la sesion y se agrega el cliente a la misma -> FIUMBA
+				HttpSession session = attr.getRequest().getSession(true);
+				session.setAttribute("usersession", admin);
+	
 			return new User(mail, admin.getPassword(), authorities);
 		} catch(Exception e) {
 			
