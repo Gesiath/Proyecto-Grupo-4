@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="utf-8" />
@@ -7,12 +7,12 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>WorkMerge | InicioUser</title>
+    <link rel="stylesheet" href="/css/normalize.css">
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="/src/main/resources/static/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link href="../css/InicioCliente.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/index.css">
+    <link href="/css/InicioCliente.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/index.css">
     
 </head>
 
@@ -25,7 +25,7 @@
         <!-- src="/src/main/resources/static/img/LogoColor.png" -->
         <!--src= "../static/img/LogoColor.png"-->
             <img 
-                src="../img/LogoColor.png" 
+                src="/img/LogoColor.png" 
                 alt="WM" 
                 width="90" 
                 height="90"                   
@@ -35,7 +35,7 @@
         </a>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
-            <button id="cliente" class="btn btn-warning" type="button"><a th:href="@{/client/form}">Ir a mi perfil</a></button>
+            <a th:href="@{/client/perfilCli/}+${session.usersession.id}" class="btn btn-warning">Ir a mi perfil</a>
         </div>
     </div>
 </nav>
@@ -49,16 +49,18 @@
             <div class="text-center my-5">
 
                 <div class="card mb-4">
-                    <div class="card-header">Palabra clave</div> <!-- .card-header ln.css.Ln4566 -->
+                    <div class="card-header">Elije tu empleo ideal</div> <!-- .card-header ln.css.Ln4566 -->
+                    <form th:action="@{/client/hubCli/{id}}"method="GET">
                     <div class="card-body">
                         <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Ej: Diseñador..."
+                            <input class="form-control" type="text" name="q" placeholder="Ej: Medicina, Informática, Ventas.."
                                 aria-label="Enter search term..." aria-describedby="button-search" />
-                            <button class="btn btn-primary" id="button-search" type="button">Ir!</button>
+                            <button class="btn btn-primary" id="button-search" type="submit">Ir!</button>
                         </div>
                     </div>
+                    </form>
                 </div>
-
+			
             </div>
         </div>
     </header>
@@ -67,67 +69,55 @@
     <div class="container">
         <div class="row">
             <!-- Blog entries-->
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <!-- Featured blog post-->
 
 
                 <!-- Nested row for non-featured blog posts-->
                 <div class="row">
-                    <div class="col-lg-6">
+                <div th:each="job : ${jobs}" class="col-lg-4"> 
+                    
+                        
                         <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top"
-                                    src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2021</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Reiciendis aliquid atque, nulla.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                            </div>
-                        </div>
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top"
-                                    src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2021</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Reiciendis aliquid atque, nulla.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top"
-                                    src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2021</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Reiciendis aliquid atque, nulla.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                            </div>
-                        </div>
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top"
-                                    src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2021</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+						<div class="card mb-4">
 
-                <!-- Pagination-->
+							<img class="card-img-top"
+								src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." />
+							<div class="card-body">
+
+								<div class="small text-muted" th:text="${job.datepost}"></div>
+								
+								<h2 class="card-title" th:text="${job.title}"></h2>
+								<hr>
+								<label class="h4">Disponibilidad:</label>
+								<p class="card-text h5" th:text="${job.availability}"></p>
+								<hr>
+								<label class="h4">Categoria:</label>
+								<p class="card-text" th:text="${job.category}"></p>
+								<hr>
+								<label class="h4">Salario:</label>
+								<p class="card-text" th:text="${job.salary}"></p>
+								<hr>
+								<label class="h4">Experiencia Requerida:</label>
+								<p class="card-text" th:text="${job.experienceRequired}"></p>
+								<hr>
+								<label class="h4"><b>Descripción:</b></label>
+								<p class="card-text" th:text="${job.description}" ></p>
+							</div>
+						</div>
+
+					</div>
+              </div>   
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+                      
+
+         <!--       <!-- Pagination
                 <nav aria-label="Pagination">
                     <hr class="my-0" />
                     <ul class="pagination justify-content-center my-4">
@@ -142,30 +132,27 @@
                     </ul>
                 </nav>
             </div>
-
-            <!-- Side widgets-->
+            <!-- Side widgets
             <div class="col-lg-4">
-                <!-- Search widget-->
+                <!-- Search widget
                 <div class="card mb-4">
                     <div class="card-header">... </div>
                     <div class="card-body">
                         <div class="input-group">
-
                             <img src="" alt="..." height="300" width="300">
-
                         </div>
                     </div>
-                </div>
+                </div>-->
 
-                <!-- Categories widget-->
+                <!-- Categories widget
                 <div class="card mb-4">
                     <div class="card-header">Categories</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-6">
                                 <ul class="list-unstyled mb-0">
-                                    <!-- 564 LN.css -->
-                                    <li><a href="#!">Infotmática</a></li>
+                                     564 LN.css 
+                                    <li><a href="#!">Informática</a></li>
                                     <br>
                                     <li><a href="#!">Ventas</a></li>
                                     <br>
@@ -215,8 +202,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Side widget-->
+                </div>-->
+                <!-- Side widget
                 <div class="card mb-4">
                     <div class="card-header">Side Widget</div>
                     <div class="card-body">You can put anything you want inside of these side widgets. They are easy to
@@ -224,14 +211,14 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
     
 
-    <!--------------------Footer---------------------------------------->
+    <!--------------------Footer-------------------------------------->
     <footer class="container-fluid">
         <div class="contenedor">
-            <img class="loguito" src="../img/isovalenteLogo.png" width="50" height="50">
+            <img class="loguito" src="/img/isovalenteLogo.png" width="50" height="50">
             <h2 class="titulo-seccion">WorkMerge</h2>
         </div>
         <div class="redes-sociales">

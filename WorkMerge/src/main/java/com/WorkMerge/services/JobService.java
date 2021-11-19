@@ -148,6 +148,10 @@ public class JobService {
 		return jobRepository.findActive();
 	}
 	
+	public List<Job> findActiveByQ(String q){
+        return jobRepository.findActiveByQ("%"+q+"%");
+    }
+	
 	//VALIDACION
 	public void validate(String title, Date datepost, String availability, String category, String description,Integer salary, String experienceRequired)throws ServiceException{
 		
