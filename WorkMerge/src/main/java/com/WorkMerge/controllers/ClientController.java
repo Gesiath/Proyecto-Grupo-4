@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.WorkMerge.entities.Client;
 import com.WorkMerge.exceptions.ServiceException;
@@ -32,9 +34,9 @@ public class ClientController {
 	 
 	@PostMapping("/save")
 	public String createClient(@RequestParam("email") String email, @RequestParam("password") String password,
-			@RequestParam("password2") String password2) {
+			@RequestParam("password2") String password2,@RequestParam("photo") MultipartFile file) {
 		try {
-			clientService.registerClient(email, password, password2);
+			clientService.registerClient(email, password, password2,file);
 			Client c = clientService.obtenerPorMail(email);
 			String id = c.getId();
 			return "redirect:/client/loadCv/".concat(id);
