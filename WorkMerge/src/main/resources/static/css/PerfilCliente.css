@@ -46,7 +46,7 @@ Copiar esto
     position: relative;
     width: 90%;
     height: 17rem;
-    background: linear-gradient(45deg, #ffffff, #afaaaa);
+    background: linear-gradient(#fab534,#ffffff);
     border-radius: 0 0 20px 20px;
 }
 
@@ -129,6 +129,17 @@ Copiar esto
     background-color: #fff;
     border-radius: 15px;
     width: 100%;
+    text-align: left;
+}
+
+.perfil-usuario-strings2 {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1.5rem 2rem;
+    background-color: #fff;
+    border-radius: 15px;
+    width: 100%;
+    text-align: left;
 }
 
 .seccion-perfil-usuario .perfil-usuario-bio {
@@ -226,9 +237,4 @@ Copiar esto
         margin-left: 1rem;
         margin-top: 0;
     }
-
- 
-
-
-
 }

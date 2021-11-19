@@ -27,7 +27,7 @@ public class JobService {
 
 	//CREAR TRABAJO	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public Job newJob(String title, String datepost, String availability, String category, String description,Integer salary, String experienceRequired) throws ServiceException, ParseException{
+	public Job newJob(String title, String datepost, String availability, String category, String description,String salary, String experienceRequired) throws ServiceException, ParseException{
 		
 		//validate(title, datepost, availability, category, description, salary, experienceRequired);
 
@@ -39,7 +39,8 @@ public class JobService {
 		newJob.setAvailability(availability);
 		newJob.setCategory(category);
 		newJob.setDescription(description);
-		newJob.setSalary(salary);
+		Integer salaryInt = Integer.parseInt(salary);
+		newJob.setSalary(salaryInt);
 		newJob.setExperienceRequired(experienceRequired);
 		
 		return jobRepository.save(newJob);
@@ -47,7 +48,7 @@ public class JobService {
 	
 	//CREAR LISTA DE TRABAJOS
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public List<Job> listJobs(String idCompany, String title, String datepost, String availability, String category, String description,Integer salary, String experienceRequired) throws ServiceException, ParseException{
+	public List<Job> listJobs(String idCompany, String title, String datepost, String availability, String category, String description,String salary, String experienceRequired) throws ServiceException, ParseException{
 		
 		Company company = companyService.obtenerPorId(idCompany);
 		
@@ -107,6 +108,7 @@ public class JobService {
 		if (respuesta.isPresent()) {
 		   Job job = respuesta.get();
 		   job.setActive(true);
+		   jobRepository.save(job);
 		} else {
 		   throw new ServiceException("No se encontro el trabajo a activar.");
 		}
@@ -121,11 +123,34 @@ public class JobService {
 		if (respuesta.isPresent()) {
 			Job job = respuesta.get();
 			job.setActive(false);
+			jobRepository.save(job);
 		} else {
 			throw new ServiceException("No se encontro el trabajo a desactivar.");
 		}
 
 	}
+	
+	//OBETER EMPLEO POR ID
+		@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+		public Job obtenerPorId(String id) throws ServiceException{
+			
+			Optional<Job> result  = jobRepository.findById(id);
+			
+			if (result.isEmpty()) {
+				throw new ServiceException("No se encontró el cliente");
+			} else {
+				return result.get();
+			}
+		}
+		
+	//LISTAR TRABAJOS ACTIVOS
+	public List<Job> listActives(){
+		return jobRepository.findActive();
+	}
+	
+	public List<Job> findActiveByQ(String q){
+        return jobRepository.findActiveByQ("%"+q+"%");
+    }
 	
 	//VALIDACION
 	public void validate(String title, Date datepost, String availability, String category, String description,Integer salary, String experienceRequired)throws ServiceException{

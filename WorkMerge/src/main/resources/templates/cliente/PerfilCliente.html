@@ -1,31 +1,36 @@
 <!DOCTYPE html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
     
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>WorkMerge | Perfil Cliente</title>
-        <link rel="stylesheet" href="../css/normalize.css">
+		<link rel="stylesheet" href="/css/normalize.css">
+		
+
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         
  
-        <link rel="stylesheet" href="../css/index.css">
-        <link rel="stylesheet" href="../css/PerfilCliente.css">
-        <link  rel="icon"   href="../favicon.ico" type="image.ico"/>
+
+        <link rel="stylesheet" href="/css/index.css">
+        <link rel="stylesheet" href="/css/PerfilCliente.css">
+        <link  rel="icon"   href="/favicon.ico" type="image.ico"/>
+
     </head>
 
 <body>
 
 <!--     ------------------NavBar-------------------------------------------- -->
+
 <nav class="navbar navbar-light">
     <div class="container-fluid" style="display:flex">
         <a class="navbar-brand" href="/">
         <!-- src="/src/main/resources/static/img/LogoColor.png" -->
         <!--src= "../static/img/LogoColor.png"-->
             <img 
-                src="../img/LogoColor.png" 
+                src="/img/LogoColor.png" 
                 alt="WM" 
                 width="90" 
                 height="90"                   
@@ -34,11 +39,13 @@
 
         </a>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        	<a th:href="@{/client/hubCli/}+${session.usersession.id}" class="btn btn-warning">Volver a inicio </a>
             <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
-            <button id="cliente" class="btn btn-warning" type="button"><a th:href="@{/client/form}">Volver a inicio </a></button>
+            
         </div>
     </div>
 </nav>
+
 
 
 
@@ -47,87 +54,89 @@
         <div class="perfil-usuario-header">
             <div class="perfil-usuario-portada">
                 <div class="perfil-usuario-avatar">
-                    <img src="http://localhost/multimedia/relleno/img-c9.png" alt="img-avatar">
+
+                    <img  src="/img/avatar_user.png" alt="img-avatar">
+
                     <button type="button" class="boton-avatar">
                         <i class="far fa-image"></i>
                     </button>
                 </div>
-                <button type="button" class="boton-portada">
+<!--                 <button type="button" class="boton-portada">
                     <i class="far fa-image"></i> Cambiar fondo
-                </button>
+                </button> -->
             </div>
         </div>
 
 <!--------------------Datos Cliente---------------------------------------------->
         <div class="perfil-usuario-body">
-            <div class="perfil-usuario-bio">
-                <h3>C.V</h3>
-                <h3 class="name">NOMBRE</h3>
-                <h3 class="name">APELLIDO</h3>
+            <div class="perfil-usuario-bio"  >
+                <h3>CURRICULUM VITAE</h3>
+           <!----    <h3 th:text="${curriculum.name}">NOMBRE</h3>---->
+            <!----    <h3 th:text="${curriculum.surname}">APELLIDO</h3>---->
 
             </div>
-
-
 
             <div class="perfil-usuario-footer">
-                <ul class="lista-datos">
+                <ul class="lista-datos" >
                     <li><i class="icono fas fa-address-card"></i> Documento:</li>
-                    <li><i class="icono fas fa-flag"></i> Nacionalidad:</li>
+                   	<p th:text="${client.curriculum.dni}"></p>
+          	
+          		<li><i class="icono fas fa-flag"></i> Nacionalidad:</li>
+                    <p th:text="${client.curriculum.nationality}"></p>
+                  
                     <li><i class="icono fas fa-map-marker-alt"></i> Ciudad:</li>
-                    <li><i class="icono fas fa-map-signs"></i> Domicilio:</li>
-                    <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento.</li>
+                    <p th:text="${client.curriculum.city}"></p>
+                   
+                <li><i class="icono fas fa-map-signs"></i> Domicilio:</li>
+                    <p th:text="${client.curriculum.address}"></p>
+                    
+                <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento.</li>
+                    <p th:text="${client.curriculum.birthday}"></p>
                     <br>
-                    <li><i class="icono fas fa-phone-alt"></i> Telefono:</li>
-                    <li><i class="icono fas fa-envelope"></i> Email</li>
+                <li><i class="icono fas fa-phone-alt"></i> Telefono:</li>
+                    <p th:text="${client.curriculum.phone}"></p>
+                <li><i class="icono fas fa-envelope"></i> Email</li> 
+                     <p th:text="${client.email}"></p>
 
                 </ul>
             </div>
+            
+       
 
-            <div class="perfil-usuario-strings"> <!-- 133ln -->
-                <h3>Educación</h3>
-                <ul >
-                    <br>
-                    <li><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut vel excepturi ullam suscipit! Corporis earum ea minus, quam ex accusamus. Odio repellat accusantium architecto quis quia ratione adipisci libero incidunt.</p></li>
-                </ul>
+            <div class="perfil-usuario-strings">  
+                <h3>Educación</h3>                
+                <div class="perfil-usuario-strings2"><p th:text="${client.curriculum.education}"></p></div>
             </div>
 
             <div class="perfil-usuario-strings">
-                <h3>Experiencia laboral</h3>
-                <ul >
-                    <br>
-                    <li><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut vel excepturi ullam suscipit! Corporis earum ea minus, quam ex accusamus. Odio repellat accusantium architecto quis quia ratione adipisci libero incidunt.</p></li>
-                </ul>
+                <h3>Experiencia laboral</h3>                
+                <div class="perfil-usuario-strings2"><p th:text="${client.curriculum.workexperience}"></p></div>
             </div>
 
-            <div class="perfil-usuario-strings">
+            <div class="perfil-usuario-strings">                
                 <h3>Idiomas</h3>
-                <ul >
-                    <br>
-                    <li><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut vel excepturi ullam suscipit! Corporis earum ea minus, quam ex accusamus. Odio repellat accusantium architecto quis quia ratione adipisci libero incidunt.</p></li>
-                </ul>
+           		<div class="perfil-usuario-strings2"><p th:text="${client.curriculum.language}"></p></div>
             </div>
 
             <div class="perfil-usuario-strings">
-                <h3>Habilidades informáticas</h3>
-                <ul >
-                    <br>
-                    <li><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut vel excepturi ullam suscipit! Corporis earum ea minus, quam ex accusamus. Odio repellat accusantium architecto quis quia ratione adipisci libero incidunt.</p></li>
-                </ul>
+             	<h3>Habilidades informáticas</h3>
+           		<div class="perfil-usuario-strings2"><p th:text="${client.curriculum.skills}"></p></div>               	
+                
             </div>
+            
 
             <br>
 
         </div>
        
- 
     </section>
     <br>
      
-    <button>
-        <a id= "cliente" th:href="@{/client/form}" class="btn btn-light">Editar Información</a>
-    </button>
-                            
 
+    <button style="display:block; margin-left: auto; margin-right: auto;">
+        <a id= "cliente" th:href="@{/client/form}" class="btn btn-light">Editar información</a>
+    </button>
+       
 
     <br>
     <br>
@@ -136,7 +145,9 @@
 <!--------------------Footer---------------------------------------->
     <footer class="container-fluid">
         <div class="contenedor">
-                <img class="loguito" src="../img/isovalenteLogo.png" width="50" height="50">
+
+                <img class="loguito" src="/img/isovalenteLogo.png" width="50" height="50">
+
                 <h2 class="titulo-seccion">WorkMerge</h2>
         </div>
         <div class="redes-sociales">
@@ -146,15 +157,10 @@
         </div>
         <div class="contenedor">
             <small class="copy"> WorkMerge 2021/Todos los derechos reservados. 
-                <address class="copy2" align= "center">Argentina</address></small>
+                <address class="copy2" style="text-align: center;">Argentina</address></small>
         </div>
 
     </footer>
-
-
-
-
- 
 
 
 
@@ -171,4 +177,3 @@
 </body>
 
 </html>
-

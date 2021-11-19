@@ -1,174 +1,150 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/index.css" />
-    <link rel="stylesheet" href="../css/PerfilCliente.css" />
-    <title>WorkMerge | Perfil Empresa</title>
-  </head>
+<html
+	lang="es"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="/css/index.css" />
+		<title>WorkMerge | Perfil Empresa</title>
+		<!--Iconos-->
+		<script src="https://kit.fontawesome.com/f67994367c.js" crossorigin="anonymous"></script>
+	</head>
 
-  <body>
-    <nav class="navbar navbar-light">
-      <div class="container-fluid" style="display: flex">
-        <a class="navbar-brand" href="/">
-          <!-- src="/src/main/resources/static/img/LogoColor.png" -->
-          <!--src= "../static/img/LogoColor.png"-->
-          <img
-            src="../img/LogoColor.png"
-            alt="WM"
-            width="90"
-            height="90"
-          />
-          <span class="titulo">WorkMerge</span>
-        </a>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-         <a th:href="@{/login}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
-        </div>
-      </div>
-    </nav>
+	<body>
+		<nav class="navbar navbar-light">
+			<div class="container-fluid">
+				<div class="d-flex align-items-center">
+					<a class="navbar-brand" href="/">
+						<img src="/img/LogoColor.png" alt="WM" width="90" height="90" class="d-inline-block" />
+						<span class="titulo">WorkMerge </span>
+					</a>
+				</div>
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<h3 class=" me-md-2">Bienvenido, <span th:text="${company.name}"></span></h3>
+					<a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
+					<!-- <button id="cliente" class="btn btn-warning" type="button"><a th:href="@{/client/form}">Registrarse como cliente </a></button>
+                <button id="empresa" class="btn btn-warning" type="button"><a th:href="@{/company/form}">Registrarse como empresa</a></button> -->
+				</div>
+			</div>
+		</nav>
 
-    <section class="seccion-perfil-usuario">
-      <div class="perfil-usuario-header">
-        <div class="perfil-usuario-portada">
-          <div class="perfil-usuario-avatar">
-            <img
-              src="/src/main/resources/static/img/avatar_user.png"
-              alt="img-avatar"
-            />
-            <button type="button" class="boton-avatar">
-              <i class="far fa-image"></i>
-            </button>
-          </div>
-          <!-- <button type="button" class="boton-portada">
-            <i class="far fa-image"></i> Cambiar fondo
-          </button> -->
-        </div>
-      </div>
-      <div class="perfil-usuario-body">
-        <div class="perfil-usuario-bio">
-          <h3 class="name">NOMBRE DE LA EMPRESA</h3>
-        </div>
-      </div>
-    </section>
 
-    <div class="container-xxl">
-      <!--Botones de error y exito-->
-      <div
-        th:if="${error}"
-        class="alert alert-danger alert-dismissible fade show mt-3"
-        role="alert"
-      >
-        <span th:text="${error}"></span>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div
-        th:if="${success}"
-        class="alert alert-success alert-dismissible fade show mt-3"
-        role="alert"
-      >
-        <span th:text="${success}"></span>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="card mt-3">
-        <div class="card-header d-flex">
-          <h1>Mis anuncios</h1>
-            <a class="btn btn-success px-3 py-2 ms-auto" th:href="/company/registerCom/{id}(id=${company.id})" style="line-height: 4; padding-top: 0 !important; padding-bottom: 0 !important;">Crear Anuncio</a>
-        </div>
-        <div class="card-body">
-          <form class="row g-3" th:action="@{/company/perfilCom/{id}(id=${company.id})}" method="GET">
-            <div class="col">
-              <input
-                type="text"
-                style="width: 100%"
-                name="q"
-                placeholder="Buscar.."
-              />
-            </div>
-            <div class="col-1">
-              <button type="submit" class="btn btn btn-dark">Buscar</button>
-            </div>
-          </form>
-          <table class="table table-dark table-hover table-bordered">
-            <thead>
-              <tr>
-                <th>Numero</th>
-                <!-- <th>Id</th> -->
-                <th>Título</th>
-                <th>Fecha posteo</th>
-                <th>Disponibilidad</th>
-                <th>Categoría</th>
-                <th>Descripción</th>
-                <th>Salario</th>
-                <th>Experiencia Req</th>
-                <th>Activo</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="t, iterator : ${trabajos}">
-                <td th:text="${iterator.index+1}"></td>
-                <!-- <td th:text="${t.id}"></td> -->
-                <td th:text="${t.titulo}"></td>
-                <td th:text="${t.fechadepost}"></td>
-                <td th:text="${t.disponibilidad}"></td>
-                <td th:text="${t.categoria}"></td>
-                <td th:text="${t.descripcion}"></td>
-                <td th:text="${t.salario}"></td>
-                <td th:text="${t.experienciarequerida}"></td>
-                <td th:text="${t.activo}"></td>
-                <td>
-                  
-                    <a th:href="@{#}+'?id='+${p.id}" class="px-2 py-2 btn btn btn-primary btn-sm">Eliminar</a>
-					<a th:href="@{#}+'?id='+${p.id}" class="px-2 py-2 btn btn btn-primary btn-sm">Editar</a>
-                  
-                </td>
-              </tr>
-            </tbody>
-            <p th:if="${trabajos.isEmpty()}">No hay anuncios para mostrar.</p>
-          </table>
-        </div>
-      </div>
-    </div>
+		<div class="container">
+			<!-- MENSAJE DE ERROR
+			<div
+				th:if="${error}"
+				class="alert alert-danger alert-dismissible fade show mt-3"
+				role="alert"
+			>
+				<span th:text="${error}"></span>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+			<div
+				th:if="${success}"
+				class="alert alert-success alert-dismissible fade show mt-3"
+				role="alert"
+			>
+				<span th:text="${success}"></span>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+			-->
+			<div class="card mt-3">
+				<div class="card-header d-flex">
+					<h1>Mis anuncios</h1>
+					<a
+						class="btn btn-success ms-auto text-center p-3"
+						th:href="@{/company/loadJob/{id}(id=${company.id})}"
+						>Crear Anuncio</a
+					>
+				</div>
+				<div class="card-body">
+					<!--
+					<form
+						class="row g-3"
+						th:action="@{/company/perfilCom/{id}(id=${company.id})}"
+						method="GET"
+					>
+						<div class="col">
+							<input type="text" style="width: 100%" name="q" placeholder="Buscar.." />
+						</div>
+						<div class="col-2">
+							<button type="submit" class="btn btn btn-primary">Buscar</button>
+						</div>
+					</form>
+					-->
+					<table class="table table-success table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Numero</th>
+								<th>Id</th>
+								<th>Título</th>
+								<th>Fecha posteo</th>
+								<th>Disponibilidad</th>
+								<th>Categoría</th>
+								<th>Descripción</th>
+								<th>Salario</th>
+								<th>Experiencia Req</th>
+								<th>Activo</th>
+								<th>Alta/Baja</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="job, iterator : ${jobs}">
+								<td th:text="${iterator.index+1}"></td>
+								<td th:text="${job.id}"></td>
+								<td th:text="${job.title}"></td>
+								<td th:text="${job.datepost}"></td>
+								<td th:text="${job.availability}"></td>
+								<td th:text="${job.category}"></td>
+								<td th:text="${job.description}"></td>
+								<td th:text="${job.salary}"></td>
+								<td th:text="${job.experienceRequired}"></td>
+								<td th:text="${job.active}"></td>
+								<td>
+								<a class="btn btn-outline-light me-md-2" th:href="@{/company/alta/{id}/{idCon}(id=${job.id}, idCon=${company.id})}">
+									ALTA
+								</a>
+								<a class="btn btn-outline-light me-md-2" th:href="@{/company/baja/{id}/{idCon}(id=${job.id}, idCon=${company.id})}">
+									BAJA
+								</a>
+							</td>
+							</tr>
+						</tbody>
+						<p class="text-center" th:if="${jobs.isEmpty()}">No hay anuncios para mostrar.</p>
+					</table>
+				</div>
+			</div>
+		</div>
 
-    <footer class="container-fluid">
-      <div class="contenedor">
-        <div class="d-flex align-items-center">
-					<img src="../img/isovalenteLogo.png" width="50" height="50" />
+		<footer class="container-fluid">
+			<div class="contenedor">
+				<div class="d-flex align-items-center">
+					<img src="/img/isovalenteLogo.png" width="50" height="50" />
 					<h2 class="titulo-seccion">WorkMerge</h2>
 				</div>
+
       </div>
       <div class="redes-sociales">
-        <i class="fab fa-twitter"></i>
-        <i class="fab fa-facebook-f"></i>
-        <i class="fab fa-youtube"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-youtube"></i>
       </div>
       <div class="contenedor">
-        <small class="copy">
-          WorkMerge 2021/Todos los derechos reservados</small
-        >
-        <address class="copy">Argentina</address>
+          <small class="copy"> WorkMerge 2021/Todos los derechos reservados. 
+              <address class="copy2" style="text-align: center;">Argentina</address></small>
       </div>
-    </footer>
+  </footer>
+
 
     <script
       src="https://kit.fontawesome.com/bdbed0aafa.js"

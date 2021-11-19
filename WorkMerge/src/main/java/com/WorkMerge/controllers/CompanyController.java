@@ -1,6 +1,7 @@
 package com.WorkMerge.controllers;
 
 import java.text.ParseException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.WorkMerge.entities.Company;
+import com.WorkMerge.entities.Job;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.services.CompanyService;
 import com.WorkMerge.services.JobService;
@@ -23,7 +25,7 @@ public class CompanyController {
 	@Autowired
 	private CompanyService companyService;
 	
-	@Autowired
+	@Autowired 
 	private JobService jobService;
 	
 	private final String viewPath = "empresa/";
@@ -32,8 +34,7 @@ public class CompanyController {
 	public String registerCompany() {
 		return this.viewPath.concat("registroInicialEmpresa");
 	}
-		
-		
+			
 	@PostMapping("/save")
 	public String createCompany(@RequestParam("email") String email, @RequestParam("password") String password,
 			@RequestParam("password2") String password2) {
@@ -75,11 +76,12 @@ public class CompanyController {
 		
 	}
 	
-	@GetMapping("/perfilCom/{id}")
+	@GetMapping("/perfil/{id}")
 	public String perfilCompany (@PathVariable("id") String id, ModelMap modelo)	{
 		try {
-			Company company = companyService.obtenerPorId(id);
-			modelo.addAttribute("company", company );
+			List<Job> listJobs = companyService.listMyJobs(id);
+			modelo.addAttribute("jobs", listJobs );
+			modelo.addAttribute("company", companyService.obtenerPorId(id));
 			
 			return this.viewPath.concat("perfilEmpresa");
 		} catch (ServiceException e) {
@@ -88,23 +90,11 @@ public class CompanyController {
 		}
 	}	
 	
-	@GetMapping("/eliminar/{id}")
-	public String deleteCompany(@PathVariable("id") String id) {
-		try {
-			companyService.deleteCompany(id);
-			return "redirect:/admin/adminEmpresas";
-		} catch (ServiceException e) {
-			e.printStackTrace();
-			return "redirect:/admin";
-		}
-		
-	}
-	
-	@GetMapping("/eliminarTrabajo/{id}")
+	@GetMapping("/delete/{id}")
 	public String deleteJob(@PathVariable("id") String id) {
 		try {
 			jobService.deleteJob(id);
-			return "redirect:/admin/adminEmpresas";
+			return "redirect:/company/perfil/".concat(id);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			return "redirect:/admin";
@@ -112,17 +102,54 @@ public class CompanyController {
 		
 	}
 	
-	@GetMapping("cargarTrabajo/{id}")
-	public String cargartrabajo(@PathVariable("id") String id) {
+	@GetMapping("loadJob/{id}")
+	public String createJob(ModelMap modelo, @PathVariable("id") String id) {
 		try {
-			companyService.uploadJobs(id, "Tachero", "16/01/2021", "Full Time", "Uber", "Manejar", 25000, "Mucha experiencia");
-			return "redirect:/";
+			modelo.addAttribute("company", companyService.obtenerPorId(id));
+			return this.viewPath.concat("AnuncioEmpresa");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return "redirect:/company/perfil/".concat(id);
+		}
+	}
+	
+	@PostMapping("saveJob/{id}")
+	public String registerJob(@PathVariable("id") String id, @RequestParam("titulo") String titulo, @RequestParam("fecha") String fecha,
+			@RequestParam("disponibilidad") String disponibilidad, @RequestParam("categoria") String categoria, @RequestParam("descripcion") String descripcion,
+			@RequestParam("salario") String salario, @RequestParam("experiencia") String experiencia) {
+		try {
+			companyService.uploadJobs(id, titulo, fecha, disponibilidad, categoria, descripcion, salario, experiencia);
+			return "redirect:/company/perfil/".concat(id);
 		} catch (ServiceException e) {
 			e.getMessage("ERROR COMUN");
 			return "redirect:/";
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return "redirect:/";
+		}
+		
+	}
+	
+	@GetMapping("alta/{idJob}/{idCon}")
+	public String alta(@PathVariable("idJob") String idJob, @PathVariable("idCon") String idCon) {
+		try {
+			jobService.upgradeJob(idJob);
+			return "redirect:/company/perfil/".concat(idCon);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return "redirect:/company/perfil/".concat(idCon);
+		}
+		
+	}
+	
+	@GetMapping("baja/{idJob}/{idCon}")
+	public String baja(@PathVariable("idJob") String idJob, @PathVariable("idCon") String idCon) {
+		try {
+			jobService.downgradeJob(idJob);
+			return "redirect:/company/perfil/".concat(idCon);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return "redirect:/company/perfil/".concat(idCon);
 		}
 		
 	}
