@@ -38,6 +38,31 @@ public class ClientService implements UserDetailsService {
 	
 	@Autowired
 	private CurriculumService curriculumService;
+	
+	@Override
+	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+		
+		try {
+			Client client = clientRepository.findByEmail(mail);
+			
+			List<GrantedAuthority> authorities = new ArrayList<>();
+			
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + client.getRol()));
+			
+			// Se extraen atributos de contexto del navegador -> INVESTIGAR
+						ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+			// Se crea la sesion y se agrega el cliente a la misma -> FIUMBA
+			HttpSession session = attr.getRequest().getSession(true);
+			session.setAttribute("usersession", client);
+			
+			return new User(mail, client.getPassword(), authorities);
+		} catch(Exception e) {
+			
+			throw new UsernameNotFoundException("El usuario no existe");
+			
+		}
+	}
 
 	//REGISTRAR CLIENTE
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })//Transactional (se pone porque cambia algo en la base de datos)
@@ -69,7 +94,6 @@ public class ClientService implements UserDetailsService {
 	}
 		
 	//MODIFICAR CLIENTE
-
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })//Transactional (se pone porque cambia algo en la base de datos)
 
 	public Client modifyClient(String id, String email, String password,String password2, Photo photo) throws ServiceException {
@@ -90,7 +114,6 @@ public class ClientService implements UserDetailsService {
 	}
 	
 	//ELIMINAR CLIENTE
-
 	public void delete(String id) throws ServiceException {
 		Optional<Client> respuesta = clientRepository.findById(id);
 		if(respuesta.isPresent()) {
@@ -143,7 +166,7 @@ public class ClientService implements UserDetailsService {
 		return clientRepository.findByEmail(email);
 	}
 	
-	//METODO VALIDACION
+	//VALIDAR
 	public void validar(String email,String password,String password2)throws ServiceException{
 		if(email==null || email.isEmpty()) {
 			throw new ServiceException("El email no puede estar vacío");
@@ -160,35 +183,6 @@ public class ClientService implements UserDetailsService {
 		}
 	}
 
-	
-	@Override
-	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
-		
-		try {
-			Client client = clientRepository.findByEmail(mail);
-			
-			List<GrantedAuthority> authorities = new ArrayList<>();
-			
-			authorities.add(new SimpleGrantedAuthority("ROLE_" + client.getRol()));
-			
-			// Se extraen atributos de contexto del navegador -> INVESTIGAR
-						ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-
-			// Se crea la sesion y se agrega el cliente a la misma -> FIUMBA
-			HttpSession session = attr.getRequest().getSession(true);
-			session.setAttribute("usersession", client);
-			
-			return new User(mail, client.getPassword(), authorities);
-		} catch(Exception e) {
-			
-			throw new UsernameNotFoundException("El usuario no existe");
-			
-		}
-		
-		
-		
-		
-	}
 }
 	
 	

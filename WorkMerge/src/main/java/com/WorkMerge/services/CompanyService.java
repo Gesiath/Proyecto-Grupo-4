@@ -163,7 +163,7 @@ public class CompanyService implements UserDetailsService {
 		Optional<Company> result  = companyRepository.findById(id);
 		
 		if (result.isEmpty()) {
-			throw new ServiceException("No se encontró el cliente");
+			throw new ServiceException("No se encontró la compañia");
 		} else {
 			return result.get();
 		}

@@ -47,7 +47,8 @@ public class ClientController {
 	@GetMapping("/loadCv/{id}")
 	public String registerCv(ModelMap modelo, @PathVariable("id") String id) {
 		try {
-			modelo.addAttribute("cliente", clientService.obtenerPorId(id));
+			Client c = clientService.obtenerPorId(id);
+			modelo.addAttribute("cliente", c);
 			return this.viewPath.concat("registroDatoCliente");
 		} catch (ServiceException e) {
 			e.printStackTrace();
