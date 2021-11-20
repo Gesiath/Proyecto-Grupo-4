@@ -14,7 +14,9 @@
 
 
         <!--<link rel="stylesheet" href="../static/css/index.css">-->
+
      	<link rel="stylesheet" href="../css/index.css"> 
+
 
     <title>WorkMerge</title>
 
@@ -34,12 +36,12 @@
                 	height="90"                   
                  /> <!-- class="d-inline-block align-text-top" -->
                 <span class="titulo">WorkMerge</span>
-
             </a>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
                 <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn btn-outline-light me-md-2">Iniciar sesión</a>
-                <a sec:authorize="isAuthenticated()" th:href="@{/company/perfil/}+${session.usersession.id}" class="btn btn-outline-light me-md-2">Ver Perfil Empresa</a>
+                <a sec:authorize="hasAnyRole('ROLE_COMPANY')" th:href="@{/company/perfil/}+${session.usersession.id}" class="btn btn-outline-light me-md-2">Ver Perfil</a>
+                <a sec:authorize="hasAnyRole('ROLE_CLIENT')" th:href="@{/client/hubCli/}+${session.usersession.id}" class="btn btn-outline-light me-md-2">Ver Inicio</a>
                 <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
                 <a sec:authorize="!isAuthenticated()" th:href="@{/client/form}" class="btn btn-warning">Registrarse como cliente </a>
                 <a sec:authorize="!isAuthenticated()" th:href="@{/company/form}" class="btn btn-warning">Registrarse como empresa</a>
@@ -58,16 +60,18 @@
                 <img src="../img/hello1.jpg" alt="Hello Word" id="imagenintro">
                 <div class="cajaflex1">
 
-                    <h1 class="textosobreimg1">Un universo de posibilidades esperándote ! </h1>
+                    <h1 class="textosobreimg1">¡Un universo de posibilidades esperándote! </h1>
+
 
                     <h3 class="textosobreimg2">En nuestro sitio nos enfocamos en que reclutadores y usuarios se conecten
                         en el
                         punto exacto de unión: ¡El progreso humano!
                     </h3>
+                    
                 </div>
 
             </div>
-            </div>
+            
         </article>
     </section>
 
@@ -77,23 +81,23 @@
 
 
     <section class="row">
-        <div class="col_12 CentroPagina">
+        <div class="col_6 CentroPagina">
             <div class="col_10">
                 <div class="col_6 TextoCentro">
                     <h1>Date a conocer </h1>
                     <h2>con WorkMerge</h2>
-                    <p>Miles de reclutadores en todo el mundo estan buscandote postulantes para cubrir las mas variadas
+                    <p>Miles de reclutadores en todo el mundo están buscando postulantes para cubrir las más variadas
                         ofertas laborales.
-                        Las posibilidades en la era de la hiperconectividad sobrepasan los limites de la presencialidad.
+                        Las posibilidades en la era de la hiperconectividad sobrepasan los límites de la presencialidad.
                         No te quedes afuera del cambio, ¡Anunciate y date a conocer con nuestras poderosas opciones
                         especiales de alerta!. <a href="/client/form">Registrarse!</a></p>
                     <a href=""></a>
                 </div>
 
                 <div class="col_6 ImagenCentro">
-                <!-- src="../static/img/Anunciate!1.png-->    
-                <!-- src="/src/main/resources/static/img/Anunciate!1.png" -->
-                    <img class="img1" src="../img/Anunciate!1.png" alt="356-314">
+
+                    <img class="sobre" src="../img/Anunciate1.png" alt="356-314">
+                    <img class="debajo" src="../img/Anunciate!2.png" alt="356-314"> 
 
                 </div>
             </div>
@@ -108,13 +112,16 @@
             <div class="col_10">
 
                 <div class="col_6 ImagenCentro">
-                <!-- src= "../static/img/recluters.png"-->    
-                <!-- src="/src/main/resources/static/img/recluters.png" -->
-                    <img class="img1" src="../img/recluters.png" alt="356-314">
+
+
+                    <img class="sobre" src="../img/recluters1.png" alt="356-314">
+                    <img class="debajo" src="../img/recluters3.png" alt="356-314">
+
 
                 </div>
 
                 <div class="col_6 TextoCentro2">
+
                     <h1>Publique y reclute</h1>
                     <h2>en WorkMerge</h2>
                     <p>Con nuestras herramientas de preselección de personal, podrás conectarte con trabajadores y profesionales
@@ -123,6 +130,7 @@
                         sitio se encargue de generar alertas a nuestros usuarios!. 
                         Consiga mas rápido para su empresa perfiles con nuestras opciones especiales 
                         de URGENCIA.  <a href="/company/form">Registrarse!</a> </p>                   
+
                 </div>
             </div>
 
@@ -141,8 +149,9 @@
         </div>
 
         <div class="contenedor">
-            <small class="copy"> WorkMerge 2021 &copy; Todos los derechos reservados. 
-                <address class="copy2" align= "center">Argentina</address></small>
+
+            <small class="copy"> WorkMerge 2021/Todos los derechos reservados. 
+                <address class="copy2" style="text-align: center;">Argentina</address></small>
 
         </div>
         <div class="contenedor"><a th:href="@{/admin}" class="btn btn-danger">Admins entry </a></div>

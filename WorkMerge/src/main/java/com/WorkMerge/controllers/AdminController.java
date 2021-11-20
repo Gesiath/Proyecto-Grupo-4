@@ -19,6 +19,7 @@ import com.WorkMerge.entities.Company;
 import com.WorkMerge.entities.Job;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.services.AdminService;
+import com.WorkMerge.services.JobService;
 
 @Controller
 @PreAuthorize("isAuthenticated()")
@@ -27,6 +28,9 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private JobService jobService;
 	
 	private final String viewPath = "admin/";
 	
@@ -89,6 +93,30 @@ public class AdminController {
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			return "redirect:/admin";
+		}
+		
+	}
+	
+	@GetMapping("alta/{idJob}")
+	public String alta(ModelMap modelo, @PathVariable("t.id") String idJob) {
+		try {
+			jobService.upgradeJob(idJob);
+			return this.viewPath.concat("tableroAdminPost");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return this.viewPath.concat("tableroAdminPost");
+		}
+		
+	}
+	
+	@GetMapping("baja/{idJob}")
+	public String baja(ModelMap modelo, @PathVariable("t.id") String idJob) {
+		try {
+			jobService.downgradeJob(idJob);
+			return this.viewPath.concat("tableroAdminPost");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return this.viewPath.concat("tableroAdminPost");
 		}
 		
 	}

@@ -39,6 +39,9 @@ public class CompanyService implements UserDetailsService {
 	@Autowired
 	private JobService jobService;
 	
+	@Autowired
+	private PhotoService photoService;
+	
 	//@Autowired private PhotoService photoService;
 	
 	@Override
@@ -71,7 +74,7 @@ public class CompanyService implements UserDetailsService {
 	//CREAR COMPAÑIA
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	//Photo photo,MultipartFile archive (CARGAR FOTO)
-	public void newCompany(String email, String password, String password2)throws ServiceException {
+	public void newCompany(String email, String password, String password2, MultipartFile file)throws ServiceException {
 		
 		validate(email, password, password2);
 		
@@ -83,7 +86,8 @@ public class CompanyService implements UserDetailsService {
 		company.setEmail(email);
 		company.setPassword(encript);
 		
-		//photo = photoService.saved(archive); company.setPhoto(photo);
+		Photo photo = photoService.saved(file);
+		company.setPhoto(photo);	
 	    
 		companyRepository.save(company);
 	}
