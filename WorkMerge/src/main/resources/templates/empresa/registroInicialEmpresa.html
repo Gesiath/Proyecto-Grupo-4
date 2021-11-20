@@ -47,7 +47,7 @@
               <h1>Registrarse con sus datos</h1>
             </div>
             
-              <form th:action="@{/company/save}" class="px-4 py-3" method="POST">
+              <form th:action="@{/company/save}" class="px-4 py-3" method="POST" enctype="multipart/form-data">
                   <div class="card-body">
                 <div class="mb-3">
                   <label for="correoElectronico" class="form-label"
@@ -79,6 +79,15 @@
                   />
                 </div>
                 
+                <div class="mb-3">
+                    		<label for="Photo">Foto* - Máximo 1MB</label>
+                   <input
+
+                   		type="file" 
+                   		class="form-control" 
+                   		name="photo" 
+                   		th:value="${photo}" >
+                </div>
 
                 <br>
                   <button type="submit" class="btn btn-dark">
