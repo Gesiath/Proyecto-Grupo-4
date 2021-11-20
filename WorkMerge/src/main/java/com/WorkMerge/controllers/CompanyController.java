@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.WorkMerge.entities.Company;
 import com.WorkMerge.entities.Job;
@@ -37,9 +38,9 @@ public class CompanyController {
 			
 	@PostMapping("/save")
 	public String createCompany(@RequestParam("email") String email, @RequestParam("password") String password,
-			@RequestParam("password2") String password2) {
+			@RequestParam("password2") String password2,@RequestParam("photo") MultipartFile file) {
 		try {
-			companyService.newCompany(email, password, password2);
+			companyService.newCompany(email, password, password2,file);
 			Company c = companyService.obtenerPorMail(email);
 			String id = c.getId();
 			return "redirect:/company/loadCom/".concat(id);
