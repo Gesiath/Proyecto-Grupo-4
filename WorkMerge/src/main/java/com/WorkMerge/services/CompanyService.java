@@ -2,6 +2,7 @@ package com.WorkMerge.services;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -105,7 +106,7 @@ public class CompanyService implements UserDetailsService {
 	
 	//CARGAR TRABAJOS
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void uploadJobs(String idCompany, String title, String datepost, String availability, String category, String description,String salary, String experienceRequired) throws ServiceException, ParseException {
+	public void uploadJobs(String idCompany, String title, Date	 datepost, String availability, String category, String description,String salary, String experienceRequired) throws ServiceException, ParseException {
 		
 		List<Job> listJobs = jobService.listJobs(idCompany, title, datepost, availability, category, description, salary, experienceRequired);
 		

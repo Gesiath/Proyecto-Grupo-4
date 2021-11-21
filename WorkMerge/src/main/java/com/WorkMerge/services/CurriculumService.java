@@ -169,7 +169,7 @@ public class CurriculumService {
 				break;
 			}
 			curriculum.setAddress(address);
-			Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(birthday); 
+			Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(birthday); 
 			curriculum.setBirthday(date1);
 			Long phoneLong = Long.parseLong(phone);
 			curriculum.setPhone(phoneLong);

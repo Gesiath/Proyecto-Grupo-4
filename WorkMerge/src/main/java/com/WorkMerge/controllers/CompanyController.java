@@ -1,6 +1,7 @@
 package com.WorkMerge.controllers;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,10 +116,11 @@ public class CompanyController {
 	}
 	
 	@PostMapping("saveJob/{id}")
-	public String registerJob(@PathVariable("id") String id, @RequestParam("titulo") String titulo, @RequestParam("fecha") String fecha,
+	public String registerJob(@PathVariable("id") String id, @RequestParam("titulo") String titulo,
 			@RequestParam("disponibilidad") String disponibilidad, @RequestParam("categoria") String categoria, @RequestParam("descripcion") String descripcion,
 			@RequestParam("salario") String salario, @RequestParam("experiencia") String experiencia) {
 		try {
+			Date fecha = new Date();
 			companyService.uploadJobs(id, titulo, fecha, disponibilidad, categoria, descripcion, salario, experiencia);
 			return "redirect:/company/perfil/".concat(id);
 		} catch (ServiceException e) {

@@ -17,10 +17,11 @@
 		<!--<link rel="stylesheet" href="/src/main/resources/static/css/index.css" /> -->		
 
 		 <link rel="stylesheet" href="/css/index.css" />
+		 <link rel="stylesheet" href="/css/PerfilCliente.css">
 		 		
 
 		 
-		<title>WorkMerge | Datos Cliente</title>
+		<title>WorkMerge | Editar Datos Cliente</title>
 	</head>
 
 	<body>
@@ -51,22 +52,48 @@
 		<div class="container col-5">
 			<div class="card mt-5">
 				<div class="card-header d-flex">
-					<h1>Ingrese sus datos</h1>
+					<h1>Edite sus datos</h1>
 				</div>
 				<div class="card-body">
-					<form 
-						th:action="@{/client/saveCv/{id}(id=${cliente.id})}" 
+					<form 						
+						th:action="@{/client/updateCv/{id}(id=${cliente.id})}" 						
 						method="POST" 
 						class="col-9 mx-auto"
+						enctype="multipart/form-data"
 					>
 						<!--<input hidden th:field="*{id}" />-->
+						
+						
+						
+        
+                <div class="perfil-usuario-avatar">
 
+                    <img th:if="${cliente.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/img/avatar_user.png}" alt="img-avatar">
+    				<img th:unless="${cliente.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/photo/load/} + ${cliente.photo.id}" alt="img-avatar">	
+
+                    <div class="mb-3">
+                    		<label for="Photo">Foto* - Máximo 1MB</label>
+                   <input
+                   		 
+                   		type="file" 
+                   		class="form-control" 
+                   		name="photo" 
+                   		th:value="${cliente.photo}"
+                   		>
+                </div>
+                </div>
+                <br>
+
+						
+						
+						
 						<div class="mb-3">
 							<label for="nombre" class="form-label">Nombre</label>
 							<input
 								type="text"
 								class="form-control"
-								name="nombre"														
+								name="nombre"
+								th:value="${cliente.curriculum.name}"																				
 								placeholder="Nombre"
 																
 							/><!-- th:field="*{name}" -->
@@ -77,6 +104,7 @@
 								type="text"
 								class="form-control"								
 								name="apellido"
+								th:value="${cliente.curriculum.surname}"
 								placeholder="Apellido"
 							/>
 						</div><!-- th:field="*{surname}" -->
@@ -86,17 +114,19 @@
 							<input 
 								type="text" 
 								class="form-control" 
-								name="dni"								
+								name="dni"
+								th:value="${cliente.curriculum.dni}"								
 								placeholder="123456789"
 							/><!-- th:field="*{dni}" -->
 						</div>
 
 						<div class="dropdown">
 							<label for="genero" class="form-label">Genero</label>
-							<select class="form-select" name="genero">
-								<option value="female">Femenino</option>
-								<option value="male">Masculino</option>
-								<option value="nobinary">No binario</option>
+							<select class="form-select" name="genero">								
+								<option value="female" >Femenino</option>
+								<option value="male" >Masculino</option>
+								<option value="nobinary" >No binario</option>
+								
 							</select>
 						</div>
 						<br />
@@ -133,6 +163,7 @@
 								type="text"
 								class="form-control"								
 								name="domicilio"
+								th:value="${cliente.curriculum.address}"
 								placeholder="Domicilio"
 							/><!-- th:field="*{address}" -->
 						</div>
@@ -142,6 +173,7 @@
 								type="text"
 								class="form-control"								
 								name="fecha"
+								th:value="${cliente.curriculum.birthday}"
 								placeholder="Fecha de nacimiento"
 							/><!-- th:field="*{birthday}" -->
 						</div>
@@ -151,6 +183,7 @@
 								type="text"
 								class="form-control"								
 								name="telefono"
+								th:value="${cliente.curriculum.phone}"
 								placeholder="123 456 789"
 							/><!-- th:field="*{phone}" -->
 						</div>
@@ -159,9 +192,11 @@
 							<textarea
 								cols="50"
 								rows="3"
-								class="form-control"								
-								placeholder="Ingrese sus últimos estudios alcanzados..."
+								class="form-control"
 								name="educacion"
+								th:text="${cliente.curriculum.education}"								
+								placeholder="Ingrese sus últimos estudios alcanzados..."								
+								
 							></textarea><!-- th:field="*{education}" -->
 						</div>
 						<div class="mb-3">
@@ -171,6 +206,7 @@
 								rows="3"
 								class="form-control"								
 								placeholder="Ingrese su última experiencia laboral..."
+								th:text="${cliente.curriculum.workexperience}"
 								name="experienciaLaboral"
 							></textarea><!-- th:field="*{workexperience}" -->
 						</div>
@@ -181,6 +217,7 @@
 								rows="3"
 								class="form-control"								
 								placeholder="Idiomas..."
+								th:text="${cliente.curriculum.language}"
 								name="idiomas"
 							></textarea><!-- th:field="*{language}" -->
 						</div>
@@ -193,6 +230,7 @@
 								rows="3"
 								class="form-control"								
 								placeholder="Ingrese sus habilidades..."
+								th:text="${cliente.curriculum.skills}"
 								name="habilidadesInformáticas"
 							></textarea><!-- th:field="*{skills}" -->
 						</div>

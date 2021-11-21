@@ -23,6 +23,7 @@ import com.WorkMerge.services.PhotoService;
 		private PhotoService photoService;
 		@Autowired
 		private PhotoRepository photoRepository;
+		
 		@GetMapping("/load/{id}")
 		public ResponseEntity<byte[]> photo(@PathVariable String id) {
 			Photo photo = photoRepository.getOne(id);
