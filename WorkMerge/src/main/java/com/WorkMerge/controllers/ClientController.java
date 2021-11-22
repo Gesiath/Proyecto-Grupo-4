@@ -130,8 +130,7 @@ public class ClientController {
 	public String enviarMail(@PathVariable String idJob, @PathVariable String idCli) {
 
 		try {
-			//clientService.obtenerPorId(idCli).getEmail();
-			String mailCli = "maximongelos@gmail.com";
+			String mailCli = clientService.obtenerPorId(idCli).getEmail();
 			notificationService.notificar(idJob, mailCli);
 			return "redirect:/";
 		} catch (Exception e) {
