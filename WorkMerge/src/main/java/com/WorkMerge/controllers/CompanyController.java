@@ -122,7 +122,6 @@ public class CompanyController {
 			companyService.uploadJobs(id, titulo, fecha, disponibilidad, categoria, descripcion, salario, experiencia);
 			return "redirect:/company/perfil/".concat(id);
 		} catch (ServiceException e) {
-			e.getMessage("ERROR COMUN");
 			return "redirect:/";
 		} catch (ParseException e) {
 			e.printStackTrace();

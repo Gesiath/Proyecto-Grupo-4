@@ -94,10 +94,12 @@
                 <label class="h6"><b>Descripcion del trabajo:</b></label>                
                 <li class="list-group-item card-text" th:text="${job.description}"></li>
               </div>
+              	<form th:action="@{/client/mailsender/__${job.id}__/}+${session.usersession.id}" method="POST">
+					<div class="card-body">
+		                <button type="submit" class="btn btn-outline-dark" style="margin-left: 80px">Postularme!</button>
+	                 </div>
+				</form>
               
-              <div class="card-body">
-                <a href="" class="btn btn-outline-dark" style="margin-left: 80px">Postularme!</a>
-              </div>
               </ul>
             </div>
             </div>

@@ -19,6 +19,7 @@ import com.WorkMerge.entities.Job;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.services.ClientService;
 import com.WorkMerge.services.JobService;
+import com.WorkMerge.services.NotificationService;
 
 @Controller
 @RequestMapping("/client")
@@ -29,6 +30,9 @@ public class ClientController {
 	
 	@Autowired
 	private JobService jobService;
+	
+	@Autowired
+	private NotificationService notificationService;
 	
 	private final String viewPath = "cliente/";
 	
@@ -120,5 +124,18 @@ public class ClientController {
 			return "redirect:/admin";
 		}
 		
+	}
+	
+	@PostMapping("/mailsender/{idJob}/{idCli}")
+	public String enviarMail(@PathVariable String idJob, @PathVariable String idCli) {
+
+		try {
+			//clientService.obtenerPorId(idCli).getEmail();
+			String mailCli = "maximongelos@gmail.com";
+			notificationService.notificar(idJob, mailCli);
+			return "redirect:/";
+		} catch (Exception e) {
+			return "redirect:/";
+		}
 	}
 }
