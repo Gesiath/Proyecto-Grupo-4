@@ -119,40 +119,42 @@
 								placeholder="123456789"
 							/><!-- th:field="*{dni}" -->
 						</div>
-
 						<div class="dropdown">
 							<label for="genero" class="form-label">Genero</label>
-							<select class="form-select" name="genero">								
-								<option value="female" >Femenino</option>
-								<option value="male" >Masculino</option>
-								<option value="nobinary" >No binario</option>
-								
-							</select>
+							<select class="form-select" name="genero">
+    								<option th:each="genero : ${T(com.WorkMerge.enums.Gender).values()}"
+            								th:value="${genero}"
+            								th:text="${genero.getValue}"
+            								th:selected="(${genero} == *{cliente.curriculum.gender})"
+            								>            								       								
+    								</option>
+							</select>						
 						</div>
+						
 						<br />
 						<div class="dropdown">
 							<label for="nacionalidad" class="form-label">Nacionalidad</label>
 							<select class="form-select" name="nacionalidad">
-								<option value="ARGENTINA">Argentina</option>
-								<option value="CHILE">Chile</option>
-								<option value="PERU">Peru</option>
-								<option value="URUGUAY">Uruguay</option>
-								<option value="BRASIL">Brasil</option>
-								<option value="PARAGUAY">Paraguay</option>
-								<option value="BOLIVIA">Bolivia</option>
+							
+								<option th:each="nacionalidad : ${T(com.WorkMerge.enums.Nationality).values()}"
+            								th:value="${nacionalidad}"
+            								th:text="${nacionalidad.getValue}"
+            								th:selected="(${nacionalidad} == *{cliente.curriculum.nationality})"
+            								>            								       								
+    							</option>
+								
 							</select>
 						</div>
 						<br />
 						<div class="dropdown">
 							<label for="ciudad" class="form-label">Ciudad</label>
 							<select class="form-select" name="ciudad">
-								<option value="ROSARIO">Rosario</option>
-								<option value="BAIGORRIA">Baigorria</option>
-								<option value="VGG">Villa Gobernador Galvez</option>
-								<option value="ACEBAL">Acebal</option>
-								<option value="ARROYOSECO">Arroyo Seco</option>
-								<option value="FUNES">Funes</option>
-								<option value="PUEBLOESTHER">Pueblo Esther</option>
+								<option th:each="ciudad : ${T(com.WorkMerge.enums.City).values()}"
+            								th:value="${ciudad}"
+            								th:text="${ciudad.getValue}"
+            								th:selected="(${ciudad} == *{cliente.curriculum.city})"
+            								>            								       								
+    							</option>
 							</select>
 						</div>
 						<br />

@@ -112,7 +112,7 @@ public class ClientController {
 	
 	@GetMapping("/editCv/{id}")
 	public String editCv(ModelMap modelo, @PathVariable("id") String id) {
-		try {
+		try {	
 			modelo.addAttribute("cliente", clientService.obtenerPorId(id));
 			return this.viewPath.concat("EditarCliente");
 		} catch (ServiceException e) {
@@ -130,8 +130,8 @@ public class ClientController {
 			@RequestParam("educacion") String educacion, 
 			@RequestParam("experienciaLaboral") String experienciaLaboral, @RequestParam("idiomas") String idiomas,
 			@RequestParam("habilidadesInformáticas") String habilidadesInformáticas,@RequestParam("photo") MultipartFile file) {
-		try {
-			clientService.modifyClient(id, nombre, apellido, dni, genero, nacionalidad, ciudad, domicilio, fecha, telefono, educacion, experienciaLaboral, idiomas, habilidadesInformáticas, file);
+		try {			
+			clientService.modifyClient(id, nombre, apellido, dni, genero, nacionalidad, domicilio, ciudad, fecha, telefono, educacion, experienciaLaboral, idiomas, habilidadesInformáticas, file);
 			return "redirect:/client/perfilCli/".concat(id);
 		} catch (ServiceException e) {
 			e.printStackTrace();

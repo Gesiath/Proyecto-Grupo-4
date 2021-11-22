@@ -87,8 +87,10 @@ public class ClientService implements UserDetailsService {
 		if(respuesta.isPresent()) {
 			Client p = respuesta.get();
 			Photo photo = photoService.saved(file);
-			p.setPhoto(photo);
-			Curriculum cv = curriculumService.updateCurriculum(p.getCurriculum().getId(), name, surname, dni, gender, nationality, city, address, birthday, phone, education, workexperience, language, skills);
+			if (!photo.getMime().equalsIgnoreCase("application/octet-stream")) {
+				p.setPhoto(photo);
+			}			
+			Curriculum cv = curriculumService.updateCurriculum(p.getCurriculum().getId(), name, surname, dni, gender, nationality, address, city, birthday, phone, education, workexperience, language, skills);
 			p.setCurriculum(cv);
 			return clientRepository.save(p);
 		}else {
