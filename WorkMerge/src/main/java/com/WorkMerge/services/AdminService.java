@@ -157,7 +157,24 @@ public class AdminService implements UserDetailsService {
 		return adminRepository.findAll();
 	}
 	
-	//VALIDAR 
+
+	public List<Admin> findActiveByQ(String q){
+        return adminRepository.findActiveByQ("%"+q+"%");
+    }
+	
+	public List<Company> findCompanyByQ(String q){
+        return adminRepository.findCompanyByQ("%"+q+"%");
+    }
+	
+	public List<Client> findClientByQ(String q){
+        return adminRepository.findClientByQ("%"+q+"%");
+    }
+	
+	public List<Job> findJobByQ(String q){
+        return adminRepository.findJobByQ("%"+q+"%");
+    }
+	
+
 	private void validate(String email, String password, String nickname) throws ServiceException{
 		if(email == null || email.isEmpty()) {
 			throw new ServiceException("El email no puede ser nulo o estar vacio.");

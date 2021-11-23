@@ -1,9 +1,11 @@
 package com.WorkMerge.controllers;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import com.WorkMerge.services.CompanyService;
 import com.WorkMerge.services.JobService;
 
 @Controller
+@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 @RequestMapping("/company")
 public class CompanyController {
 	
@@ -115,10 +118,11 @@ public class CompanyController {
 	}
 	
 	@PostMapping("saveJob/{id}")
-	public String registerJob(@PathVariable("id") String id, @RequestParam("titulo") String titulo, @RequestParam("fecha") String fecha,
+	public String registerJob(@PathVariable("id") String id, @RequestParam("titulo") String titulo,
 			@RequestParam("disponibilidad") String disponibilidad, @RequestParam("categoria") String categoria, @RequestParam("descripcion") String descripcion,
 			@RequestParam("salario") String salario, @RequestParam("experiencia") String experiencia) {
 		try {
+			Date fecha = new Date();
 			companyService.uploadJobs(id, titulo, fecha, disponibilidad, categoria, descripcion, salario, experiencia);
 			return "redirect:/company/perfil/".concat(id);
 		} catch (ServiceException e) {
@@ -151,6 +155,32 @@ public class CompanyController {
 			e.printStackTrace();
 			return "redirect:/company/perfil/".concat(idCon);
 		}
+		
+	}
+	
+	@GetMapping("/editCv/{id}")
+	public String editCv(ModelMap modelo, @PathVariable("id") String id) {
+		try {	
+			modelo.addAttribute("empresa", companyService.obtenerPorId(id));
+			return this.viewPath.concat("EditarEmpresa");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return "redirect:/company/perfil";
+		}
+		
+	}
+	
+	
+	@PostMapping("/updateCv/{id}")
+	public String updateCv(@PathVariable("id") String id, @RequestParam("nombre") String nombre,@RequestParam("photo") MultipartFile file) {
+		try {
+			companyService.updateCompany(id, nombre, file);
+			return "redirect:/company/perfil/".concat(id);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return "redirect:/company/perfil/".concat(id);
+		}
+		
 		
 	}
 	

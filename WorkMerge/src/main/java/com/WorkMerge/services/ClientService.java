@@ -103,17 +103,19 @@ public class ClientService implements UserDetailsService {
 	//MODIFICAR CLIENTE
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })//Transactional (se pone porque cambia algo en la base de datos)
 
-	public Client modifyClient(String id, String email, String password,String password2, Photo photo) throws ServiceException {
-		validar(email,password,password2);
+	public Client modifyClient(String id, String name, String surname, String dni, String  gender,
+			String nationality, String address, String  city, String birthday, String phone, String education,
+			String workexperience, String language, String skills,MultipartFile file ) throws ServiceException, ParseException {
+		
 		Optional<Client> respuesta = clientRepository.findById(id);
 		if(respuesta.isPresent()) {
 			Client p = respuesta.get();
-			p.setEmail(email);
-			String encript = new BCryptPasswordEncoder().encode(password); //ENCRIPTANDO PASSWORD
-			p.setPassword(encript);
-			//p.setCurriculum(curriculum);
-			p.setPhoto(photo);
-			p.setActive(true);
+			Photo photo = photoService.saved(file);
+			if (!photo.getMime().equalsIgnoreCase("application/octet-stream")) {
+				p.setPhoto(photo);
+			}			
+			Curriculum cv = curriculumService.updateCurriculum(p.getCurriculum().getId(), name, surname, dni, gender, nationality, address, city, birthday, phone, education, workexperience, language, skills);
+			p.setCurriculum(cv);
 			return clientRepository.save(p);
 		}else {
 			throw new ServiceException("No se encontro el cliente solicitado");

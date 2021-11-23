@@ -1,7 +1,6 @@
 package com.WorkMerge.services;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -27,15 +26,16 @@ public class JobService {
 
 	//CREAR TRABAJO	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public Job newJob(String idCompany, String title, String datepost, String availability, String category, String description,String salary, String experienceRequired) throws ServiceException, ParseException{
+
+	public Job newJob(String idCompany, String title, Date datepost, String availability, String category, String description,String salary, String experienceRequired) throws ServiceException, ParseException{
+
 		
 		//validate(title, datepost, availability, category, description, salary, experienceRequired);
 
 		Job newJob = new Job();
 		
-		newJob.setTitle(title);
-		Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(datepost); 
-		newJob.setDatepost(date1);
+		newJob.setTitle(title); 
+		newJob.setDatepost(datepost);
 		newJob.setAvailability(availability);
 		newJob.setCategory(category);
 		newJob.setDescription(description);
@@ -49,7 +49,7 @@ public class JobService {
 	
 	//CREAR LISTA DE TRABAJOS
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public List<Job> listJobs(String idCompany, String title, String datepost, String availability, String category, String description,String salary, String experienceRequired) throws ServiceException, ParseException{
+	public List<Job> listJobs(String idCompany, String title, Date datepost, String availability, String category, String description,String salary, String experienceRequired) throws ServiceException, ParseException{
 		
 		Company company = companyService.obtenerPorId(idCompany);
 		

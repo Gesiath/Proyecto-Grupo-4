@@ -33,6 +33,7 @@
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 					
 					<h3 class="me-md-2">Bienvenido, <span th:text="${company.name}"></span></h3>
+					<a id= "empresa" th:href="@{/company/editCv/}+${session.usersession.id}" class="btn btn-outline-light me-md-2" >Editar información</a>
 					<a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
 					<!-- <button id="cliente" class="btn btn-warning" type="button"><a th:href="@{/client/form}">Registrarse como cliente </a></button>
                 <button id="empresa" class="btn btn-warning" type="button"><a th:href="@{/company/form}">Registrarse como empresa</a></button> -->
@@ -48,9 +49,7 @@
                     <img th:if="${company.photo.getMime().equalsIgnoreCase('application/octet-stream')}"th:src="@{/img/avatar_user.png}" alt="img-avatar">
     				<img th:unless="${company.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/photo/load/} + ${company.photo.id}" alt="img-avatar">	
 
-                    <button type="button" class="boton-avatar">
-                        <i class="far fa-image"></i>
-                    </button>
+                    <a id= "company" th:href="@{/company/editCv/}+${session.usersession.id}"  class="btn boton-avatar" ><i class="far fa-image"></i></a>
                 </div>
 <!--                 <button type="button" class="boton-portada">
                     <i class="far fa-image"></i> Cambiar fondo
@@ -145,6 +144,10 @@
 					</table>
 				</div>
 			</div>
+			
+			
+        
+    
 		</div>
 
 		<footer class="container-fluid">

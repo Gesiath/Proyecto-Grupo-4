@@ -36,60 +36,23 @@ public class CurriculumService {
 		curriculum.setSurname(surname);
 		Long dniLong = Long.parseLong(dni);
 		curriculum.setDni(dniLong);
-		if (gender.equalsIgnoreCase("female")) {
-			curriculum.setGender(Gender.FEMALE);
-		} else if (gender.equalsIgnoreCase("male")) {
-			curriculum.setGender(Gender.MALE);
-		} else if (gender.equalsIgnoreCase("nobinary")) {
-			curriculum.setGender(Gender.NOBINARY);
+		
+		for (Gender genders : Gender.values()) {				
+			if (gender.toString().equals(genders.toString())) {					
+				curriculum.setGender(genders);
+			}
 		}
-
-		switch (nationality) {
-		case "ARGENTINA":
-			curriculum.setNationality(Nationality.ARGENTINA);
-			break;
-		case "CHILE":
-			curriculum.setNationality(Nationality.CHILE);
-			break;
-		case "PERU":
-			curriculum.setNationality(Nationality.PERU);
-			break;
-		case "URUGUAY":
-			curriculum.setNationality(Nationality.URUGUAY);
-			break;
-		case "BOLIVIA":
-			curriculum.setNationality(Nationality.BOLIVIA);
-			break;
-		case "BRASIL":
-			curriculum.setNationality(Nationality.BRASIL);
-			break;
-		case "PARAGUAY":
-			curriculum.setNationality(Nationality.PARAGUAY);
-			break;
+		
+		for (Nationality nationalities : Nationality.values()) {				
+			if (nationality.toString().equals(nationalities.toString())) {					
+				curriculum.setNationality(nationalities);
+			}
 		}
-
-		switch (city) {
-		case "ROSARIO":
-			curriculum.setCity(City.ROSARIO);
-			break;
-		case "BAIGORRIA":
-			curriculum.setCity(City.GRANADERO_BAIGORRIA);
-			break;
-		case "VGG":
-			curriculum.setCity(City.VILLA_GOBERNADOR_GÁLVEZ);
-			break;
-		case "ACEBAL":
-			curriculum.setCity(City.ACEBAL);
-			break;
-		case "ARROYOSECO":
-			curriculum.setCity(City.ARROYO_SECO);
-			break;
-		case "FUNES":
-			curriculum.setCity(City.FUNES);
-			break;
-		case "PUEBLOESTHER":
-			curriculum.setCity(City.PUEBLO_ESTHER);
-			break;
+		
+		for (City cities : City.values()) {				
+			if (city.toString().equals(cities.toString())) {					
+				curriculum.setCity(cities);
+			}
 		}
 
 		curriculum.setAddress(address);
@@ -118,64 +81,29 @@ public class CurriculumService {
 			curriculum.setName(name);
 			curriculum.setSurname(surname);
 			Long dniLong = Long.parseLong(dni);
-			curriculum.setDni(dniLong);
-			if (gender.equalsIgnoreCase("female")) {
-				curriculum.setGender(Gender.FEMALE);
-			} else if (gender.equalsIgnoreCase("male")) {
-				curriculum.setGender(Gender.MALE);
-			} else if (gender.equalsIgnoreCase("nobinary")) {
-				curriculum.setGender(Gender.NOBINARY);
+			curriculum.setDni(dniLong);			
+			
+			for (Gender genders : Gender.values()) {				
+				if (gender.toString().equals(genders.toString())) {					
+					curriculum.setGender(genders);
+				}
+			}
+			
+			for (Nationality nationalities : Nationality.values()) {				
+				if (nationality.toString().equals(nationalities.toString())) {					
+					curriculum.setNationality(nationalities);
+				}
+			}
+			
+			for (City cities : City.values()) {				
+				if (city.toString().equals(cities.toString())) {					
+					curriculum.setCity(cities);
+				}
 			}
 
-			switch (nationality) {
-			case "ARGENTINA":
-				curriculum.setNationality(Nationality.ARGENTINA);
-				break;
-			case "CHILE":
-				curriculum.setNationality(Nationality.CHILE);
-				break;
-			case "PERU":
-				curriculum.setNationality(Nationality.PERU);
-				break;
-			case "URUGUAY":
-				curriculum.setNationality(Nationality.URUGUAY);
-				break;
-			case "BOLIVIA":
-				curriculum.setNationality(Nationality.BOLIVIA);
-				break;
-			case "BRASIL":
-				curriculum.setNationality(Nationality.BRASIL);
-				break;
-			case "PARAGUAY":
-				curriculum.setNationality(Nationality.PARAGUAY);
-				break;
-			}
-
-			switch (city) {
-			case "ROSARIO":
-				curriculum.setCity(City.ROSARIO);
-				break;
-			case "BAIGORRIA":
-				curriculum.setCity(City.GRANADERO_BAIGORRIA);
-				break;
-			case "VGG":
-				curriculum.setCity(City.VILLA_GOBERNADOR_GÁLVEZ);
-				break;
-			case "ACEBAL":
-				curriculum.setCity(City.ACEBAL);
-				break;
-			case "ARROYOSECO":
-				curriculum.setCity(City.ARROYO_SECO);
-				break;
-			case "FUNES":
-				curriculum.setCity(City.FUNES);
-				break;
-			case "PUEBLOESTHER":
-				curriculum.setCity(City.PUEBLO_ESTHER);
-				break;
-			}
+			
 			curriculum.setAddress(address);
-			Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(birthday); 
+			Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(birthday); 
 			curriculum.setBirthday(date1);
 			Long phoneLong = Long.parseLong(phone);
 			curriculum.setPhone(phoneLong);

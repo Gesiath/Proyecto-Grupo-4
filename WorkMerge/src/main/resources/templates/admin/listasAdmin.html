@@ -29,6 +29,7 @@
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 		
 			<a href="/admin" class="btn btn-dark px-5 py-2 ms-auto">Inicio</a>
+			<a th:href="@{/admin/listasAdmin}" class="btn btn-warning">Tabla admins</a>
             <a th:href="@{/admin/adminClientes}" class="btn btn-warning">Tabla clientes</a>
             <a th:href="@{/admin/adminEmpresas}" class="btn btn-warning">Tabla empresas</a>
             <a th:href="@{/admin/adminTrabajos}" class="btn btn-warning">Tabla trabajos</a>
@@ -60,14 +61,18 @@
 				
 				</div>
 				<div class="card-body">
-					<form class="row g-3" th:action="@{/persona/list}" method="GET">
-						<div class="col">
-                        <input type="text" style="width: 100%;" class="form-control"  name="search" required placeholder="Buscar..">
+					<div class="card mb-4">
+                    <div class="card-header" style="background-color: rgb(179, 179, 179);" ><b>Busqueda de admins</b></div> <!-- .card-header ln.css.Ln4566 -->
+                    <form th:action="@{/admin/listasAdmin}"method="GET">
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="q" placeholder="Ej: Por Nickname o email"
+                                aria-label="Enter search term..." aria-describedby="button-search" />
+                            <button class="btn btn-primary" id="button-search" type="submit">Ir!</button>
+                        </div>
                     </div>
-						<div class="col-2">
-							<button type="submit" class="btn btn-dark mb-3">Buscar</button>
-						</div>
-					</form>
+                    </form>
+                </div>
 					<table class="col-md-8 table table-dark table-hover">
 						<thead>
 							<tr class="h5">

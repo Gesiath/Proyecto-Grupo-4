@@ -74,9 +74,9 @@
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div th:each="job : ${jobs}">
             <div class="card shadow mb-5 mt-4"  style="width: 20rem; margin: 20px;">
-              <img
-                src="https://thumbs.dreamstime.com/b/icono-de-la-ingenier%C3%ADa-inform%C3%A1tica-engranaje-y-ordenador-port%C3%A1til-s%C3%ADmbolo-del-desarrollo-113174897.jpg"
-                class="card-img-top" alt=""/>
+            <img th:if="${job.getCompany().getPhoto.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/img/avatar_user.png}" alt="img-avatar">
+              <img th:unless="${job.getCompany().getPhoto.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/photo/load/} + ${job.getCompany().getPhoto().id}" alt="img-avatar">
+              
               <div class="card-body">
                 <h3 class="card-title text-center" th:text="${job.title}"></h3>
                 <small class="text-muted" th:text="${job.datepost}"></small>
