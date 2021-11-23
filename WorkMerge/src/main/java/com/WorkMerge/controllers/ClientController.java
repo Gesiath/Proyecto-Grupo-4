@@ -23,7 +23,6 @@ import com.WorkMerge.services.JobService;
 import com.WorkMerge.services.NotificationService;
 
 @Controller
-@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
 @RequestMapping("/client")
 public class ClientController {
 	
@@ -43,6 +42,7 @@ public class ClientController {
 		return this.viewPath.concat("registroInicialCliente");
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
 	@GetMapping("/perfilCli/{id}")
 	public String perfilClient (@PathVariable("id") String id, ModelMap modelo)	{
 		try {
@@ -55,6 +55,7 @@ public class ClientController {
 		}
 	}	
 
+	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
 	@GetMapping("/hubCli/{id}")
 	public String inicioClient (@PathVariable("id") String id, ModelMap modelo,@RequestParam(required = false) String q)	{
 		
@@ -117,6 +118,7 @@ public class ClientController {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
 	@GetMapping("/editCv/{id}")
 	public String editCv(ModelMap modelo, @PathVariable("id") String id) {
 		try {	
@@ -129,7 +131,7 @@ public class ClientController {
 		
 	}
 	
-	
+	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
 	@PostMapping("/updateCv/{id}")
 	public String updateCv(@PathVariable("id") String id, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido, 
 			@RequestParam("dni") String dni, @RequestParam("genero") String genero, @RequestParam("nacionalidad") String nacionalidad,
@@ -151,7 +153,7 @@ public class ClientController {
 		
 	}
 	
-	
+	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
 	@GetMapping("/eliminar/{id}")
 	public String deleteClint(@PathVariable("id") String id) {
 		try {
@@ -164,6 +166,7 @@ public class ClientController {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_CLIENT')")
 	@PostMapping("/mailsender/{idJob}/{idCli}")
 	public String enviarMail(@PathVariable String idJob, @PathVariable String idCli) {
 

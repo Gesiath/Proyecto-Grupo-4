@@ -54,7 +54,7 @@ public class NotificationService {
 			if (job != null ) {
 				//enviarSimpleCliente(job, mailTo);
 				enviarHTMLCliente(job, mailCli);
-				enviarHTMLEmpresa(client, job, "maximongelos@gmail.com");
+				enviarHTMLEmpresa(client, job, mailCon);
 				
 				return true;
 			} else {

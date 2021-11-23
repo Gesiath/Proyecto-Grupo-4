@@ -73,8 +73,8 @@
         
                 <div class="perfil-usuario-avatar">
 
-                    <img th:if="${cliente.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/img/avatar_user.png}" alt="img-avatar">
-    				<img th:unless="${cliente.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/photo/load/} + ${cliente.photo.id}" alt="img-avatar">	
+                    <img width="100%"  height="100%" th:if="${cliente.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/img/avatar_user.png}" alt="img-avatar">
+    				<img width="100%"  height="100%" th:unless="${cliente.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/photo/load/} + ${cliente.photo.id}" alt="img-avatar">	
 
                     <div class="mb-3">
                     		<label for="Photo">Foto* - Máximo 1MB</label>

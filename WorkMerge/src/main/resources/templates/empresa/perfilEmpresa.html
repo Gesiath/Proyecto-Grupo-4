@@ -46,8 +46,8 @@
             <div class="perfil-usuario-portada2">
                 <div class="perfil-usuario-avatar">
 
-                    <img th:if="${company.photo.getMime().equalsIgnoreCase('application/octet-stream')}"th:src="@{/img/avatar_user.png}" alt="img-avatar">
-    				<img th:unless="${company.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/photo/load/} + ${company.photo.id}" alt="img-avatar">	
+                    <img width="100%"  height="100%" th:if="${company.photo.getMime().equalsIgnoreCase('application/octet-stream')}"th:src="@{/img/avatar_user.png}" alt="img-avatar">
+    				<img width="100%"  height="100%" th:unless="${company.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/photo/load/} + ${company.photo.id}" alt="img-avatar">	
 
                     <a id= "company" th:href="@{/company/editCv/}+${session.usersession.id}"  class="btn boton-avatar" ><i class="far fa-image"></i></a>
                 </div>

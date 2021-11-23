@@ -22,7 +22,6 @@ import com.WorkMerge.services.CompanyService;
 import com.WorkMerge.services.JobService;
 
 @Controller
-@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 @RequestMapping("/company")
 public class CompanyController {
 	
@@ -53,6 +52,7 @@ public class CompanyController {
 		}
 	}
 	
+	
 	@GetMapping("/loadCom/{id}")
 	public String registerCom(ModelMap modelo, @PathVariable("id") String id) {
 		try {
@@ -64,6 +64,7 @@ public class CompanyController {
 		}
 		
 	}
+	
 	
 	@PostMapping("/saveCom/{id}")
 	public String createCom(@PathVariable("id") String id, @RequestParam("name") String name) {
@@ -80,6 +81,7 @@ public class CompanyController {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 	@GetMapping("/perfil/{id}")
 	public String perfilCompany (@PathVariable("id") String id, ModelMap modelo)	{
 		try {
@@ -94,6 +96,7 @@ public class CompanyController {
 		}
 	}	
 	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 	@GetMapping("/delete/{id}")
 	public String deleteJob(@PathVariable("id") String id) {
 		try {
@@ -106,6 +109,7 @@ public class CompanyController {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 	@GetMapping("loadJob/{id}")
 	public String createJob(ModelMap modelo, @PathVariable("id") String id) {
 		try {
@@ -117,6 +121,7 @@ public class CompanyController {
 		}
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 	@PostMapping("saveJob/{id}")
 	public String registerJob(@PathVariable("id") String id, @RequestParam("titulo") String titulo,
 			@RequestParam("disponibilidad") String disponibilidad, @RequestParam("categoria") String categoria, @RequestParam("descripcion") String descripcion,
@@ -134,6 +139,7 @@ public class CompanyController {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 	@GetMapping("alta/{idJob}/{idCon}")
 	public String alta(@PathVariable("idJob") String idJob, @PathVariable("idCon") String idCon) {
 		try {
@@ -146,6 +152,7 @@ public class CompanyController {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 	@GetMapping("baja/{idJob}/{idCon}")
 	public String baja(@PathVariable("idJob") String idJob, @PathVariable("idCon") String idCon) {
 		try {
@@ -158,6 +165,7 @@ public class CompanyController {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")		
 	@GetMapping("/editCv/{id}")
 	public String editCv(ModelMap modelo, @PathVariable("id") String id) {
 		try {	
@@ -170,7 +178,7 @@ public class CompanyController {
 		
 	}
 	
-	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 	@PostMapping("/updateCv/{id}")
 	public String updateCv(@PathVariable("id") String id, @RequestParam("nombre") String nombre,@RequestParam("photo") MultipartFile file) {
 		try {

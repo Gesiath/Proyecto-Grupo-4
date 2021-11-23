@@ -10,11 +10,8 @@ body {
     height: 10px;
 
     
-<<<<<<< HEAD
     background-image: url("../img/image-from-rawpixel-id-555782-jpeg.jpg");  
-=======
-    background-image: url("/src/main/resources/static/img/image-from-rawpixel-id-555782-jpeg.jpg");  
->>>>>>> 230535baf01f603b813d47de68d5718f5fcf25af
+
     background-attachment: fixed;
     background-size: 100%;
     
@@ -295,11 +292,4 @@ justify-content: center;
                
 
     }
-
-
-<<<<<<< HEAD
-} 
-=======
-} 
-
->>>>>>> 230535baf01f603b813d47de68d5718f5fcf25af
+}
