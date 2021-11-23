@@ -119,19 +119,26 @@ public class CompanyService implements UserDetailsService {
 	
 	// ACTUALIZAR
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void updateCompany(String id, String password, String password2, String email) throws ServiceException{
+	public void updateCompany(String id, String name, MultipartFile file) throws ServiceException{
 		
-		validate(email, password, password2);
+		//validate(email, password, password2);
 		
 		Optional<Company> compy = companyRepository.findById(id);
-		Company company = compy.get();
-		String encript = new BCryptPasswordEncoder().encode(password);
+		if (compy.isPresent()) {
+			Company company = compy.get();
+			company.setName(name);
+			Photo photo = photoService.saved(file);
+			if (!photo.getMime().equalsIgnoreCase("application/octet-stream")) {
+				company.setPhoto(photo);
+			}	
+			companyRepository.save(company);
+		} else {
+			
+			throw new ServiceException("No se encontro la empresa solicitado");
+		}
 		
-		company.setPassword(encript);
-		//company.setJob(job);
-		//photo = photoService.saved(archive); company.setPhoto(photo);
 	    
-		companyRepository.save(company);
+		
 	}
 	
 	//ELIMINAR TRABAJO

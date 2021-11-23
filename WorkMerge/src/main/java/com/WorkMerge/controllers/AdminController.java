@@ -98,25 +98,37 @@ public class AdminController {
 	}
 	
 	@GetMapping("alta/{idJob}")
-	public String alta(ModelMap modelo, @PathVariable("t.id") String idJob) {
+	public String alta(@PathVariable("idJob") String idJob) {
 		try {
 			jobService.upgradeJob(idJob);
-			return this.viewPath.concat("tableroAdminPost");
+			return "redirect:/admin/adminTrabajos";
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			return this.viewPath.concat("tableroAdminPost");
+			return "redirect:/admin/adminTrabajos";
 		}
 		
 	}
 	
 	@GetMapping("baja/{idJob}")
-	public String baja(ModelMap modelo, @PathVariable("t.id") String idJob) {
+	public String baja(@PathVariable("idJob") String idJob) {
 		try {
 			jobService.downgradeJob(idJob);
-			return this.viewPath.concat("tableroAdminPost");
+			return "redirect:/admin/adminTrabajos";
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			return this.viewPath.concat("tableroAdminPost");
+			return "redirect:/admin/adminTrabajos";
+		}
+		
+	}
+	
+	@GetMapping("/deleteJob/{idJob}")
+	public String deleteJob(@PathVariable("idJob") String id) {
+		try {
+			jobService.deleteJob(id);
+			return "redirect:/admin/adminTrabajos";
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return "redirect:/admin/adminTrabajos";
 		}
 		
 	}

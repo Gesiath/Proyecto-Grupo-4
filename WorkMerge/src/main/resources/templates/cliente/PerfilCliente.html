@@ -58,9 +58,9 @@
                     <img th:if="${client.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/img/avatar_user.png}" alt="img-avatar">
     				<img th:unless="${client.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/photo/load/} + ${client.photo.id}" alt="img-avatar">	
 
-                    <button type="button" class="boton-avatar">
-                        <i class="far fa-image"></i>
-                    </button>
+                    
+                        <a id= "cliente" th:href="@{/client/editCv/}+${session.usersession.id}"  class="btn boton-avatar" ><i class="far fa-image"></i></a>
+                    
                 </div>
 <!--                 <button type="button" class="boton-portada">
                     <i class="far fa-image"></i> Cambiar fondo

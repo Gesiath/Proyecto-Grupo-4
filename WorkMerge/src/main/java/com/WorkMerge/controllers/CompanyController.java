@@ -157,5 +157,31 @@ public class CompanyController {
 		
 	}
 	
+	@GetMapping("/editCv/{id}")
+	public String editCv(ModelMap modelo, @PathVariable("id") String id) {
+		try {	
+			modelo.addAttribute("empresa", companyService.obtenerPorId(id));
+			return this.viewPath.concat("EditarEmpresa");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return "redirect:/company/perfil";
+		}
+		
+	}
+	
+	
+	@PostMapping("/updateCv/{id}")
+	public String updateCv(@PathVariable("id") String id, @RequestParam("nombre") String nombre,@RequestParam("photo") MultipartFile file) {
+		try {
+			companyService.updateCompany(id, nombre, file);
+			return "redirect:/company/perfil/".concat(id);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return "redirect:/company/perfil/".concat(id);
+		}
+		
+		
+	}
+	
 	
 }
