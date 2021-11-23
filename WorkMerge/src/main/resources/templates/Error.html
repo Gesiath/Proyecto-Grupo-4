@@ -32,7 +32,7 @@
 				<span class="titulo">WorkMerge</span>
 
 			</a>
-
+			<a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Salir</a>
 		</div>
 	</nav>
 

@@ -27,7 +27,7 @@ public class JobService {
 
 	//CREAR TRABAJO	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public Job newJob(String title, String datepost, String availability, String category, String description,String salary, String experienceRequired) throws ServiceException, ParseException{
+	public Job newJob(String idCompany, String title, String datepost, String availability, String category, String description,String salary, String experienceRequired) throws ServiceException, ParseException{
 		
 		//validate(title, datepost, availability, category, description, salary, experienceRequired);
 
@@ -42,6 +42,7 @@ public class JobService {
 		Integer salaryInt = Integer.parseInt(salary);
 		newJob.setSalary(salaryInt);
 		newJob.setExperienceRequired(experienceRequired);
+		newJob.setCompany(companyService.obtenerPorId(idCompany));
 		
 		return jobRepository.save(newJob);
 	}
@@ -53,7 +54,7 @@ public class JobService {
 		Company company = companyService.obtenerPorId(idCompany);
 		
 		List<Job> listJobs = company.getJob();
-		listJobs.add(this.newJob(title, datepost, availability, category, description, salary, experienceRequired));
+		listJobs.add(this.newJob(idCompany, title, datepost, availability, category, description, salary, experienceRequired));
 		
 		return listJobs;
 	}

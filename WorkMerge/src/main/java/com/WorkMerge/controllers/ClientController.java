@@ -130,9 +130,11 @@ public class ClientController {
 	public String enviarMail(@PathVariable String idJob, @PathVariable String idCli) {
 
 		try {
+			String mailCon = jobService.obtenerPorId(idJob).getCompany().getEmail();
 			String mailCli = clientService.obtenerPorId(idCli).getEmail();
-			notificationService.notificar(idJob, mailCli);
-			return "redirect:/";
+			System.out.println(mailCli);
+			notificationService.notificar(idJob, idCli, mailCli, mailCon);
+			return "redirect:/client/hubCli/".concat(idCli);
 		} catch (Exception e) {
 			return "redirect:/";
 		}

@@ -44,6 +44,7 @@ public class CompanyService implements UserDetailsService {
 	
 	//@Autowired private PhotoService photoService;
 	
+	
 	@Override
 	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
 		
@@ -87,8 +88,8 @@ public class CompanyService implements UserDetailsService {
 		company.setPassword(encript);
 		
 		Photo photo = photoService.saved(file);
-		company.setPhoto(photo);	
-	    
+		company.setPhoto(photo);
+		
 		companyRepository.save(company);
 	}
 	

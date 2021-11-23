@@ -2,10 +2,10 @@ package com.WorkMerge.entities;
 
 import java.util.Date;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,7 +25,10 @@ public class Job {
  private String description;
  private Integer salary;
  private String experienceRequired;
- private boolean active;
+ @ManyToOne
+ private Company company;
+ 
+private boolean active;
 
  public Job() {
 	 
@@ -98,6 +101,14 @@ public boolean isActive() {
 }
 public void setActive(boolean active) {
 	this.active = active;
+}
+
+public Company getCompany() {
+	return company;
+}
+
+public void setCompany(Company company) {
+	this.company = company;
 }
  
 }
