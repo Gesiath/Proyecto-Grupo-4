@@ -13,14 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.WorkMerge.entities.Photo;
 import com.WorkMerge.repositories.PhotoRepository;
-import com.WorkMerge.services.PhotoService;
 
 @Controller
 	@RequestMapping("/photo")
 	public class PhotoController {
 
-		@Autowired
-		private PhotoService photoService;
 		@Autowired
 		private PhotoRepository photoRepository;
 		

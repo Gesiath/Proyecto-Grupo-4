@@ -23,7 +23,8 @@ import com.WorkMerge.services.CompanyService;
 import com.WorkMerge.services.JobService;
 
 @Controller
-@PreAuthorize("isAuthenticated()")
+
+@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 @RequestMapping("/admin")
 public class AdminController {
 	
@@ -97,7 +98,7 @@ public class AdminController {
 		return this.viewPath.concat("tableroAdminPost");
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+	
 	@GetMapping("/registro")
 	public String crearAdmin() {
 		return this.viewPath.concat("crearAdmin");
