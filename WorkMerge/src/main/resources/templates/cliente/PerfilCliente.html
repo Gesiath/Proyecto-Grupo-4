@@ -59,7 +59,7 @@
     				<img width="100%"  height="100%" th:unless="${client.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/photo/load/} + ${client.photo.id}" alt="img-avatar">	
 
                     
-                        <a id= "cliente" th:href="@{/client/editCv/}+${session.usersession.id}"  class="btn boton-avatar" ><i class="far fa-image"></i></a>
+                        <a id= "cliente" th:href="@{/client/editCv/}+${session.usersession.id}"  class="btn boton-avatar" ><i class="center-button far fa-image"></i></a>
                     
                 </div>
 <!--                 <button type="button" class="boton-portada">
