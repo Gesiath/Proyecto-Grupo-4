@@ -156,7 +156,7 @@ public class CompanyService implements UserDetailsService {
 	
 	//DAR DE BAJA
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void downgradeCompany (String id,String password, List<Job> job,Photo photo,MultipartFile archive)throws ServiceException{
+	public void downgradeCompany (String id)throws ServiceException{
 		
 		Optional<Company> compy = companyRepository.findById(id);
 		
@@ -167,6 +167,20 @@ public class CompanyService implements UserDetailsService {
 	          throw new ServiceException("No se encontro la compañía.");
 	    }
 	}
+	
+	//DAR DE ALTA
+		@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+		public void upgradeCompany (String id)throws ServiceException{
+			
+			Optional<Company> compy = companyRepository.findById(id);
+			
+			if (compy.isPresent()) {
+		          Company company = compy.get();
+		           company.setActive(true);
+		    } else {
+		          throw new ServiceException("No se encontro la compañía.");
+		    }
+		}
 	
 	//OBETER COMPAÑIA POR ID
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })

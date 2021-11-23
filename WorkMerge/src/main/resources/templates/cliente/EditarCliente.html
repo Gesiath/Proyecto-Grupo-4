@@ -44,8 +44,13 @@
 					<span class="titulo">WorkMerge</span>
 	
 				</a>
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        	<a th:href="@{/client/perfilCli/}+${session.usersession.id}" class="btn btn-warning">Volver a perfil </a>
+            <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
+            
+        </div>
 				</div>
-			</div>
+			
 		</nav>
 
 
