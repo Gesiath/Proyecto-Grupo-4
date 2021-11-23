@@ -110,6 +110,11 @@ Copiar esto
     cursor: pointer;
 }
 
+.center-button{
+	position: relative;
+    top: 5px;
+}
+
 .seccion-perfil-usuario .perfil-usuario-body {
     width: 70%;
     position: relative;

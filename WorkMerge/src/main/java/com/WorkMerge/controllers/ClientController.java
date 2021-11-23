@@ -106,7 +106,7 @@ public class ClientController {
 			@RequestParam("habilidadesInformáticas") String habilidadesInformáticas) {
 		try {
 			clientService.loadData(id, nombre, apellido, dni, genero, nacionalidad, ciudad, domicilio, fecha, telefono, educacion, experienciaLaboral, idiomas, habilidadesInformáticas);
-			return "redirect:/";
+			return "redirect:/login";
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			return "redirect:/";
