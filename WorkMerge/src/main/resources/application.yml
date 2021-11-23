@@ -2,10 +2,10 @@ spring:
   mail: 
     host: smtp.gmail.com
     port: 587
-    username: workmerges.a@gmail.com
-    password: "workmerge1"
+    username: maximongelos@gmail.com
+    password: "MaxMon38095827"
     properties:
-        mail:
+        mail: 
             smtp:              
                 auth: true
                 starttls:
