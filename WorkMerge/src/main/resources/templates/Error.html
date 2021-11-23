@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="../css/normalize.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+	<!-- <link rel="stylesheet" href="/src/main/resources/static/css/index.css"/> -->
+
+	<link rel="stylesheet" href="/css/index.css" />
+
+	<style>
+		.img-fluid {
+			margin-left: 21rem;
+		}
+	</style>
+
+	<title>WorkMerge | Error</title>
+</head>
+
+<body>
+	<nav class="navbar navbar-light">
+
+		<div class="container-fluid" style="display:flex">
+			<a class="navbar-brand" href="/">
+				<!-- src="/src/main/resources/static/img/LogoColor.png" -->
+				<img src="/img/LogoColor.png" alt="WM" width="90" height="90" />
+				<!-- class="d-inline-block align-text-top" -->
+				<span class="titulo">WorkMerge</span>
+
+			</a>
+			<a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Salir</a>
+		</div>
+	</nav>
+
+
+	<div class="container d-flex align-items-center flex-column">
+		<!-- Masthead Avatar Image-->
+		<img class="masthead-avatar mb-5" src="/img/error.png" alt="imagenError" width="30%"/>
+		<div class="btn btn-warning">
+			<h1 class="masthead-heading text-uppercase mb-0">ERROR</h1>
+			<h1 class="masthead-heading mb-0" th:text="${codigo}"></h1>
+			<h2 class="masthead-subheading mb-0" th:text="${mensaje == null ? 'Intenta nuevamente' : mensaje}"></h2>	
+		</div>
+		
+	</div>
+
+	<br>
+	
+	<footer class="container-fluid">
+	    <div class="contenedor">
+	            <img class="loguito" src="/img/isovalenteLogo.png" width="50" height="50">
+	            <h2 class="titulo-seccion">WorkMerge</h2>
+	    </div>
+	    
+	    <div class="redes-sociales">
+	        <i class="fab fa-twitter"></i>
+	        <i class="fab fa-facebook-f"></i>
+	        <i class="fab fa-youtube"></i>
+	    </div>
+
+	    <div class="contenedor">
+	
+	        <small class="copy"> WorkMerge 2021/Todos los derechos reservados. 
+	            <address class="copy2" style="text-align: center;">Argentina</address></small>
+	
+	    </div>
+    </footer>
+
+	<script src="https://kit.fontawesome.com/bdbed0aafa.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
+</body>
+
+</html>
