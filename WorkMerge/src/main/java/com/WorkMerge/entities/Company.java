@@ -2,6 +2,7 @@ package com.WorkMerge.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -25,7 +26,7 @@ public class Company {
 	private Rol rol;
 	private String email;
 	private String password;
-	@OneToMany
+	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Job> job;
 	private boolean active;
 	@OneToOne

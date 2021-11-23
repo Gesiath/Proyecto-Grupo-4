@@ -26,6 +26,7 @@ import com.WorkMerge.services.PhotoService;
 		
 		@GetMapping("/load/{id}")
 		public ResponseEntity<byte[]> photo(@PathVariable String id) {
+			@SuppressWarnings("deprecation")
 			Photo photo = photoRepository.getOne(id);
 			final HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.IMAGE_PNG);
