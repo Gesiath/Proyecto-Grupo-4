@@ -9,12 +9,12 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
 	<!-- <link rel="stylesheet" href="/src/main/resources/static/css/index.css"/> -->
-	
-	<link rel="stylesheet" href="../css/index.css"/>
+
+	<link rel="stylesheet" href="/css/index.css" />
 
 	<style>
 		.img-fluid {
-			margin-left: 21rem; 
+			margin-left: 21rem;
 		}
 	</style>
 
@@ -24,45 +24,50 @@
 <body>
 	<nav class="navbar navbar-light">
 
-        <div class="container-fluid" style="display:flex">
-            <a class="navbar-brand" href="/">
-            <!-- src="/src/main/resources/static/img/LogoColor.png" -->
-                <img 
-                	src="../img/LogoColor.png" 
-                	alt="WM" 
-                	width="90" 
-                	height="90"                   
-                 /> <!-- class="d-inline-block align-text-top" -->
-                <span class="titulo">WorkMerge</span>
+		<div class="container-fluid" style="display:flex">
+			<a class="navbar-brand" href="/">
+				<!-- src="/src/main/resources/static/img/LogoColor.png" -->
+				<img src="/img/LogoColor.png" alt="WM" width="90" height="90" />
+				<!-- class="d-inline-block align-text-top" -->
+				<span class="titulo">WorkMerge</span>
 
-            </a>
-
-        </div>
-    </nav>
+			</a>
+			<a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Salir</a>
+		</div>
+	</nav>
 
 
-
-	<div id="centrador">
-		<!--..img/ERROR INESPERADO.png-->
-		<img class="img-fluid" src="../img/ERROR INESPERADO.png" alt="Error404" width="719" height="558">
+	<div class="container d-flex align-items-center flex-column">
+		<!-- Masthead Avatar Image-->
+		<img class="masthead-avatar mb-5" src="/img/error.png" alt="imagenError" width="30%"/>
+		<div class="btn btn-warning">
+			<h1 class="masthead-heading text-uppercase mb-0">ERROR</h1>
+			<h1 class="masthead-heading mb-0" th:text="${codigo}"></h1>
+			<h2 class="masthead-subheading mb-0" th:text="${mensaje == null ? 'Intenta nuevamente' : mensaje}"></h2>	
+		</div>
+		
 	</div>
 
-
+	<br>
+	
 	<footer class="container-fluid">
-        <div class="contenedor">
-                <img class="loguito" src="../img/isovalenteLogo.png" width="50" height="50">
-                <h2 class="titulo-seccion">WorkMerge</h2>
-        </div>
-        <div class="redes-sociales">
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-facebook-f"></i>
-            <i class="fab fa-youtube"></i>
-        </div>
-        <div class="contenedor">
-            <small class="copy"> WorkMerge 2021/Todos los derechos reservados. 
-                <address class="copy2" align= "center">Argentina</address></small>
-        </div>
-        <div class="contenedor"><a th:href="@{/admin}" class="btn btn-danger">Admins entry </a></div>
+	    <div class="contenedor">
+	            <img class="loguito" src="/img/isovalenteLogo.png" width="50" height="50">
+	            <h2 class="titulo-seccion">WorkMerge</h2>
+	    </div>
+	    
+	    <div class="redes-sociales">
+	        <i class="fab fa-twitter"></i>
+	        <i class="fab fa-facebook-f"></i>
+	        <i class="fab fa-youtube"></i>
+	    </div>
+
+	    <div class="contenedor">
+	
+	        <small class="copy"> WorkMerge 2021/Todos los derechos reservados. 
+	            <address class="copy2" style="text-align: center;">Argentina</address></small>
+	
+	    </div>
     </footer>
 
 	<script src="https://kit.fontawesome.com/bdbed0aafa.js" crossorigin="anonymous"></script>

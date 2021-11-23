@@ -13,6 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Job {
+
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")

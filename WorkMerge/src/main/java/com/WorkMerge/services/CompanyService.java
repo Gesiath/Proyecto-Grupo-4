@@ -45,6 +45,7 @@ public class CompanyService implements UserDetailsService {
 	
 	//@Autowired private PhotoService photoService;
 	
+	
 	@Override
 	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
 		
@@ -88,8 +89,8 @@ public class CompanyService implements UserDetailsService {
 		company.setPassword(encript);
 		
 		Photo photo = photoService.saved(file);
-		company.setPhoto(photo);	
-	    
+		company.setPhoto(photo);
+		
 		companyRepository.save(company);
 	}
 	
@@ -189,7 +190,7 @@ public class CompanyService implements UserDetailsService {
 		Optional<Company> result  = companyRepository.findById(id);
 		
 		if (result.isEmpty()) {
-			throw new ServiceException("No se encontró el cliente");
+			throw new ServiceException("No se encontró la compañia");
 		} else {
 			return result.get();
 		}

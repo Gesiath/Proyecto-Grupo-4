@@ -47,8 +47,7 @@ public class AdminService implements UserDetailsService {
 	@Autowired
 	private CompanyRepository companyRepository;
 	
-	/*Crear ADMIN, Eliminar cliente, Eliminar empresa, Eliminar trabajo*/
-	
+	//CREAR ADMIN	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Admin newAdmin(String email, String password, String nickname) throws ServiceException{
 		
@@ -69,6 +68,7 @@ public class AdminService implements UserDetailsService {
 		return adminRepository.save(newAdmin);
 	}
 	
+	//ELIMINAR CLIENTE
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void deleteClient(String id) throws ServiceException{
 		
@@ -81,6 +81,7 @@ public class AdminService implements UserDetailsService {
 		}
 	}
 	
+	//ELIMINAR ADMIN
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void deleteAdmin(String id) throws ServiceException{
 		
@@ -93,6 +94,7 @@ public class AdminService implements UserDetailsService {
 		}
 	}
 	
+	//ELIMINAR COMPAÑIA
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void deleteCompany(String id) throws ServiceException{
 		
@@ -105,6 +107,7 @@ public class AdminService implements UserDetailsService {
 		}
 	}
 	
+	//ELIMINAR TRABAJO
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public void deleteJob(String id) throws ServiceException{
 		
@@ -118,37 +121,43 @@ public class AdminService implements UserDetailsService {
 	}
 	
 	//OBTENER POR MAIL
-		@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-		public Admin obtenerPorMail(String email) throws ServiceException{
-			
-			return adminRepository.findByEmail(email);
-		}
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+	public Admin obtenerPorMail(String email) throws ServiceException{
+		
+		return adminRepository.findByEmail(email);
+	}
 	
+	//LISTA TRABAJOS
 	@Transactional(readOnly = true)
 	public List<Job> listJobs() {
 		return jobRepository.findAll();
 	}
 	
+	//LISTA COMPAÑIAS POR PARAMETRO
 	@Transactional(readOnly = true)
 	public List<Company> listCompanyByParam(String name) {
 		return companyRepository.findByName(name);
 	}
 
+	//LISTA  COMPAÑIAS
 	@Transactional(readOnly = true)
 	public List<Company> listCompanies(){
 		return companyRepository.findAll();
 	}
 
+	//LISTA CLIENTES
 	@Transactional(readOnly = true)
 	public List<Client> listClients(){
 		return clientRepository.findAll();
 	}
 	
+	//LISTA ADMINS
 	@Transactional(readOnly = true)
 	public List<Admin> listAdmins(){
 		return adminRepository.findAll();
 	}
 	
+
 	public List<Admin> findActiveByQ(String q){
         return adminRepository.findActiveByQ("%"+q+"%");
     }
@@ -165,6 +174,7 @@ public class AdminService implements UserDetailsService {
         return adminRepository.findJobByQ("%"+q+"%");
     }
 	
+
 	private void validate(String email, String password, String nickname) throws ServiceException{
 		if(email == null || email.isEmpty()) {
 			throw new ServiceException("El email no puede ser nulo o estar vacio.");
@@ -204,12 +214,6 @@ public class AdminService implements UserDetailsService {
 			
 		}
 	}
-	
-	/*
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public Job registerWork(String id) {
-		
-	}
-	*/
+
 }
 

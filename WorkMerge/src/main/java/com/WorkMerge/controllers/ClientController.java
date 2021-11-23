@@ -20,6 +20,7 @@ import com.WorkMerge.entities.Job;
 import com.WorkMerge.exceptions.ServiceException;
 import com.WorkMerge.services.ClientService;
 import com.WorkMerge.services.JobService;
+import com.WorkMerge.services.NotificationService;
 
 @Controller
 @PreAuthorize("hasAnyRole('ROLE_CLIENT')")
@@ -31,6 +32,9 @@ public class ClientController {
 	
 	@Autowired
 	private JobService jobService;
+	
+	@Autowired
+	private NotificationService notificationService;
 	
 	private final String viewPath = "cliente/";
 	
@@ -82,7 +86,8 @@ public class ClientController {
 	@GetMapping("/loadCv/{id}")
 	public String registerCv(ModelMap modelo, @PathVariable("id") String id) {
 		try {
-			modelo.addAttribute("cliente", clientService.obtenerPorId(id));
+			Client c = clientService.obtenerPorId(id);
+			modelo.addAttribute("cliente", c);
 			return this.viewPath.concat("registroDatoCliente");
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -157,5 +162,19 @@ public class ClientController {
 			return "redirect:/admin";
 		}
 		
+	}
+	
+	@PostMapping("/mailsender/{idJob}/{idCli}")
+	public String enviarMail(@PathVariable String idJob, @PathVariable String idCli) {
+
+		try {
+			String mailCon = jobService.obtenerPorId(idJob).getCompany().getEmail();
+			String mailCli = clientService.obtenerPorId(idCli).getEmail();
+			System.out.println(mailCli);
+			notificationService.notificar(idJob, idCli, mailCli, mailCon);
+			return "redirect:/client/hubCli/".concat(idCli);
+		} catch (Exception e) {
+			return "redirect:/";
+		}
 	}
 }

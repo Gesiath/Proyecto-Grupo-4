@@ -26,7 +26,9 @@ public class JobService {
 
 	//CREAR TRABAJO	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+
 	public Job newJob(String idCompany, String title, Date datepost, String availability, String category, String description,String salary, String experienceRequired) throws ServiceException, ParseException{
+
 		
 		//validate(title, datepost, availability, category, description, salary, experienceRequired);
 
