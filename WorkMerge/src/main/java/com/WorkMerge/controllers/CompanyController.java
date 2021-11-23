@@ -1,9 +1,11 @@
 package com.WorkMerge.controllers;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +52,7 @@ public class CompanyController {
 		}
 	}
 	
+	
 	@GetMapping("/loadCom/{id}")
 	public String registerCom(ModelMap modelo, @PathVariable("id") String id) {
 		try {
@@ -61,6 +64,7 @@ public class CompanyController {
 		}
 		
 	}
+	
 	
 	@PostMapping("/saveCom/{id}")
 	public String createCom(@PathVariable("id") String id, @RequestParam("name") String name) {
@@ -77,6 +81,7 @@ public class CompanyController {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 	@GetMapping("/perfil/{id}")
 	public String perfilCompany (@PathVariable("id") String id, ModelMap modelo)	{
 		try {
@@ -91,6 +96,7 @@ public class CompanyController {
 		}
 	}	
 	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 	@GetMapping("/delete/{id}")
 	public String deleteJob(@PathVariable("id") String id) {
 		try {
@@ -103,6 +109,7 @@ public class CompanyController {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 	@GetMapping("loadJob/{id}")
 	public String createJob(ModelMap modelo, @PathVariable("id") String id) {
 		try {
@@ -114,15 +121,16 @@ public class CompanyController {
 		}
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 	@PostMapping("saveJob/{id}")
-	public String registerJob(@PathVariable("id") String id, @RequestParam("titulo") String titulo, @RequestParam("fecha") String fecha,
+	public String registerJob(@PathVariable("id") String id, @RequestParam("titulo") String titulo,
 			@RequestParam("disponibilidad") String disponibilidad, @RequestParam("categoria") String categoria, @RequestParam("descripcion") String descripcion,
 			@RequestParam("salario") String salario, @RequestParam("experiencia") String experiencia) {
 		try {
+			Date fecha = new Date();
 			companyService.uploadJobs(id, titulo, fecha, disponibilidad, categoria, descripcion, salario, experiencia);
 			return "redirect:/company/perfil/".concat(id);
 		} catch (ServiceException e) {
-			e.getMessage("ERROR COMUN");
 			return "redirect:/";
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -131,6 +139,7 @@ public class CompanyController {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 	@GetMapping("alta/{idJob}/{idCon}")
 	public String alta(@PathVariable("idJob") String idJob, @PathVariable("idCon") String idCon) {
 		try {
@@ -143,6 +152,7 @@ public class CompanyController {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
 	@GetMapping("baja/{idJob}/{idCon}")
 	public String baja(@PathVariable("idJob") String idJob, @PathVariable("idCon") String idCon) {
 		try {
@@ -152,6 +162,33 @@ public class CompanyController {
 			e.printStackTrace();
 			return "redirect:/company/perfil/".concat(idCon);
 		}
+		
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")		
+	@GetMapping("/editCv/{id}")
+	public String editCv(ModelMap modelo, @PathVariable("id") String id) {
+		try {	
+			modelo.addAttribute("empresa", companyService.obtenerPorId(id));
+			return this.viewPath.concat("EditarEmpresa");
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return "redirect:/company/perfil";
+		}
+		
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_COMPANY')")
+	@PostMapping("/updateCv/{id}")
+	public String updateCv(@PathVariable("id") String id, @RequestParam("nombre") String nombre,@RequestParam("photo") MultipartFile file) {
+		try {
+			companyService.updateCompany(id, nombre, file);
+			return "redirect:/company/perfil/".concat(id);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			return "redirect:/company/perfil/".concat(id);
+		}
+		
 		
 	}
 	

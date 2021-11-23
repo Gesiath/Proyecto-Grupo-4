@@ -55,12 +55,12 @@
             <div class="perfil-usuario-portada">
                 <div class="perfil-usuario-avatar">
 
-                    <img th:if="${client.photo.getMime().equalsIgnoreCase('application/octet-stream')}"th:src="@{/img/avatar_user.png}" alt="img-avatar">
-    				<img th:unless="${client.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/photo/load/} + ${client.photo.id}" alt="img-avatar">	
+                    <img width="100%"  height="100%" th:if="${client.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/img/avatar_user.png}" alt="img-avatar">
+    				<img width="100%"  height="100%" th:unless="${client.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/photo/load/} + ${client.photo.id}" alt="img-avatar">	
 
-                    <button type="button" class="boton-avatar">
-                        <i class="far fa-image"></i>
-                    </button>
+                    
+                        <a id= "cliente" th:href="@{/client/editCv/}+${session.usersession.id}"  class="btn boton-avatar" ><i class="far fa-image"></i></a>
+                    
                 </div>
 <!--                 <button type="button" class="boton-portada">
                     <i class="far fa-image"></i> Cambiar fondo
@@ -71,9 +71,10 @@
 <!--------------------Datos Cliente---------------------------------------------->
         <div class="perfil-usuario-body">
             <div class="perfil-usuario-bio"  >
-                <h3>CURRICULUM VITAE</h3>
-           <!----    <h3 th:text="${curriculum.name}">NOMBRE</h3>---->
-            <!----    <h3 th:text="${curriculum.surname}">APELLIDO</h3>---->
+                <!-- <h3>CURRICULUM VITAE</h3> -->
+           <h3 th:text="${client.curriculum.name}"></h3>
+           <h3>&nbsp;</h3>
+            <h3 th:text="${client.curriculum.surname}"></h3>
 
             </div>
 
@@ -81,6 +82,9 @@
                 <ul class="lista-datos" >
                     <li><i class="icono fas fa-address-card"></i> Documento:</li>
                    	<p th:text="${client.curriculum.dni}"></p>
+                   	
+                   	<li><i class="icono fas fa-venus-mars"></i> Genero:</li>
+                   	<p th:text="${client.curriculum.gender}"></p>
           	
           		<li><i class="icono fas fa-flag"></i> Nacionalidad:</li>
                     <p th:text="${client.curriculum.nationality}"></p>
@@ -93,7 +97,7 @@
                     
                 <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento.</li>
                     <p th:text="${client.curriculum.birthday}"></p>
-                    <br>
+                    
                 <li><i class="icono fas fa-phone-alt"></i> Telefono:</li>
                     <p th:text="${client.curriculum.phone}"></p>
                 <li><i class="icono fas fa-envelope"></i> Email</li> 
@@ -135,7 +139,7 @@
      
 
     <button style="display:block; margin-left: auto; margin-right: auto;">
-        <a id= "cliente" th:href="@{/client/form}" class="btn btn-light">Editar información</a>
+        <a id= "cliente" th:href="@{/client/editCv/}+${session.usersession.id}" class="btn btn-light" >Editar información</a>
     </button>
        
 

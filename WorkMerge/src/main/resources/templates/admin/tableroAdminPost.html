@@ -33,6 +33,7 @@
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 		
 			<a href="/admin" class="btn btn-dark px-5 py-2 ms-auto">Inicio</a>
+			<a th:href="@{/admin/listasAdmin}" class="btn btn-warning">Tabla admins</a>
             <a th:href="@{/admin/adminClientes}" class="btn btn-warning">Tabla clientes</a>
             <a th:href="@{/admin/adminEmpresas}" class="btn btn-warning">Tabla empresas</a>
             <a th:href="@{/admin/adminTrabajos}" class="btn btn-warning">Tabla trabajos</a>
@@ -67,14 +68,18 @@
                 </button>
                 </div>
                 <div class="card-body">
-                  <form class="row g-3" th:action="@{/admin/adminTrabajos}" method="POST">
-                    <div class="col">
-                      <input type="text" style="width: 100%;" class="form-control"  name="search" required placeholder="Buscar..">
+                  <div class="card mb-4">
+                    <div class="card-header" style="background-color: rgb(179, 179, 179);" ><b>Busqueda de admins</b></div> <!-- .card-header ln.css.Ln4566 -->
+                    <form th:action="@{/admin/adminTrabajos}"method="GET">
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="q" placeholder="Ej: Por titulo, salario, etc..."
+                                aria-label="Enter search term..." aria-describedby="button-search" />
+                            <button class="btn btn-primary" id="button-search" type="submit">Ir!</button>
+                        </div>
                     </div>
-                    <div class="col-2">
-                      <a th:href="@{/admin/adminTrabajos}" class="btn btn-dark mb-3" type="submit">Buscar</a>
-                    </div>
-                  </form>
+                    </form>
+                </div>
                   <table class="table table-success table-striped table-bordered">
                     <thead>
                       <tr>
@@ -92,34 +97,30 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr th:each="t, iterator : ${jobs}">
+                      <tr th:each="job, iterator : ${jobs}">
                         <td th:text="${iterator.index+1}"></td>
-                        <td th:text="${t.id}"></td>
-                        <td th:text="${t.title}"></td>
-                        <td th:text="${t.datepost}"></td>
-                        <td th:text="${t.availability}"></td>
-                        <td th:text="${t.category}"></td>
-                        <td th:text="${t.description}"></td>
-                        <td th:text="${t.salary}"></td>
-                        <td th:text="${t.experienceRequired}"></td>
-                        <td th:text="${t.active}"></td>
-                        <td>
-                          
-
-                            
-                              
-                              <a class="btn btn-outline-light me-md-2" th:href="@{/admin/alta/{id}(id=${t.id}}">
+                        <td th:text="${job.id}"></td>
+                        <td th:text="${job.title}"></td>
+                        <td th:text="${job.datepost}"></td>
+                        <td th:text="${job.availability}"></td>
+                        <td th:text="${job.category}"></td>
+                        <td th:text="${job.description}"></td>
+                        <td th:text="${job.salary}"></td>
+                        <td th:text="${job.experienceRequired}"></td>
+                        <td th:text="${job.active}"></td>
+                        <td>                   
+                        <a class="btn btn-success me-md-2" th:href="@{/admin/altaTrabajo/{id}(id=${job.id})}">
 									ALTA
 								</a>
-								<a class="btn btn-outline-light me-md-2" th:href="@{/admin/baja/{id}(id=${t.id}}">
+						<a class="btn btn-danger me-md-2" th:href="@{/admin/bajaTrabajo/{id}(id=${job.id})}">
 									BAJA
 								</a>
 								
 							
 
-                              <a th:href="@{/company/eliminarTrabajo/{id}(id=${t.id})}"
+                              <!-- <a th:href="@{/admin/deleteJob/{id}(id=${job.id})}"
                               class="btn btn btn-primary btn-sm px-2 py-2"
-                              >Eliminar</a>
+                              >Eliminar</a> -->
                          
                         </td>
                       </tr>

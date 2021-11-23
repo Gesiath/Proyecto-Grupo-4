@@ -1,5 +1,16 @@
-
 spring:
+  mail: 
+    host: smtp.gmail.com
+    port: 587
+    username: workmerges.a@gmail.com
+    password: "workmerge1"
+    properties:
+        mail:
+            smtp:              
+                auth: true
+                starttls:
+                    enable: true
+
   datasource: 
     url: jdbc:mysql://localhost:3306/workmerge?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=GMT&characterEncoding=UTF-8&createDatabaseIfNotExist=true
     username: root
@@ -25,4 +36,3 @@ server:
         http-only: true
       tracking-modes:
       - cookie
-

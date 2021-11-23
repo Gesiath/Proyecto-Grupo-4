@@ -13,18 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.WorkMerge.entities.Photo;
 import com.WorkMerge.repositories.PhotoRepository;
-import com.WorkMerge.services.PhotoService;
 
 @Controller
 	@RequestMapping("/photo")
 	public class PhotoController {
 
 		@Autowired
-		private PhotoService photoService;
-		@Autowired
 		private PhotoRepository photoRepository;
+		
 		@GetMapping("/load/{id}")
 		public ResponseEntity<byte[]> photo(@PathVariable String id) {
+			@SuppressWarnings("deprecation")
 			Photo photo = photoRepository.getOne(id);
 			final HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.IMAGE_PNG);

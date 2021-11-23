@@ -2,6 +2,7 @@ package com.WorkMerge.services;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +44,7 @@ public class CompanyService implements UserDetailsService {
 	private PhotoService photoService;
 	
 	//@Autowired private PhotoService photoService;
+	
 	
 	@Override
 	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
@@ -87,8 +89,8 @@ public class CompanyService implements UserDetailsService {
 		company.setPassword(encript);
 		
 		Photo photo = photoService.saved(file);
-		company.setPhoto(photo);	
-	    
+		company.setPhoto(photo);
+		
 		companyRepository.save(company);
 	}
 	
@@ -105,7 +107,7 @@ public class CompanyService implements UserDetailsService {
 	
 	//CARGAR TRABAJOS
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void uploadJobs(String idCompany, String title, String datepost, String availability, String category, String description,String salary, String experienceRequired) throws ServiceException, ParseException {
+	public void uploadJobs(String idCompany, String title, Date	 datepost, String availability, String category, String description,String salary, String experienceRequired) throws ServiceException, ParseException {
 		
 		List<Job> listJobs = jobService.listJobs(idCompany, title, datepost, availability, category, description, salary, experienceRequired);
 		
@@ -118,19 +120,26 @@ public class CompanyService implements UserDetailsService {
 	
 	// ACTUALIZAR
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void updateCompany(String id, String password, String password2, String email) throws ServiceException{
+	public void updateCompany(String id, String name, MultipartFile file) throws ServiceException{
 		
-		validate(email, password, password2);
+		//validate(email, password, password2);
 		
 		Optional<Company> compy = companyRepository.findById(id);
-		Company company = compy.get();
-		String encript = new BCryptPasswordEncoder().encode(password);
+		if (compy.isPresent()) {
+			Company company = compy.get();
+			company.setName(name);
+			Photo photo = photoService.saved(file);
+			if (!photo.getMime().equalsIgnoreCase("application/octet-stream")) {
+				company.setPhoto(photo);
+			}	
+			companyRepository.save(company);
+		} else {
+			
+			throw new ServiceException("No se encontro la empresa solicitado");
+		}
 		
-		company.setPassword(encript);
-		//company.setJob(job);
-		//photo = photoService.saved(archive); company.setPhoto(photo);
 	    
-		companyRepository.save(company);
+		
 	}
 	
 	//ELIMINAR TRABAJO
@@ -148,7 +157,7 @@ public class CompanyService implements UserDetailsService {
 	
 	//DAR DE BAJA
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
-	public void downgradeCompany (String id,String password, List<Job> job,Photo photo,MultipartFile archive)throws ServiceException{
+	public void downgradeCompany (String id)throws ServiceException{
 		
 		Optional<Company> compy = companyRepository.findById(id);
 		
@@ -160,6 +169,20 @@ public class CompanyService implements UserDetailsService {
 	    }
 	}
 	
+	//DAR DE ALTA
+		@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
+		public void upgradeCompany (String id)throws ServiceException{
+			
+			Optional<Company> compy = companyRepository.findById(id);
+			
+			if (compy.isPresent()) {
+		          Company company = compy.get();
+		           company.setActive(true);
+		    } else {
+		          throw new ServiceException("No se encontro la compañía.");
+		    }
+		}
+	
 	//OBETER COMPAÑIA POR ID
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { Exception.class })
 	public Company obtenerPorId(String id) throws ServiceException{
@@ -167,7 +190,7 @@ public class CompanyService implements UserDetailsService {
 		Optional<Company> result  = companyRepository.findById(id);
 		
 		if (result.isEmpty()) {
-			throw new ServiceException("No se encontró el cliente");
+			throw new ServiceException("No se encontró la compañia");
 		} else {
 			return result.get();
 		}

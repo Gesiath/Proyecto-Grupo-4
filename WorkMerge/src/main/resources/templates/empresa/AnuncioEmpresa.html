@@ -16,6 +16,7 @@
 			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 			crossorigin="anonymous"
 		/>
+		<link rel="stylesheet" href="/css/index - forms.css" />
 		<link rel="stylesheet" href="/css/index.css" />
 
 		<title>WorkMerge | Nuevo Empleo</title>
@@ -36,13 +37,14 @@
 					</a>
 				</div>
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+				<a th:href="@{/company/perfil/}+${session.usersession.id}" class="btn btn-warning">Volver a mi perfil </a>
 					<a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
-					<a th:href="@{/company/perfil/}+${session.usersession.id}" class="btn btn-warning">Volver a mi perfil </a>
+					
 				</div>
 			</div>
 		</nav>
 
-		<div class="container">
+		<div class="container col-5">
 			<div class="card mt-md-2">
 				<div class="card-header d-flex">
 					<h1>Crear anuncio</h1>
@@ -50,17 +52,17 @@
 				<div class="card-body">
 					<form
 						th:action="@{/company/saveJob/{id}(id=${company.id})}"
-						class="col-6 mx-auto"
+						class="col-9 mx-auto"
 						method="POST"
 					>
 						<div class="mb-3">
 							<label for="titulo" class="form-label">Titulo</label>
 							<input type="text" class="form-control" name="titulo" placeholder="Titulo" />
 						</div>
-						<div class="mb-3">
+						<!-- <div class="mb-3">
 							<label for="fechadepost" class="form-label">Fecha de posteo</label>
 							<input type="text" class="form-control" name="fecha" placeholder="Fecha de posteo" />
-						</div>
+						</div> -->
 						<div class="mb-3">
 							<label for="disponibilidad" class="form-label">Disponibilidad</label>
 							<input
@@ -75,13 +77,15 @@
 							<input type="text" class="form-control" name="categoria" placeholder="Categoría" />
 						</div>
 						<div class="mb-3">
-							<label for="descripción" class="form-label">Descripción</label>
-							<input
-								type="text"
-								class="form-control"
-								name="descripcion"
-								placeholder="Descripción"
-							/>
+                        <label for="descripción" class="form-label">Descripción</label>
+                        <textarea
+                        cols="50"
+                        rows="3"
+                        class="form-control"
+                        
+                        placeholder="Descripción"
+                        name="educacion"
+                    	></textarea>
 						</div>
 						<div class="mb-3">
 							<label for="salario" class="form-label">Salario</label>
@@ -96,30 +100,32 @@
 								placeholder="Experiencia requerida"
 							/>
 						</div>
-
-						<button type="submit" class="btn btn btn-dark btn-sm">Guardar</button>
+ 
+						<button type="submit" class="btn btn btn-dark btn-sm" style="margin-left: 40%;">Guardar</button>
 					</form>
 				</div>
-				<br />
+				
 			</div>
 		</div>
 		<br />
 
 		<footer class="container-fluid">
-			<div class="contenedor">
-				<div class="d-flex align-items-center">
-					<img src="/img/isovalenteLogo.png" width="50" height="50" />
-					<h2 class="titulo-seccion">WorkMerge</h2>
-				</div>
-			</div>
-			<div class="redes-sociales">
-				<i class="fab fa-twitter"></i>
-				<i class="fab fa-facebook-f"></i>
-				<i class="fab fa-youtube"></i>
-			</div>
-			<div class="contenedor">
-				<small class="copy"> WorkMerge 2021/Todos los derechos reservados</small>
-				<address class="copy">Argentina</address>
-			</div>
-		</footer>
+        <div class="contenedor">
+                <img class="loguito" src="/img/isovalenteLogo.png" width="50" height="50">
+                <h2 class="titulo-seccion">WorkMerge</h2>
+        </div>
+        <div class="redes-sociales">
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-youtube"></i>
+        </div>
+
+        <div class="contenedor">
+
+            <small class="copy"> WorkMerge 2021/Todos los derechos reservados. 
+                <address class="copy2" style="text-align: center;">Argentina</address></small>
+
+        </div>
+        
+    </footer>
 	</body>

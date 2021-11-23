@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta http-equiv = "Content-Type" content = "multipart / form-data; charset = utf-8" />
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="/css/normalize.css">
+
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+		<!--<link rel="stylesheet" href="/src/main/resources/static/css/index.css" /> -->		
+
+		 <link rel="stylesheet" href="/css/index.css" />
+		 <link rel="stylesheet" href="/css/PerfilCliente.css">
+		 		
+
+		 
+		<title>WorkMerge | Editar Datos Cliente</title>
+	</head>
+
+	<body>
+
+		<nav class="navbar navbar-light">
+
+			<div class="container-fluid" style="display:flex">
+
+			  <!--href /index-->
+				<a class="navbar-brand" href="/">
+
+				<!-- src="/src/main/resources/static/img/LogoColor.png" -->
+				<!--src= "../static/img/LogoColor.png"-->
+					<img src="/img/LogoColor.png" 
+					  alt="WM" 
+					  width="90" 
+					  height="90"                   
+
+					 /> <!-- class="d-inline-block align-text-top" -->
+					<span class="titulo">WorkMerge</span>
+	
+				</a>
+				
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        	<a th:href="@{/company/perfil/}+${session.usersession.id}" class="btn btn-warning">Volver a perfil </a>
+            <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-light me-md-2">Cerrar sesión</a>
+            
+        </div>
+				</div>
+			</div>
+		</nav>
+
+
+		<div class="container col-5">
+			<div class="card mt-5">
+				<div class="card-header d-flex">
+					<h1>Edite sus datos</h1>
+				</div>
+				<div class="card-body">
+					<form 						
+						th:action="@{/company/updateCv/{id}(id=${empresa.id})}" 						
+						method="POST" 
+						class="col-9 mx-auto"
+						enctype="multipart/form-data"
+					>
+						<!--<input hidden th:field="*{id}" />-->
+						
+						
+						
+        
+                <div class="perfil-usuario-avatar">
+
+                    <img width="100%"  height="100%" th:if="${empresa.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/img/avatar_user.png}" alt="img-avatar">
+    				<img width="100%"  height="100%" th:unless="${empresa.photo.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/photo/load/} + ${empresa.photo.id}" alt="img-avatar">	
+
+                    <div class="mb-3">
+                    		<label for="Photo">Foto* - Máximo 1MB</label>
+                   <input
+                   		 
+                   		type="file" 
+                   		class="form-control" 
+                   		name="photo" 
+                   		th:value="${empresa.photo}"
+                   		>
+                </div>
+                </div>
+                <br>
+
+						
+						
+						
+						<div class="mb-3">
+							<label for="nombre" class="form-label">Nombre</label>
+							<input
+								type="text"
+								class="form-control"
+								name="nombre"
+								th:value="${empresa.name}"																				
+								placeholder="Nombre"
+																
+							/><!-- th:field="*{name}" -->
+						</div>
+						
+						<button type="submit" class="btn btn-dark px-4 py-2 ms-auto">Guardar</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<br />
+		<br />
+		<footer>
+			<div class="container-fluid">
+				<div class="contenedor">
+				<img class="loguito" src="/img/isovalenteLogo.png" width="50" height="50">
+					<h2 class="título-sección">WorkMerge</h2>
+				</div>
+				<div class="redes-sociales">
+					<i class="fab fa-twitter"></i> <i class="fab fa-facebook-f"></i>
+					<i class="fab fa-youtube"></i>
+				</div>
+				<div class="contenedor">
+					<small class="copy"> WorkMerge 2021/Todos los derechos reservados</small>
+					<address class="copy2" style="text-align: center;">Argentina</address></small>
+				</div>
+				<div class="contenedor"><a th:href="@{/admin}" class="btn btn-danger">Admins entry </a></div>
+
+			</div>
+		</footer>
+
+		<script src="https://kit.fontawesome.com/bdbed0aafa.js" crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+			crossorigin="anonymous"
+		></script>
+
+		<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
+	</body>
+</html>

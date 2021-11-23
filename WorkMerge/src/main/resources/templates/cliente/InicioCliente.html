@@ -74,9 +74,9 @@
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div th:each="job : ${jobs}">
             <div class="card shadow mb-5 mt-4"  style="width: 20rem; margin: 20px;">
-              <img
-                src="https://thumbs.dreamstime.com/b/icono-de-la-ingenier%C3%ADa-inform%C3%A1tica-engranaje-y-ordenador-port%C3%A1til-s%C3%ADmbolo-del-desarrollo-113174897.jpg"
-                class="card-img-top" alt=""/>
+            <img th:if="${job.getCompany().getPhoto.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/img/avatar_user.png}" alt="img-avatar">
+              <img th:unless="${job.getCompany().getPhoto.getMime().equalsIgnoreCase('application/octet-stream')}" th:src="@{/photo/load/} + ${job.getCompany().getPhoto().id}" alt="img-avatar">
+              
               <div class="card-body">
                 <h3 class="card-title text-center" th:text="${job.title}"></h3>
                 <small class="text-muted" th:text="${job.datepost}"></small>
@@ -94,10 +94,12 @@
                 <label class="h6"><b>Descripcion del trabajo:</b></label>                
                 <li class="list-group-item card-text" th:text="${job.description}"></li>
               </div>
+              	<form th:action="@{/client/mailsender/__${job.id}__/}+${session.usersession.id}" method="POST">
+					<div class="card-body">
+		                <button type="submit" class="btn btn-outline-dark" style="margin-left: 80px">Postularme!</button>
+	                 </div>
+				</form>
               
-              <div class="card-body">
-                <a href="" class="btn btn-outline-dark" style="margin-left: 80px">Postularme!</a>
-              </div>
               </ul>
             </div>
             </div>
