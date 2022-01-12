@@ -1,2 +1,2 @@
-# Proyecto-Grupo-4
+# WorkMerge
 Proyecto del grupo 4 del curso de EGG. 
